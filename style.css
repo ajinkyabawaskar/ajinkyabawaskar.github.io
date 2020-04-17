@@ -100,5 +100,14 @@
 .bioLink:hover {
     text-decoration: none;
     background-color: #555;
+    padding: 0px 1px;
     color: #fff;
+}
+
+.anchorText {
+    color: inherit;
+}
+
+.anchorText:hover {
+    text-decoration: none;
 }
