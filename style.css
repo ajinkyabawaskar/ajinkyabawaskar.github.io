@@ -1,3 +1,7 @@
+* {
+    font-family: 'Roboto';
+}
+
 .display-5 {
     font-size: 3.0rem;
     font-weight: 300;
@@ -22,31 +26,79 @@
     line-height: 1.2;
 }
 
-.jumbotron {
+
+/* .jumbotron {
     color: #fff;
     background: radial-gradient(black 15%, transparent 16%) 0 0, radial-gradient(black 15%, transparent 16%) 8px 8px, radial-gradient(rgba(255, 255, 255, .1) 15%, transparent 20%) 0 1px, radial-gradient(rgba(255, 255, 255, .1) 15%, transparent 20%) 8px 9px;
     background-color: #282828;
     background-size: 16px 16px;
     border-radius: 0px !important;
+} */
+
+.jumbotron {
+    color: #000;
+    background-color: #fff;
+    border-radius: 0px !important;
+    margin-top: 60px;
 }
 
-
-/* The animation code */
-
-@keyframes example {
-    from {
-        display: block;
-    }
-    to {
-        display: none;
-    }
+.profile {
+    /* filter: grayscale(); */
 }
 
+.materialShadow {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
 
-/* The element to apply the animation to */
+.card-img-top-bg {
+    align-items: center;
+    flex-direction: column;
+    border-radius: 6px;
+    text-align: center;
+    background: radial-gradient(circle at 20% 20%, #5183f5 25%, #4640ff 100%);
+    box-shadow: 0.5rem 1.25rem 1.75rem 0 rgba(100, 110, 140, .4);
+    color: hsla(0, 0%, 100%, .9);
+}
 
-.text-animated {
-    animation-name: example;
-    animation-duration: 4s;
-    animation-iteration-count: infinite;
+.card-holder {
+    padding: 2rem;
+}
+
+.bg-white {
+    background-color: #fff !important;
+    color: #000 !important;
+}
+
+.border-bottom {
+    border: 0px;
+    border-bottom: 1px solid #dee2e6!important;
+}
+
+.subsButton {
+    font-size: 1rem;
+    padding: 0.4rem 1rem;
+    border: none!important;
+    background: #fff;
+    color: #3972f4;
+    border-radius: 5px;
+}
+
+.subsButton:hover {
+    color: #0c49d4;
+}
+
+.px-6 {
+    padding: 0rem 2.4rem;
+}
+
+.bioLink {
+    color: inherit;
+    font-weight: 400;
+    text-decoration: underline dotted;
+}
+
+.bioLink:hover {
+    text-decoration: none;
+    background-color: #555;
+    color: #fff;
 }
