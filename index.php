@@ -162,8 +162,8 @@
             <span class="text-muted">
                 <?php
                 echo  preg_replace('<address>', '', trim("Page loaded in " . number_format(microtime(true) - $starttime, 2) . "s running " . (strval($_SERVER['SERVER_SOFTWARE']))));
-                echo '<script>console.log("If you are reading this, I will read this: "'.$_SERVER['HTTP_X_FORWARDED_FOR'].'");</script>';
-                ?></span>
+                ?>
+                </span>
         </div>
     </footer>
     <!-- Optional JavaScript -->
@@ -172,6 +172,10 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="script.js"></script>
+    <?php 
+    echo '<script>console.log("This is you:");</script>';
+    echo '<script>console.log('.$_SERVER['HTTP_X_FORWARDED_FOR'].');</script>';
+    ?>
 </body>
 
 </html>
