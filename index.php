@@ -161,7 +161,8 @@
         <div class="container">
             <span class="text-muted">
                 <?php
-                echo  preg_replace('<address>', '', trim("Page loaded in " . number_format(microtime(true) - $starttime, 2) . "s running " . (strval($_SERVER['SERVER_SIGNATURE']))))." OK".$_SERVER['HTTP_X_FORWARDED_FOR'];
+                echo  preg_replace('<address>', '', trim("Page loaded in " . number_format(microtime(true) - $starttime, 2) . "s running " . (strval($_SERVER['SERVER_SOFTWARE']))));
+                echo '<script>console.log("If you are reading this, I will read this: "'.$_SERVER['HTTP_X_FORWARDED_FOR'].');</script>';
                 ?></span>
         </div>
     </footer>
