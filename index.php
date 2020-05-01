@@ -175,9 +175,9 @@
         $date = date("h:i:sa - d M Y, D");
         $ip = $_SERVER['HTTP_CF_CONNECTING_IP'];
         $page_load =  number_format(microtime(true) - $starttime, 2);
-        $server = json_encode(($_SERVER['SERVER_SOFTWARE']));
+        $server = ($_SERVER['SERVER_SOFTWARE']);
         $data = compact("date", "ip", "page_load","server");
-        echo '<script>console.log(' . json_encode($data) . ');</script>';
+        echo '<script>console.log(' . $data . ');</script>';
     ?>
 </body>
 
