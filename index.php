@@ -173,8 +173,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="script.js"></script>
     <?php 
-    echo '<script>console.log("This is you:");</script>';
-    echo '<script>console.log('.$_SERVER['HTTP_X_FORWARDED_FOR'].');</script>';
+    echo '<script>console.log("This is you:"'.strval($_SERVER['HTTP_X_FORWARDED_FOR']).');</script>';
     ?>
 </body>
 
