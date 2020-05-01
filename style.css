@@ -26,24 +26,12 @@
     line-height: 1.2;
 }
 
-
-/* .jumbotron {
-    color: #fff;
-    background: radial-gradient(black 15%, transparent 16%) 0 0, radial-gradient(black 15%, transparent 16%) 8px 8px, radial-gradient(rgba(255, 255, 255, .1) 15%, transparent 20%) 0 1px, radial-gradient(rgba(255, 255, 255, .1) 15%, transparent 20%) 8px 9px;
-    background-color: #282828;
-    background-size: 16px 16px;
-    border-radius: 0px !important;
-} */
-
-.jumbotron {
-    color: #000;
-    background-color: #fff;
-    border-radius: 0px !important;
-    margin-top: 60px;
+#jumbotron {
+    margin: 60px 0px 30px 0px;
 }
 
-.profile {
-    /* filter: grayscale(); */
+.fs-half {
+    font-size: 1.05rem;
 }
 
 .materialShadow {
@@ -110,4 +98,61 @@
 
 .anchorText:hover {
     text-decoration: none;
+}
+
+.customBorder {
+    border: 1px solid #4640ff;
+}
+
+.customBg {
+    background: radial-gradient(circle at 20% 20%, #5183f5 25%, #4640ff 100%);
+    color: hsla(0, 0%, 100%, .9);
+}
+
+.customBg2 {
+    background: radial-gradient(circle at 20% 20%, #3494E6 25%, #EC6EAD 100%);
+    color: hsla(0, 0%, 100%, .9);
+}
+
+#sayHi:hover {
+    animation: shake 1s;
+    transition: ease 1s;
+    animation-iteration-count: 2;
+}
+
+@keyframes shake {
+    0% {
+        margin-left: 0px;
+    }
+    50% {
+        margin-left: 5px;
+    }
+    100% {
+        margin-left: 0px;
+    }
+}
+
+.profile:hover {
+    transform: scale(1.2);
+    transition: ease 1s;
+}
+
+#connectBtn:hover {
+    animation: shakeR 0.5s;
+    transition: ease 1s;
+}
+
+@keyframes shakeR {
+    25% {
+        transform: rotate(5deg);
+    }
+    50% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(-5deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
 }
