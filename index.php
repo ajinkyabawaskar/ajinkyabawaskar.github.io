@@ -157,16 +157,12 @@
             </div>
         </section>
     </main>
-	<?php echo '<script>console.log('.json_encode( date("h:i:sa - d M Y, D")).');</script>';
-	echo '<script>console.log('.json_encode($_SERVER['HTTP_CF_CONNECTING_IP']).')</script>';
-?>
+
     <footer class="footer mt-auto py-3">
         <div class="container">
             <span class="text-muted">
-                <?php
-                echo  preg_replace('<address>', '', trim("Page loaded in " . number_format(microtime(true) - $starttime, 2) . "s running " . (strval($_SERVER['SERVER_SOFTWARE']))));
-                ?>
-                </span>
+                Hi
+            </span>
         </div>
     </footer>
     <!-- Optional JavaScript -->
@@ -175,6 +171,14 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="script.js"></script>
+    <?php
+        $date = json_encode(date("h:i:sa - d M Y, D"));
+        $ip = json_encode($_SERVER['HTTP_CF_CONNECTING_IP']);
+        $page_load =  number_format(microtime(true) - $starttime, 2);
+        $server = json_encode(($_SERVER['SERVER_SOFTWARE']));
+        $data = compact("date", "ip", "page_load");
+        echo '<script>console.log(' . json_encode($data) . ');</script>';
+    ?>
 </body>
 
 </html>
