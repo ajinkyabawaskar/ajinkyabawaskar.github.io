@@ -157,6 +157,9 @@
             </div>
         </section>
     </main>
+	<?php echo '<script>console.log('.json_encode( date("h:i:sa - d M Y, D")).');</script>';
+	echo '<script>console.log('.json_encode($_SERVER['HTTP_CF_CONNECTING_IP']).')</script>';
+?>
     <footer class="footer mt-auto py-3">
         <div class="container">
             <span class="text-muted">
@@ -172,9 +175,6 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="script.js"></script>
-    <?php 
-    echo '<script>console.log("This is you:"'.strval($_SERVER['HTTP_X_FORWARDED_FOR']).');</script>';
-    ?>
 </body>
 
 </html>
