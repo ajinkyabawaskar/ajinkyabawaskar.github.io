@@ -172,11 +172,11 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="script.js"></script>
     <?php
-        $date = json_encode(date("h:i:sa - d M Y, D"));
-        $ip = json_encode($_SERVER['HTTP_CF_CONNECTING_IP']);
+        $date = date("h:i:sa - d M Y, D");
+        $ip = $_SERVER['HTTP_CF_CONNECTING_IP'];
         $page_load =  number_format(microtime(true) - $starttime, 2);
         $server = json_encode(($_SERVER['SERVER_SOFTWARE']));
-        $data = compact("date", "ip", "page_load");
+        $data = compact("date", "ip", "page_load","server");
         echo '<script>console.log(' . json_encode($data) . ');</script>';
     ?>
 </body>
