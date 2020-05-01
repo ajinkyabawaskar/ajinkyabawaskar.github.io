@@ -134,7 +134,7 @@
 
 .profile:hover {
     transform: scale(1.2);
-    transition: ease 1s;
+    transition: ease 0.5s;
 }
 
 #connectBtn:hover {
