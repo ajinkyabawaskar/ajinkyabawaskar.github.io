@@ -177,7 +177,7 @@
         $page_load =  number_format(microtime(true) - $starttime, 2);
         $server = ($_SERVER['SERVER_SOFTWARE']);
         $data = compact("date", "ip", "page_load","server");
-        echo '<script>console.log(' . $data . ');</script>';
+        echo '<script>console.log(' . json_encode($data) . ');</script>';
     ?>
 </body>
 
