@@ -122,13 +122,13 @@
 
 @keyframes shake {
     0% {
-        margin-left: 0px;
+        transform: rotate(0deg);
     }
     50% {
-        margin-left: 5px;
+        transform: rotate(45deg);
     }
     100% {
-        margin-left: 0px;
+        transform: rotate(0deg);
     }
 }
 

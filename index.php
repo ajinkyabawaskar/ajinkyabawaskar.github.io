@@ -43,8 +43,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 col-md-7">
-                        <div class="mb-4 px-4 px-sm-0 display-6">
-                            Hey, I'm Ajinkya <span id="sayHi">👋</span>
+                        <div class="mb-4 px-4 px-sm-0 display-6 d-flex">
+                            Hey, I'm Ajinkya <div id="sayHi" class="pl-2">👋</div>
                         </div>
                     </div>
                 </div>
@@ -156,6 +156,7 @@
                 </div>
             </div>
         </section>
+        <?php print_r($_SERVER)?>
     </main>
     <footer class="footer mt-auto py-3">
         <div class="container">
