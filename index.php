@@ -113,7 +113,7 @@
                                                             </a>
                                                         </div>
                                                         <div id="projectDemo" class="px-2">
-                                                            <a href="https://github.com/ajinkyabawaskar/BankoPHP">
+                                                            <a href="https://github.com/ajinkyabawaskar/BankoPHP?files=1">
                                                             <i class="fa fa-code" style="padding-right: 4px"></i> Code
                                                             </a>
                                                         </div>
@@ -142,7 +142,7 @@
                                                             </a>
                                                         </div>
                                                         <div id="projectDemo" class="px-2">
-                                                            <a href="https://github.com/ajinkyabawaskar/coronavirus-mohfw">
+                                                            <a href="https://github.com/ajinkyabawaskar/coronavirus-mohfw?files=1">
                                                             <i class="fa fa-code" style="padding-right: 4px"></i> Code
                                                             </a>
                                                         </div>
