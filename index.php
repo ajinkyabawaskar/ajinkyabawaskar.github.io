@@ -113,8 +113,8 @@
                                                             </a>
                                                         </div>
                                                         <div id="projectDemo" class="px-2">
-                                                            <a href="github.com">
-                                                            <i class="fa fa-github" style="padding-right: 4px"></i> Code
+                                                            <a href="https://github.com/ajinkyabawaskar/BankoPHP">
+                                                            <i class="fa fa-code" style="padding-right: 4px"></i> Code
                                                             </a>
                                                         </div>
                                                     </div>
@@ -128,7 +128,7 @@
                                                     Corona Dashboard
                                                 </div>
                                                 <div class="projectDescription mb-3">
-                                                    One of the earliest coronavirus spread tracking
+                                                    One of the earliest coronavirus spread tracking websites specific to India.
                                                 </div>
                                                 <div class="projectDemo d-flex justify-content-between wrap">
                                                     <div class="d-flex">
@@ -137,13 +137,13 @@
                                                     </div>
                                                     <div class="d-flex">
                                                         <div id="projectLink" class="px-2">
-                                                            <a href="https://bankogame.online" target="_blank">
+                                                            <a class="offline">
                                                              <i class="fa fa-hand-pointer-o" style="padding-right: 4px"></i>   Demo
                                                             </a>
                                                         </div>
                                                         <div id="projectDemo" class="px-2">
-                                                            <a href="github.com">
-                                                            <i class="fa fa-github" style="padding-right: 4px"></i> Code
+                                                            <a href="https://github.com/ajinkyabawaskar/coronavirus-mohfw">
+                                                            <i class="fa fa-code" style="padding-right: 4px"></i> Code
                                                             </a>
                                                         </div>
                                                     </div>
@@ -151,6 +151,36 @@
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <div class="col-md-6 col-lg-4 mb-3">
+                                            <div class="card p-3 px-3 customBorder2">
+                                                <div class="title">
+                                                    Internship Portal
+                                                </div>
+                                                <div class="projectDescription mb-3">
+                                                    One of the earliest coronavirus spread tracking websites specific to India.
+                                                </div>
+                                                <div class="projectDemo d-flex justify-content-between wrap">
+                                                    <div class="d-flex">
+                                                        <span id="php" class="techUsed mr-2">PHP</span>
+                                                        <span id="mySQL" class="techUsed">MySQL</span>
+                                                    </div>
+                                                    <div class="d-flex">
+                                                        <div id="projectLink" class="px-2">
+                                                            <a href="" class="">
+                                                             <i class="fa fa-hand-pointer-o" style="padding-right: 4px"></i>   Demo
+                                                            </a>
+                                                        </div>
+                                                        <div id="projectDemo" class="px-2">
+                                                            <a href="https://github.com/ajinkyabawaskar/coronavirus-mohfw">
+                                                            <i class="fa fa-code" style="padding-right: 4px"></i> Code
+                                                            </a>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>  
                                     </div>
 
                                 </div>

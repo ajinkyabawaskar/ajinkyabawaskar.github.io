@@ -228,3 +228,8 @@ a:hover {
 #json {
     background-color: #2ab131;
 }
+
+.offline:hover {
+    color: #888;
+    cursor: default;
+}
