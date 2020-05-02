@@ -229,6 +229,11 @@ a:hover {
     background-color: #2ab131;
 }
 
+#js {
+    background-color: #F0DB4F;
+    color: #323330;
+}
+
 .offline:hover {
     color: #888;
     cursor: default;

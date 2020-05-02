@@ -99,22 +99,22 @@
                                                     Banko
                                                 </div>
                                                 <div class="projectDescription mb-3">
-                                                    A realtime multiplayer card game
+                                                    A realtime multiplayer card game,
                                                 </div>
                                                 <div class="projectDemo d-flex justify-content-between wrap">
                                                     <div class="d-flex">
-                                                        <span id="php" class="techUsed mr-2">PHP</span>
-                                                        <span id="mySQL" class="techUsed">MySQL</span>
+                                                        <span id="js" class="techUsed mr-2">JavaScript</span>
+                                                        <span id="mySQL" class="techUsed">Ajax</span>
                                                     </div>
                                                     <div class="d-flex">
                                                         <div id="projectLink" class="px-2">
                                                             <a href="https://bankogame.online" target="_blank">
-                                                             <i class="fa fa-hand-pointer-o" style="padding-right: 4px"></i>   Demo
+                                                                <i class="fa fa-hand-pointer-o" style="padding-right: 4px"></i> Demo
                                                             </a>
                                                         </div>
                                                         <div id="projectDemo" class="px-2">
                                                             <a href="https://github.com/ajinkyabawaskar/BankoPHP?files=1">
-                                                            <i class="fa fa-code" style="padding-right: 4px"></i> Code
+                                                                <i class="fa fa-code" style="padding-right: 4px"></i> Code
                                                             </a>
                                                         </div>
                                                     </div>
@@ -138,12 +138,12 @@
                                                     <div class="d-flex">
                                                         <div id="projectLink" class="px-2">
                                                             <a class="offline">
-                                                             <i class="fa fa-hand-pointer-o" style="padding-right: 4px"></i>   Demo
+                                                                <i class="fa fa-hand-pointer-o" style="padding-right: 4px"></i> Demo
                                                             </a>
                                                         </div>
                                                         <div id="projectDemo" class="px-2">
                                                             <a href="https://github.com/ajinkyabawaskar/coronavirus-mohfw?files=1">
-                                                            <i class="fa fa-code" style="padding-right: 4px"></i> Code
+                                                                <i class="fa fa-code" style="padding-right: 4px"></i> Code
                                                             </a>
                                                         </div>
                                                     </div>
@@ -151,14 +151,44 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="col-md-6 col-lg-4 mb-3">
+                                            <div class="card p-3 px-3 customBorder2">
+                                                <div class="title">
+                                                    Expense Tracker
+                                                </div>
+                                                <div class="projectDescription mb-3">
+                                                    Web based expense tracker with visualisation of expenditures.
+                                                </div>
+                                                <div class="projectDemo d-flex justify-content-between wrap">
+                                                    <div class="d-flex">
+                                                        <span id="php" class="techUsed mr-2">PHP</span>
+                                                        <span id="js" class="techUsed">JavaScript</span>
+                                                    </div>
+                                                    <div class="d-flex">
+                                                        <div id="projectLink" class="px-2">
+                                                            <a href="" class="">
+                                                                <i class="fa fa-hand-pointer-o" style="padding-right: 4px"></i> Demo
+                                                            </a>
+                                                        </div>
+                                                        <div id="projectDemo" class="px-2">
+                                                            <a href="https://github.com/ajinkyabawaskar/coronavirus-mohfw">
+                                                                <i class="fa fa-code" style="padding-right: 4px"></i> Code
+                                                            </a>
+                                                        </div>
+                                                    </div>
 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="col-md-6 col-lg-4 mb-3">
                                             <div class="card p-3 px-3 customBorder2">
                                                 <div class="title">
                                                     Internship Portal
                                                 </div>
                                                 <div class="projectDescription mb-3">
-                                                    One of the earliest coronavirus spread tracking websites specific to India.
+                                                    Web application for students to facilitate internship applications in college.
                                                 </div>
                                                 <div class="projectDemo d-flex justify-content-between wrap">
                                                     <div class="d-flex">
@@ -168,19 +198,19 @@
                                                     <div class="d-flex">
                                                         <div id="projectLink" class="px-2">
                                                             <a href="" class="">
-                                                             <i class="fa fa-hand-pointer-o" style="padding-right: 4px"></i>   Demo
+                                                                <i class="fa fa-hand-pointer-o" style="padding-right: 4px"></i> Demo
                                                             </a>
                                                         </div>
                                                         <div id="projectDemo" class="px-2">
                                                             <a href="https://github.com/ajinkyabawaskar/coronavirus-mohfw">
-                                                            <i class="fa fa-code" style="padding-right: 4px"></i> Code
+                                                                <i class="fa fa-code" style="padding-right: 4px"></i> Code
                                                             </a>
                                                         </div>
                                                     </div>
 
                                                 </div>
                                             </div>
-                                        </div>  
+                                        </div>
                                     </div>
 
                                 </div>

@@ -1,5 +1,5 @@
 <?php
 if ( $_POST['payload'] ) {
-    shell_exec( ‘cd /var/www/ajinkya.space/ && git reset –hard HEAD && git pull’ );
+    shell_exec( ‘cd /var/www/ajinkya.space/ && sudo git reset –hard HEAD && sudo git pull’ );
 }
 ?>hi
