@@ -234,6 +234,10 @@ a:hover {
     color: #323330;
 }
 
+#ajax {
+    background-color: #5172F4;
+}
+
 .offline:hover {
     color: #888;
     cursor: default;

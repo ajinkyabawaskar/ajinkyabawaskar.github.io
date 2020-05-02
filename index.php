@@ -104,7 +104,7 @@
                                                 <div class="projectDemo d-flex justify-content-between wrap">
                                                     <div class="d-flex">
                                                         <span id="js" class="techUsed mr-2">JavaScript</span>
-                                                        <span id="mySQL" class="techUsed">Ajax</span>
+                                                        <span id="ajax" class="techUsed">Ajax</span>
                                                     </div>
                                                     <div class="d-flex">
                                                         <div id="projectLink" class="px-2">
