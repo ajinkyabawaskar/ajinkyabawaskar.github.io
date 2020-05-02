@@ -2,6 +2,14 @@
     font-family: 'Roboto';
 }
 
+*::-webkit-scrollbar {
+    display: none;
+}
+
+* {
+    -ms-overflow-style: none;
+}
+
 .display-5 {
     font-size: 3.0rem;
     font-weight: 300;
@@ -104,13 +112,12 @@
     border: 1px solid #4640ff;
 }
 
-.customBg {
-    background: radial-gradient(circle at 20% 20%, #5183f5 25%, #4640ff 100%);
-    color: hsla(0, 0%, 100%, .9);
+.customBorder2 {
+    border: 1.5px dashed #00000066;
 }
 
-.customBg2 {
-    background: radial-gradient(circle at 20% 20%, #3494E6 25%, #EC6EAD 100%);
+.customBg {
+    background: radial-gradient(circle at 20% 20%, #5183f5 25%, #4640ff 100%);
     color: hsla(0, 0%, 100%, .9);
 }
 
@@ -133,7 +140,7 @@
 }
 
 .profile:hover {
-    transform: scale(1.2);
+    transform: scale(1.4);
     transition: ease 0.5s;
 }
 
@@ -155,4 +162,69 @@
     100% {
         transform: rotate(0deg);
     }
+}
+
+#projects:hover #projectAnimate {
+    animation: flip 1s;
+    transition: ease 1s;
+}
+
+.profile:not( :hover) {
+    /* animation: flip 1s; */
+    transform: scale(1.25);
+    transition: ease 1s;
+}
+
+@keyframes flip {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.title {
+    font-weight: 400;
+    font-size: 1.1rem;
+}
+
+#projectsTitle {
+    font-size: 1.5rem;
+}
+
+.border2 {
+    border-width: 1.5px;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.techUsed {
+    padding: 0px 5px;
+    margin: 0px;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    color: white;
+    border-radius: 5px;
+    line-height: 0px;
+    height: 25px;
+}
+
+#php {
+    background-color: #777bb3;
+}
+
+#mySQL {
+    background-color: #e99d28;
+}
+
+#python {
+    background-color: #646464;
+}
+
+#json {
+    background-color: #2ab131;
 }
