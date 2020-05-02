@@ -93,7 +93,7 @@
                             <div class="card-body p-0 pb-3 mt-2">
                                 <div class="container-fluid">
                                     <div class="row ">
-                                        <div class="col-md-6 col-lg-4 mb-3">
+                                        <div class="col-md-6 col-lg-4 mb-4">
                                             <div class="card p-3 px-3 customBorder2 h-100 d-flex justify-content-center">
                                                 <div class="title">
                                                     Banko
@@ -122,7 +122,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 col-lg-4 mb-3">
+                                        <div class="col-md-6 col-lg-4 mb-4">
                                             <div class="card p-3 px-3 customBorder2">
                                                 <div class="title">
                                                     Corona Dashboard
@@ -151,7 +151,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 col-lg-4 mb-3">
+                                        <div class="col-md-6 col-lg-4 mb-4">
                                             <div class="card p-3 px-3 customBorder2">
                                                 <div class="title">
                                                     Expense Tracker
@@ -182,13 +182,42 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-6 col-lg-4 mb-3">
+                                        <div class="col-md-6 col-lg-4 mb-4">
                                             <div class="card p-3 px-3 customBorder2">
                                                 <div class="title">
                                                     Internship Portal
                                                 </div>
                                                 <div class="projectDescription mb-3">
                                                     Web application for students to facilitate internship applications in college.
+                                                </div>
+                                                <div class="projectDemo d-flex justify-content-between wrap">
+                                                    <div class="d-flex">
+                                                        <span id="php" class="techUsed mr-2">PHP</span>
+                                                        <span id="mySQL" class="techUsed">MySQL</span>
+                                                    </div>
+                                                    <div class="d-flex">
+                                                        <div id="projectLink" class="px-2">
+                                                            <a href="" class="">
+                                                                <i class="fa fa-hand-pointer-o" style="padding-right: 4px"></i> Demo
+                                                            </a>
+                                                        </div>
+                                                        <div id="projectDemo" class="px-2">
+                                                            <a href="https://github.com/ajinkyabawaskar/coronavirus-mohfw">
+                                                                <i class="fa fa-code" style="padding-right: 4px"></i> Code
+                                                            </a>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-4 mb-4">
+                                            <div class="card p-3 px-3 customBorder2">
+                                                <div class="title">
+                                                    Quiz Mania
+                                                </div>
+                                                <div class="projectDescription mb-3">
+                                                    Platform to organise quizes based on multiple choice questions.
                                                 </div>
                                                 <div class="projectDemo d-flex justify-content-between wrap">
                                                     <div class="d-flex">
