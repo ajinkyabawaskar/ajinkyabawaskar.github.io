@@ -18,6 +18,7 @@ function doPost()
     $log = fopen("log.json", "a") or die("Unable to open file!");
     $json = json_encode($_POST);
     fwrite($log, $json);
+    fwrite($log, "Updated");
     fclose($log);
     return response($_POST);
 }
