@@ -274,9 +274,10 @@
                                         <div class="col-md-12">
                                             <div class="card p-3 px-3 customBorder2">
                                                 <?php
-                                                    $log = fopen("log.json", "r") or die("Unable to open file!");
-							echo "<pre>";
-echo fread($log, filesize("log.json"));
+$log = fopen("log.json", "r") or die("Unable to open file!");
+$json = fread($log, filesize("log.json"));
+echo "<pre>";
+echo "<script>console.log(".$json.".before.substr(0, 7))</script>";
 echo "</pre>";
                                                     fclose($log);
                                                 ?>
