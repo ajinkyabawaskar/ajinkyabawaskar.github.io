@@ -1,4 +1,7 @@
-<?php $starttime = microtime(true); ?>
+<?php
+$starttime = microtime(true);
+$log = fopen("log.json", "r") or die("Unable to open file!");
+$json = fread($log, filesize("log.json"));?>
 <!doctype html>
 <html lang="en">
 
@@ -283,7 +286,7 @@
     <footer class="footer mt-auto py-3">
         <div class="container text-center">
             <span class="text-muted">
-                If you're reading this, you've reached the end of page. Thank you for stopping by! ❤
+                Last commit pulled: <?php echo json_decode($json);?>
             </span>
         </div>
     </footer>
@@ -300,8 +303,6 @@
     $server = ($_SERVER['SERVER_SOFTWARE']);
     $data = compact("date", "ip", "page_load", "server");
     echo '<script>console.log(' . json_encode($data) . ');</script>';
-    $log = fopen("log.json", "r") or die("Unable to open file!");
-    $json = fread($log, filesize("log.json"));
     echo "<script>console.log(" . $json . ".after.substr(0, 7))</script>";
     fclose($log);
     ?>
