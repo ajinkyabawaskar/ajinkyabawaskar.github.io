@@ -240,6 +240,35 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="col-md-6 col-lg-4 mb-4">
+                                            <div class="card p-3 px-3 customBorder2">
+                                                <div class="title">
+                                                    Quiz Mania
+                                                </div>
+                                                <div class="projectDescription mb-3">
+                                                    Platform to organise quizes based on multiple choice questions.
+                                                </div>
+                                                <div class="projectDemo d-flex justify-content-between wrap">
+                                                    <div class="d-flex">
+                                                        <span id="php" class="techUsed mr-2">PHP</span>
+                                                        <span id="mySQL" class="techUsed">MySQL</span>
+                                                    </div>
+                                                    <div class="d-flex">
+                                                        <div id="projectLink" class="px-2">
+                                                            <a href="" class="">
+                                                                <i class="fa fa-hand-pointer-o" style="padding-right: 4px"></i> Demo
+                                                            </a>
+                                                        </div>
+                                                        <div id="projectDemo" class="px-2">
+                                                            <a href="https://github.com/ajinkyabawaskar/coronavirus-mohfw">
+                                                                <i class="fa fa-code" style="padding-right: 4px"></i> Code
+                                                            </a>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
