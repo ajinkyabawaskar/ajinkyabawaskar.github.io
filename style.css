@@ -116,6 +116,21 @@
     border: 1.5px dashed #00000066;
 }
 
+.customBorder3 {
+    border: 1.5px dashed #4640ff;
+}
+
+.fs-2 {
+    font-size: 1.75rem;
+    font-family: 'Roboto', sans-serif;
+}
+
+@media (min-width: 1200px) {
+    .pr-sm-6 {
+        padding-right: 110px !important;
+    }
+}
+
 .customBg {
     background: radial-gradient(circle at 20% 20%, #5183f5 25%, #4640ff 100%);
     color: hsla(0, 0%, 100%, .9);
@@ -169,6 +184,21 @@
     transition: ease 1s;
 }
 
+#skills:hover #skillsAnimate {
+    animation: shake 1s;
+    transition: ease 1s;
+}
+
+#morePro:hover #arrow {
+    animation: slide 1s;
+    transition: ease 1s;
+}
+
+#morePro:hover #moreText {
+    /* animation: slide 1s; */
+    transition: ease 1s;
+}
+
 .profile:not( :hover) {
     /* animation: flip 1s; */
     transform: scale(1.25);
@@ -184,6 +214,19 @@
     }
 }
 
+@keyframes slide {
+    25% {
+        margin-right: 25px;
+    }
+    100% {
+        margin-right: 0px;
+    }
+}
+
+.skillText {
+    font-size: 1.1rem;
+}
+
 .title {
     font-weight: 400;
     font-size: 1.1rem;
@@ -191,6 +234,10 @@
 
 #projectsTitle {
     font-size: 1.5rem;
+}
+
+.sectionTitle {
+    padding-top: 60px
 }
 
 .border2 {
@@ -241,4 +288,44 @@ a:hover {
 .offline:hover {
     color: #888;
     cursor: default;
+}
+
+#programmingCard:hover #programmingTitle {
+    display: none;
+    transition: ease 1s;
+}
+
+#programmingCard:hover #programmingSkills {
+    display: block !important;
+    transition: ease 1s;
+}
+
+#devopsCard:hover #devopsTitle {
+    display: none;
+    transition: ease 1s;
+}
+
+#devopsCard:hover #devopsSkills {
+    display: block !important;
+    transition: ease 1s;
+}
+
+#communicationCard:hover #communicationTitle {
+    display: none;
+    transition: ease 1s;
+}
+
+#communicationCard:hover #communicationSkills {
+    display: block !important;
+    transition: ease 1s;
+}
+
+#designCard:hover #designTitle {
+    display: none;
+    transition: ease 1s;
+}
+
+#designCard:hover #designSkills {
+    display: block !important;
+    transition: ease 1s;
 }

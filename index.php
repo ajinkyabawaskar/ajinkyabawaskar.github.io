@@ -12,8 +12,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <!-- FontAwesome CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
     <!-- Font CSS -->
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
     <title>Ajinkya Bawaskar</title>
@@ -54,7 +56,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 col-md-7 d-flex align-items-center">
-                        <div class="mb-4 px-4 px-sm-0 fs-half">
+                        <div class="mb-4 px-4 px-sm-0 fs-half pr-6 pr-sm-6">
                             I am a Software Engineer based in <a href="https://goo.gl/maps/LX7jebuHv1BmzXp56" target="_blank" class="bioLink">
                                 India</a>.
                             <br> Recently graduated in Computer Science and Engineering from <a href="http://www.sgbau.ac.in" target="_blank" class="bioLink">SGBA University</a>.
@@ -81,25 +83,25 @@
                     </div>
                 </div>
         </section>
-        <section id="projects" style="padding-top:60px">
+        <section id="projects" class="sectionTitle">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-12 mb-3 p-0 px-3 px-sm-0">
+                    <div class="col-lg-12 p-0 px-3 px-sm-0">
                         <div class="card border-0">
                             <div class="card-title p-2 px-3 mt-2 d-flex" id="projectsTitle">
                                 Projects
                                 <div class="mx-2" id="projectAnimate">💾</div>
                             </div>
-                            <div class="card-body p-0 pb-3 mt-2">
+                            <div class="card-body p-0 mt-2">
                                 <div class="container-fluid">
                                     <div class="row ">
                                         <div class="col-md-6 col-lg-4 mb-4">
                                             <div class="card p-3 px-3 customBorder2 h-100 d-flex justify-content-center">
                                                 <div class="title">
-                                                    Banko
+                                                    Banko 🃏
                                                 </div>
                                                 <div class="projectDescription mb-3">
-                                                    A realtime multiplayer card game,
+                                                    A realtime multiplayer card game meant to cure boredom
                                                 </div>
                                                 <div class="projectDemo d-flex justify-content-between wrap">
                                                     <div class="d-flex">
@@ -123,9 +125,9 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-lg-4 mb-4">
-                                            <div class="card p-3 px-3 customBorder2">
+                                            <div class="card p-3 px-3 customBorder2 h-100 d-flex justify-content-center">
                                                 <div class="title">
-                                                    Corona Dashboard
+                                                    Corona Dashboard 🦠
                                                 </div>
                                                 <div class="projectDescription mb-3">
                                                     One of the earliest coronavirus spread tracking websites specific to India.
@@ -152,9 +154,9 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-lg-4 mb-4">
-                                            <div class="card p-3 px-3 customBorder2">
+                                            <div class="card p-3 px-3 customBorder2 h-100 d-flex justify-content-center">
                                                 <div class="title">
-                                                    Expense Tracker
+                                                    Expense Tracker 📈
                                                 </div>
                                                 <div class="projectDescription mb-3">
                                                     Web based expense tracker with visualisation of expenditures.
@@ -180,12 +182,38 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
                                         <div class="col-md-6 col-lg-4 mb-4">
-                                            <div class="card p-3 px-3 customBorder2">
+                                            <div class="card p-3 px-3 customBorder2 h-100 d-flex justify-content-center">
                                                 <div class="title">
-                                                    Internship Portal
+                                                    Crop Detector 👨‍🌾
+                                                </div>
+                                                <div class="projectDescription mb-3">
+                                                    Detects presence of crop in given image using K means classification
+                                                </div>
+                                                <div class="projectDemo d-flex justify-content-between wrap">
+                                                    <div class="d-flex">
+                                                        <span id="python" class="techUsed">Python</span>
+                                                    </div>
+                                                    <div class="d-flex">
+                                                        <div id="projectLink" class="px-2">
+                                                            <a href="" class="">
+                                                                <i class="fa fa-hand-pointer-o" style="padding-right: 4px"></i> Demo
+                                                            </a>
+                                                        </div>
+                                                        <div id="projectDemo" class="px-2">
+                                                            <a href="https://github.com/ajinkyabawaskar/coronavirus-mohfw">
+                                                                <i class="fa fa-code" style="padding-right: 4px"></i> Code
+                                                            </a>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-4 mb-4">
+                                            <div class="card p-3 px-3 customBorder2 h-100 d-flex justify-content-center">
+                                                <div class="title">
+                                                    Internship Portal 👨‍🎓
                                                 </div>
                                                 <div class="projectDescription mb-3">
                                                     Web application for students to facilitate internship applications in college.
@@ -211,8 +239,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 col-lg-4 mb-4">
-                                            <div class="card p-3 px-3 customBorder2">
+                                        <!-- <div class="col-md-6 col-lg-4 mb-4">
+                                            <div class="card p-3 px-3 customBorder2 h-100 d-flex justify-content-center">
                                                 <div class="title">
                                                     Quiz Mania
                                                 </div>
@@ -239,33 +267,22 @@
 
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6 col-lg-4 mb-4">
-                                            <div class="card p-3 px-3 customBorder2">
-                                                <div class="title">
-                                                    Crop Detector
-                                                </div>
-                                                <div class="projectDescription mb-3">
-                                                    Platform to organise quizes based on multiple choice questions.
-                                                </div>
-                                                <div class="projectDemo d-flex justify-content-between wrap">
-                                                    <div class="d-flex">
-                                                        <span id="php" class="techUsed mr-2">PHP</span>
-                                                        <span id="mySQL" class="techUsed">MySQL</span>
-                                                    </div>
-                                                    <div class="d-flex">
-                                                        <div id="projectLink" class="px-2">
-                                                            <a href="" class="">
-                                                                <i class="fa fa-hand-pointer-o" style="padding-right: 4px"></i> Demo
-                                                            </a>
-                                                        </div>
-                                                        <div id="projectDemo" class="px-2">
-                                                            <a href="https://github.com/ajinkyabawaskar/coronavirus-mohfw">
-                                                                <i class="fa fa-code" style="padding-right: 4px"></i> Code
-                                                            </a>
-                                                        </div>
-                                                    </div>
+                                        </div> -->
 
+                                        <div class="col-md-6 col-lg-4 mb-4" id="morePro">
+                                            <div class="card p-3 px-3 customBorder3 pl-4 h-100 d-flex justify-content-center">
+                                                <div class="d-flex">
+                                                    <div class="moreProjects w-100">
+                                                        <div class="display-4 pb-2 fs-2" id="moreText">
+                                                            More
+                                                        </div>
+                                                        <div class="projectDescription ">
+                                                            Explore all projects
+                                                        </div>
+                                                    </div>
+                                                    <div class="moreArrow d-flex justify-content-end align-items-center w-100">
+                                                        <i class="pe-7s-right-arrow" id="arrow" style="font-size: 3rem; padding-right: 10px; color:#4640ff"></i>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -276,6 +293,69 @@
                     </div>
                 </div>
             </div>
+        </section>
+        <section id="skills" class="sectionTitle" style="height: 1000px">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 mb-3 p-0 px-3 px-sm-0">
+                        <div class="card border-0 ">
+                            <div class="card-title p-2 px-3 mt-2 d-flex" id="projectsTitle">
+                                Skills
+                                <div class="mx-2" id="skillsAnimate">🤹</div>
+                            </div>
+                            <div class="card-body p-0 pb-3 mt-2 ">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-sm-3 mb-3" id="programmingCard">
+                                            <div class="card p-3 customBorder2 h-100 d-flex ">
+                                                <i class="pe-7s-box2 pe-lg pb-2"></i>
+                                                <div class="skillText" id="programmingTitle">
+                                                    Programming 
+                                                </div>
+                                                <div id="programmingSkills" class="d-none">
+                                                    C · C++ · Java · Python  · PHP
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 mb-3">
+                                            <div class="card p-3 customBorder2 h-100 d-flex" id="devopsCard">
+                                                <i class="pe-7s-config pe-lg pb-2"></i>
+                                                <div class="skillText" id="devopsTitle">
+                                                    DevOps
+                                                </div>
+                                                <div id="devopsSkills" class="d-none">
+                                                    Azure DevOps · AWS EC2 · Git
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 mb-3">
+                                            <div class="card p-3 customBorder2 h-100 d-flex" id="communicationCard">
+                                                <i class="pe-7s-micro pe-lg pb-2 "></i>
+                                                <div class="skillText" id="communicationTitle">
+                                                    Communication
+                                                </div>
+                                                <div id="communicationSkills" class="d-none">
+                                                    Soft Skills · Public Speaking
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 mb-3">
+                                            <div class="card p-3 customBorder2 h-100 d-flex" id="designCard">
+                                                <i class="pe-7s-graph1 pe-lg pb-2 "></i>
+                                                <div class="skillText" id="designTitle">
+                                                    Design
+                                                </div>
+                                                <div id="designSkills" class="d-none">
+                                                    Figma · Canva  · Filmora
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
@@ -283,7 +363,7 @@
     <footer class="footer mt-auto py-3">
         <div class="container text-center">
             <span class="text-muted">
-                Last commit pulled: 
+                Thank you!
             </span>
         </div>
     </footer>
@@ -295,15 +375,15 @@
     <script src="script.js"></script>
     <?php
     $date = date("h:i:sa - d M Y, D");
-    $ip = $_SERVER['HTTP_CF_CONNECTING_IP'];
-    $page_load =  number_format(microtime(true) - $starttime, 2);
-    $server = ($_SERVER['SERVER_SOFTWARE']);
-    $data = compact("date", "ip", "page_load", "server");
-    echo '<script>console.log(' . json_encode($data) . ');</script>';
-    $log = fopen("log.json", "r") or die("Unable to open file!");
-    $json = fread($log, filesize("log.json"));
-    echo "<script>console.log(" . $json . ".after.substr(0, 7))</script>";
-    fclose($log);
+    // $ip = $_SERVER['HTTP_CF_CONNECTING_IP'];
+    // $page_load =  number_format(microtime(true) - $starttime, 2);
+    // $server = ($_SERVER['SERVER_SOFTWARE']);
+    // $data = compact("date", "ip", "page_load", "server");
+    // echo '<script>console.log(' . json_encode($data) . ');</script>';
+    // $log = fopen("log.json", "r") or die("Unable to open file!");
+    // $json = fread($log, filesize("log.json"));
+    // echo "<script>console.log(" . $json . ".after.substr(0, 7))</script>";
+    // fclose($log);
     ?>
 </body>
 
