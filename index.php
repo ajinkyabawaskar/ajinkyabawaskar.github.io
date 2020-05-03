@@ -277,7 +277,7 @@
 $log = fopen("log.json", "r") or die("Unable to open file!");
 $json = fread($log, filesize("log.json"));
 echo "<pre>";
-echo "<script>console.log(".$json.".before.substr(0, 7))</script>";
+echo "<script>console.log(".$json.".after.substr(0, 7))</script>";
 echo "</pre>";
                                                     fclose($log);
                                                 ?>
