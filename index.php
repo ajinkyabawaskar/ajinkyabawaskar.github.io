@@ -243,7 +243,7 @@
                                         <div class="col-md-6 col-lg-4 mb-4">
                                             <div class="card p-3 px-3 customBorder2">
                                                 <div class="title">
-                                                    Quiz Mania
+                                                    Crop Detector
                                                 </div>
                                                 <div class="projectDescription mb-3">
                                                     Platform to organise quizes based on multiple choice questions.
