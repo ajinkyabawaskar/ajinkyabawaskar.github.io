@@ -270,19 +270,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="card p-3 px-3 customBorder2">
-                                                <?php
-                                                    $log = fopen("log.json", "r") or die("Unable to open file!");
-							echo "<pre>";
-echo fread($log, filesize("log.json"));
-echo "</pre>";
-                                                    fclose($log);
-                                                ?>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -313,6 +300,10 @@ echo "</pre>";
     $server = ($_SERVER['SERVER_SOFTWARE']);
     $data = compact("date", "ip", "page_load", "server");
     echo '<script>console.log(' . json_encode($data) . ');</script>';
+    $log = fopen("log.json", "r") or die("Unable to open file!");
+    $json = fread($log, filesize("log.json"));
+    echo "<script>console.log(" . $json . ".after.substr(0, 7))</script>";
+    fclose($log);
     ?>
 </body>
 
