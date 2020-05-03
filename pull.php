@@ -1,41 +1,25 @@
 <?php
 $request_method = $_SERVER['REQUEST_METHOD'];
 switch ($request_method) {
-    case 'POST':
-        doPost();
-        break;
-    case 'GET':
-        header('Content-Type: application/json');
-        echo json_encode($_GET);
+case 'POST':
+	if($_POST['payload']) {
+	header('Content-Type: application/json');
+	$logfile = fopen("log.json", "w") or die("Unable to open file!");
+	$json = $_POST['payload'];
+	shell_exec( ‘cd /var/www/ajinkya.space/ && git reset –hard HEAD && git pull’ );
+	fwrite($logfile, $json);
+	fclose($logfile);
+	header('HTTP/1.0 200 OK', true, 200);
+	}
+	else {
+		header('HTTP/1.0 403 Forbidden', true, 403);
+		die();
+	}
         break;
     default:
-        # code...
+	header('HTTP/1.0 403 Forbidden', true, 403);
+	die();
         break;
 }
-
-function doPost()
-{
-    $log = fopen("log.json", "a") or die("Unable to open file!");
-    $json = json_encode($_POST);
-    fwrite($log, $json);
-    fwrite($log, "Update");
-    fclose($log);
-    return response($_POST);
-}
-
-function response($x)
-{
-    header('Content-Type: application/json');
-    echo json_encode($x);
-}
-// if ($_POST) {
-//     echo shell_exec("cd /var/www/ajinkya.space/ && sudo git reset –hard HEAD && sudo git pull");
-//     $log = fopen("log.json", "a") or die("Unable to open file!");
-//     $json = json_encode($_POST);
-//     fwrite($log, $json);
-//     fclose($log);
-// } else {
-//     header("Location: index.php");
-// }
 ?>
 
