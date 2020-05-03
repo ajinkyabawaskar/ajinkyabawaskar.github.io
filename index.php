@@ -241,7 +241,17 @@
                                             </div>
                                         </div>
                                     </div>
-
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="card p-3 px-3 customBorder2">
+                                                <?php
+                                                    $log = fopen("log.json", "r") or die("Unable to open file!");
+                                                    echo fread($log, filesize("log.json"));
+                                                    fclose($log);
+                                                ?>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
