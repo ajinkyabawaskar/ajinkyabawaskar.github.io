@@ -27,8 +27,6 @@ function response($x)
     header('Content-Type: application/json');
     echo json_encode($x);
 }
-
-?>
 // if ($_POST) {
 //     echo shell_exec("cd /var/www/ajinkya.space/ && sudo git reset –hard HEAD && sudo git pull");
 //     $log = fopen("log.json", "a") or die("Unable to open file!");
@@ -38,3 +36,5 @@ function response($x)
 // } else {
 //     header("Location: index.php");
 // }
+?>
+
