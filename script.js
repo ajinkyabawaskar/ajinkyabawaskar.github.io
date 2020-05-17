@@ -24,7 +24,7 @@ jokeRequest.onload = () => {
 let ipRequest = new XMLHttpRequest();
 ipAddr = document.querySelector("#ip");
 ipAddr = ipAddr.innerText;
-IPUrl = "http://ip-api.com/json/" + "ipAddr";
+IPUrl = "http://ip-api.com/json/" + ipAddr;
 ipRequest.open("GET", IPUrl);
 ipRequest.send();
 ipRequest.onload = () => {
