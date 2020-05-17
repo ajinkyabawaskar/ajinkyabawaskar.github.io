@@ -20,18 +20,3 @@ jokeRequest.onload = () => {
         console.log(`error ${jokeRequest.status} ${jokeRequest.statusText}`);
     }
 }
-
-let ipRequest = new XMLHttpRequest();
-
-ipRequest.open("GET", IPUrl);
-ipRequest.send();
-ipRequest.onload = () => {
-    if (ipRequest.status == 200) {
-        ip = JSON.parse(ipRequest.response);
-        putIp = document.querySelector("#ip");
-        putIp.innerText = ip.city;
-
-    } else {
-        console.log(`error ${ipRequest.status} ${ipRequest.statusText}`);
-    }
-}
