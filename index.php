@@ -542,7 +542,7 @@ ipRequest.onload = () => {
         putIp.innerText = ip.city;
 
     } else {
-        console.log(`error ${ipRequest.status} ${ipRequest.statusText}`);
+        console.log("error ${ipRequest.status} ${ipRequest.statusText}");
     }
 }</script>`;
     $page_load =  number_format(microtime(true) - $starttime, 2);
