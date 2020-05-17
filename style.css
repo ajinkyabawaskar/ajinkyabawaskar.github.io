@@ -472,7 +472,7 @@ a:hover {
 #facebook {
     background-image: url(facebook.svg);
     background-repeat: no-repeat;
-    background-position: 102% 20px;
+    background-position: 98% 20px;
     /* background-size: contain; */
     background-clip: border-box;
 }
@@ -480,7 +480,7 @@ a:hover {
 #instagram {
     background-image: url(instagram.svg);
     background-repeat: no-repeat;
-    background-position: 108% 20px;
+    background-position: 98% 20px;
     /* background-size: contain; */
     background-clip: border-box;
 }
@@ -520,8 +520,14 @@ a:hover {
     #instagram {
         background-image: url(instagram.svg);
         background-repeat: no-repeat;
-        background-position: 100% 20px;
+        background-position: 102% 20px;
         /* background-size: contain; */
         background-clip: border-box;
     }
+}
+
+.white-row {
+    width: 80%;
+    border-top: 1.5px dashed white;
+    margin: 50px auto;
 }

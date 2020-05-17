@@ -34,7 +34,7 @@
                         <a href="" class="anchorText">About</a>
                     </div>
                     <div class="ml-4">
-                        Work
+                        Blog
                     </div>
                 </div>
             </div>
@@ -77,7 +77,7 @@
                                     <p class="card-text">
                                         I'd love to listen from you!
                                     </p>
-                                    <button class="subsButton shadow-sm" id="connectBtn"onclick="goToConnect(this)">🔗 Connect </button>
+                                    <button class="subsButton shadow-sm" id="connectBtn" onclick="goToConnect(this)">🔗 Connect </button>
                                 </div>
                             </div>
                         </div>
@@ -434,82 +434,92 @@
                 </div>
             </div>
         </section>
-        <section id="connect" class="sectionTitle" >
-            <div class="container" >
-                <div class="row" >
+        <section id="connect" class="sectionTitle">
+            <div class="container">
+                <div class="row">
                     <div class="col-lg-12 p-0 px-3 px-sm-0 py-3" id="connectSection">
-                       <div class="d-flex flex-column px-3 pb-4">
-                           <div class="connectTitle mb-3 py-1 text-center">
-                               Connect 
-                               <br>
-                               <div class="text-muted text-white fs-1">I'm always happy to chat. 🙋‍♂️</div>
-                           </div>
-                           <hr class="white">
-                           <!-- <div class="mx-2" id="projectAnimate">🔗</div> -->
-                           <div class="container-fluid">
-                               <div class="row">
-                                   <div class="col-md-4  mb-3">
-                                       <div class="card text-dark p-2 pb-4 rounded-xl " id="email">
-                                        Email
-                                        <!-- <small>ajinkyabawaskar2@gmail.com</small> -->
-                                       </div>
-                                   </div>
-                                   <div class="col-md-4 mb-3">
-                                       <div class="card text-dark p-2 pb-4 rounded-xl " id="linkedin">
-                                        LinkedIn
-                                       </div>
-                                   </div>
-                                   <div class="col-md-4  mb-3">
-                                       <div class="card text-dark p-2 pb-4 rounded-xl " id="whatsapp">
-                                        WhatsApp
-                                       </div>
-                                   </div>
-                                   <div class="col-md-4  mb-3">
-                                       <div class="card text-dark p-2 pb-4 rounded-xl " id="facebook">
-                                        Facebook
-                                       </div>
-                                   </div>
-                                   <div class="col-md-4 mb-3">
-                                       <div class="card text-dark p-2 pb-4 rounded-xl " id="twitter">
-                                        Twitter
-                                       </div>
-                                   </div>
-                                   <div class="col-md-4 mb-3">
-                                       <div class="card text-dark p-2 pb-4 rounded-xl " id="instagram">
-                                        Instagram
-                                       </div>
-                                   </div>
-                               </div>
-                           </div>
-                           <hr>
-                           <div class="container-fluid">
-                               <div class="row">
-                                   <div class="col-md-12">
-                                       <div class="text-white">
-                                           <div class="setup">
-                                                        Programming Joke
-                                           </div>
-                                           <div class="punchline">
-                                                        Punchline 😂
-                                           </div>
-                                       </div>
-                                   </div>
-                               </div>
-                           </div>
-                       </div>
+                        <div class="d-flex flex-column px-3 pb-4">
+                            <div class="connectTitle py-1 text-center">
+                                Connect
+                                <br>
+                                <div class="text-muted text-white fs-1">I'm always happy to chat. 🙋‍♂️</div>
+                            </div>
+                            <hr class="white-row" style="width:50%">
+                            <!-- <div class="mx-2" id="projectAnimate">🔗</div> -->
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-4  mb-3">
+                                        <div class="card text-dark p-2 pb-4 rounded-xl " id="email">
+                                            Email
+                                            <!-- <small>ajinkyabawaskar2@gmail.com</small> -->
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card text-dark p-2 pb-4 rounded-xl " id="linkedin">
+                                            LinkedIn
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4  mb-3">
+                                        <div class="card text-dark p-2 pb-4 rounded-xl " id="whatsapp">
+                                            WhatsApp
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4  mb-3">
+                                        <div class="card text-dark p-2 pb-4 rounded-xl " id="facebook">
+                                            Facebook
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card text-dark p-2 pb-4 rounded-xl " id="twitter">
+                                            Twitter
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card text-dark p-2 pb-4 rounded-xl " id="instagram">
+                                            Instagram
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="white-row">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="text-white text-center">
+                                            <i class="pe-7s-quote"></i>
+                                            <div class="setup">
+                                                Programming Joke
+                                            </div>
+                                            <div class="punchline">
+                                                Punchline 😂
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- <footer class="footer mt-auto py-3">
-        <div class="container text-center">
+    <footer class="footer mt-auto py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <span id="ip"></span>
+                </div>
+                <div class="col-md-6">
+                    Hi
+                </div>
+            </div>
+
             <span class="text-muted">
-                Thank you!
+
             </span>
         </div>
-    </footer> -->
+    </footer>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -518,15 +528,15 @@
     <script src="script.js"></script>
     <?php
     $date = date("h:i:sa - d M Y, D");
-    // $ip = $_SERVER['HTTP_CF_CONNECTING_IP'];
-    // $page_load =  number_format(microtime(true) - $starttime, 2);
-    // $server = ($_SERVER['SERVER_SOFTWARE']);
-    // $data = compact("date", "ip", "page_load", "server");
-    // echo '<script>console.log(' . json_encode($data) . ');</script>';
-    // $log = fopen("log.json", "r") or die("Unable to open file!");
-    // $json = fread($log, filesize("log.json"));
-    // echo "<script>console.log(" . $json . ".after.substr(0, 7))</script>";
-    // fclose($log);
+    $ip = $_SERVER['HTTP_CF_CONNECTING_IP'];
+    $page_load =  number_format(microtime(true) - $starttime, 2);
+    $server = ($_SERVER['SERVER_SOFTWARE']);
+    $data = compact("date", "ip", "page_load", "server");
+    echo '<script>console.log(' . json_encode($data) . ');</script>';
+    $log = fopen("log.json", "r") or die("Unable to open file!");
+    $json = fread($log, filesize("log.json"));
+    echo "<script>console.log(" . $json . ".after.substr(0, 7))</script>";
+    fclose($log);
     ?>
 </body>
 
