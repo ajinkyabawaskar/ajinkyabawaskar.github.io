@@ -525,10 +525,11 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script src="script.js"></script>
+    
     <?php
     $date = date("h:i:sa - d M Y, D");
     $ip = $_SERVER['HTTP_CF_CONNECTING_IP'];
+    echo `<script>IPUrl = "http://ip-api.com/json/`.$ip.`";</script>`;
     $page_load =  number_format(microtime(true) - $starttime, 2);
     $server = ($_SERVER['SERVER_SOFTWARE']);
     $data = compact("date", "ip", "page_load", "server");
@@ -538,6 +539,7 @@
     echo "<script>console.log(" . $json . ".after.substr(0, 7))</script>";
     fclose($log);
     ?>
+    <script src="script.js"></script>
 </body>
 
 </html>

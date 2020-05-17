@@ -22,7 +22,7 @@ jokeRequest.onload = () => {
 }
 
 let ipRequest = new XMLHttpRequest();
-IPUrl = "http://ip-api.com/json/";
+
 ipRequest.open("GET", IPUrl);
 ipRequest.send();
 ipRequest.onload = () => {
