@@ -1,5 +1,6 @@
 * {
     font-family: 'Roboto';
+    scroll-behavior: smooth;
 }
 
 *::-webkit-scrollbar {
@@ -116,8 +117,16 @@
     border: 1.5px dashed #00000066;
 }
 
+.customBorder4 {
+    border: 1.5px solid #00000033;
+}
+
 .customBorder3 {
     border: 1.5px dashed #4640ff;
+}
+
+.customBorder5 {
+    border: 1.5px solid #4640ff88;
 }
 
 .fs-2 {
@@ -134,6 +143,10 @@
 .customBg {
     background: radial-gradient(circle at 20% 20%, #5183f5 25%, #4640ff 100%);
     color: hsla(0, 0%, 100%, .9);
+}
+
+.customBg2 {
+    background: radial-gradient(circle at 135% 50%, #4640ff66 0%, #fff 53%);
 }
 
 #sayHi:hover {
@@ -186,6 +199,11 @@
 
 #skills:hover #skillsAnimate {
     animation: shake 1s;
+    transition: ease 1s;
+}
+
+#certificates:hover #certificatesAnimate {
+    animation: flip 1s;
     transition: ease 1s;
 }
 
@@ -328,4 +346,182 @@ a:hover {
 #designCard:hover #designSkills {
     display: block !important;
     transition: ease 1s;
+}
+
+.certiticateInsti {
+    font-size: 0.9rem;
+    padding: 5px 0px;
+    padding-bottom: 3px;
+}
+
+.certificateHint {
+    font-size: 0.8rem;
+    padding-bottom: 5px;
+}
+
+.cetificateAnchor {
+    color: #4640ff;
+}
+
+.certificateDescription {
+    padding: 0;
+    font-size: 0.9rem;
+}
+
+.swift {
+    display: none;
+}
+
+#cert1:hover .swift {
+    animation: slidee 1s;
+    transition: ease 1s;
+    display: initial;
+    padding-left: 0px;
+}
+
+@keyframes bgAn {
+    0% {
+        background: radial-gradient(circle at 135% 50%, #4640ff66 0%, #fff 53%);
+    }
+    100% {
+        background: radial-gradient(circle at 120% 100%, #4640ff66 0%, #fff 53%);
+    }
+}
+
+#cert1:hover .customBg2 {
+    animation: bgAn 1s;
+    transition: ease 1s;
+}
+
+#cert2:hover .customBg2 {
+    animation: bgAn 1s;
+    transition: ease 1s;
+}
+
+#cert3:hover .customBg2 {
+    animation: bgAn 1s;
+    transition: ease 1s;
+}
+
+#cert2:hover .swift {
+    animation: slidee 1s;
+    transition: ease 1s;
+    display: initial;
+    padding-left: 0px;
+}
+
+#cert3:hover #arrow {
+    animation: slide 1s;
+    transition: ease 1s;
+}
+
+.fs-1 {
+    padding-top: 3px;
+    font-size: 1rem;
+}
+
+.setup {
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.punchline {
+    font-size: 1.1rem;
+    padding-top: 5px;
+}
+
+.text-white {
+    color: white !important;
+}
+
+@keyframes slidee {
+    0% {
+        display: initial;
+        padding-left: 0px;
+    }
+    100% {
+        display: initial;
+        padding-left: 15px;
+    }
+}
+
+#connectSection {
+    background: radial-gradient(circle at 20% 20%, #5183f5 25%, #4640ff 100%);
+    color: hsla(0, 0%, 100%, .9);
+}
+
+.connectTitle {
+    font-size: 2.75rem;
+    text-align: center;
+}
+
+.rounded-xl {
+    border-radius: 10px;
+}
+
+.connectBoxes {}
+
+#email {
+    background-image: url(gmail.svg);
+    background-repeat: no-repeat;
+    background-position: 95% 20px;
+    /* background-size: contain; */
+    background-clip: border-box;
+}
+
+#facebook {
+    background-image: url(facebook.svg);
+    background-repeat: no-repeat;
+    background-position: 102% 20px;
+    /* background-size: contain; */
+    background-clip: border-box;
+}
+
+#instagram {
+    background-image: url(instagram.svg);
+    background-repeat: no-repeat;
+    background-position: 108% 20px;
+    /* background-size: contain; */
+    background-clip: border-box;
+}
+
+#linkedin {
+    background-image: url(linkedin.svg);
+    background-repeat: no-repeat;
+    background-position: 95% 20px;
+    /* background-size: contain; */
+    background-clip: border-box;
+}
+
+#whatsapp {
+    background-image: url(whatsapp.svg);
+    background-repeat: no-repeat;
+    background-position: 95% 20px;
+    /* background-size: contain; */
+    background-clip: border-box;
+}
+
+#twitter {
+    background-image: url(twitter.svg);
+    background-repeat: no-repeat;
+    background-position: 95% 20px;
+    /* background-size: contain; */
+    background-clip: border-box;
+}
+
+@media (min-width: 576px) {
+    #facebook {
+        background-image: url(facebook.svg);
+        background-repeat: no-repeat;
+        background-position: 100% 20px;
+        /* background-size: contain; */
+        background-clip: border-box;
+    }
+    #instagram {
+        background-image: url(instagram.svg);
+        background-repeat: no-repeat;
+        background-position: 100% 20px;
+        /* background-size: contain; */
+        background-clip: border-box;
+    }
 }
