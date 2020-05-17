@@ -508,7 +508,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <span id="ip"></span>
+                    <span id="ip"><?php echo $_SERVER['HTTP_CF_CONNECTING_IP']?></span>
                 </div>
                 <div class="col-md-6">
                     Hi
@@ -525,34 +525,17 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    
     <?php
     $date = date("h:i:sa - d M Y, D");
     $ip = $_SERVER['HTTP_CF_CONNECTING_IP'];
-    echo `<script>let IPUrl = "http://ip-api.com/json/`.$ip.`";
-    
-let ipRequest = new XMLHttpRequest();
-
-ipRequest.open("GET", IPUrl);
-ipRequest.send();
-ipRequest.onload = () => {
-    if (ipRequest.status == 200) {
-        ip = JSON.parse(ipRequest.response);
-        putIp = document.querySelector("#ip");
-        putIp.innerText = ip.city;
-
-    } else {
-        console.log("error ${ipRequest.status} ${ipRequest.statusText}");
-    }
-}</script>`;
     $page_load =  number_format(microtime(true) - $starttime, 2);
     $server = ($_SERVER['SERVER_SOFTWARE']);
     $data = compact("date", "ip", "page_load", "server");
     echo '<script>console.log(' . json_encode($data) . ');</script>';
-    $log = fopen("log.json", "r") or die("Unable to open file!");
-    $json = fread($log, filesize("log.json"));
-    echo "<script>console.log(" . $json . ".after.substr(0, 7))</script>";
-    fclose($log);
+    // $log = fopen("log.json", "r") or die("Unable to open file!");
+    // $json = fread($log, filesize("log.json"));
+    // echo "<script>console.log(" . $json . ".after.substr(0, 7))</script>";
+    // fclose($log);
     ?>
     <script src="script.js"></script>
 </body>
