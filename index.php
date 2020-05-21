@@ -1,4 +1,54 @@
-<?php $starttime = microtime(true); ?>
+<?php $starttime = microtime(true);
+if (isset($_POST['contactForm'])) {
+    @$name = $_POST['name'];
+    @$subject = $_POST['subject'];
+    @$message = $_POST['message'];
+    unset($_POST);
+    @$ip = $_SERVER['HTTP_CF_CONNECTING_IP'];
+
+    // require 'connection.php'; --already included --
+    require __DIR__ . './PHPMailer/PHPMailerAutoload.php';
+    // function sendMailFunction($toArray, $subject, $body, $replyEmail = null, $replyName = null)
+    // {
+        try {
+            $subject = $subject;
+            $body = "IP: ".$ip."<hr><br> From: ".$name." <br> Subject: ".$subject."<br>Message:<br><br>".$message;
+            $replyEmail = "hello@ajinkya.space";
+            $replyName = "Ajinkya Bawaskar";
+            $success = true;
+
+            $mail = new PHPMailer;
+            $mail->isSMTP();
+            $mail->SMTPDebug = 0;
+            $mail->Debugoutput = 'html';
+            $mail->Host = 'smtp.zoho.in';
+            $mail->Port = 587;
+            $mail->SMTPSecure = 'tls';
+            $mail->SMTPAuth = true;
+            $mail->Username = "support@growpartner.in";
+            $mail->Password = "Bn4IrT5u3BQA";
+            $mail->CharSet = 'utf-8';
+
+            $mail->setFrom('support@growpartner.in', 'Contact Form - ajinkya.space');
+            $mail->addReplyTo($replyEmail, $replyName);
+            $mail->Subject = $subject;
+            $mail->Body = $body;
+            $mail->AltBody = 'Unable to verify this mail.';
+            $mail->addAddress("hello@ajinkya.space");
+            if (!$mail->send()) {
+                $success = false;
+                echo `<script>console.log("Mail Not Sent");</script>`;
+            } else  {
+                echo `<script>console.log("Mail Sent");</script>`;
+            }
+            // return $success;
+        } catch (Exception $e) {
+            // return false;
+        }
+        
+    // }
+}
+?>
 <!doctype html>
 <html lang="en">
 
@@ -48,7 +98,7 @@
                         <a href="./about" class="anchorText">About</a>
                     </div>
                     <div class="ml-4">
-                    <a href="./blog" class="anchorText">Blog</a>
+                        <a href="./blog" class="anchorText">Blog</a>
                     </div>
                 </div>
             </div>
@@ -502,7 +552,7 @@
                 <div class="row px-2 px-sm-0">
                     <div class="col-lg-12 mt-4 mb-0 p-0 px-3 px-sm-0 py-3 customBorder3">
                         <div class="contactFrom">
-                            <form class="form-signin ">
+                            <form class="form-signin" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" name="contactForm">
                                 <div class="text-center mb-4 pl-3">
                                     <h2 class="h4 mb-3 mb-4 font-weight-normal text-left">Contact</h2>
                                 </div>
@@ -510,34 +560,30 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-label-group">
-                                                <input type="text" id="inputName" class="form-control" placeholder="Name" required>
+                                                <input type="text" id="inputName" class="form-control" placeholder="Name" name="name" required>
                                                 <label for="inputName">Name</label>
                                             </div>
                                         </div>
                                         <div class="col-md-8">
                                             <div class="form-label-group">
-                                                <input type="text" id="inputSubject" class="form-control" placeholder="Subject" required="">
+                                                <input type="text" id="inputSubject" class="form-control" placeholder="Subject" name="subject">
                                                 <label for="inputSubject">Subject</label>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-label-group">
-                                                <textarea type="textarea" id="inputMessage" class="form-control" placeholder="Your Message" required=""></textarea>
+                                                <textarea type="textarea" id="inputMessage" name="message" class="form-control" placeholder="Your Message (Include email if your message expects a reply.)" required></textarea>
                                                 <!-- <label for="inputMessage">Subject</label> -->
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-label-group">
-                                                <input type="submit" class="btn contact-btn" type="submit">
-
+                                                <input type="submit" class="btn contact-btn" type="submit" name="contactForm" value="Send">
                                                 </input>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-
-
                             </form>
                         </div>
                     </div>
@@ -568,16 +614,16 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <?php
-    // $date = date("h:i:sa - d M Y, D");
-    // $ip = $_SERVER['HTTP_CF_CONNECTING_IP'];
-    // $page_load =  number_format(microtime(true) - $starttime, 2);
-    // $server = ($_SERVER['SERVER_SOFTWARE']);
-    // $data = compact("date", "ip", "page_load", "server");
-    // echo '<script>console.log(' . json_encode($data) . ');</script>';
-    // $log = fopen("log.json", "r") or die("Unable to open file!");
-    // $json = fread($log, filesize("log.json"));
-    // echo "<script>console.log(" . $json . ".after.substr(0, 7))</script>";
-    // fclose($log);
+    $date = date("h:i:sa - d M Y, D");
+    $ip = $_SERVER['HTTP_CF_CONNECTING_IP'];
+    $page_load =  number_format(microtime(true) - $starttime, 2);
+    $server = ($_SERVER['SERVER_SOFTWARE']);
+    $data = compact("date", "ip", "page_load", "server");
+    echo '<script>console.log("%c"+' . json_encode($data) .'"+ ", "position: absolute; top: 10px; padding:5px; font-weight: 400; font-family: Roboto; font-size: 20px; margin:0 auto; align:center;");</script>';
+    $log = fopen("log.json", "r") or die("Unable to open file!");
+    $json = fread($log, filesize("log.json"));
+    echo "<script>console.log(" . $json . ".after.substr(0, 7))</script>";
+    fclose($log);
     ?>
     <script src="script.js"></script>
 </body>

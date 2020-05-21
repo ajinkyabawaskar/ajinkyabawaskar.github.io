@@ -648,34 +648,40 @@ a:hover {
     background-position: 95% 0px;
     box-shadow: #332fb6 3px 3px 6px;
     transition: ease 0.2s;
+    cursor: pointer;
 }
 
 #linkedin:hover {
     background-position: 98% 8px;
     box-shadow: #332fb6 3px 3px 6px;
     transition: ease 0.2s;
+    cursor: pointer;
 }
 
 #twitter:hover {
     background-position: 95% 0px;
     box-shadow: #332fb6 3px 3px 6px;
     transition: ease 0.2s;
+    cursor: pointer;
 }
 
 #whatsapp:hover {
     background-position: 95% 0px;
     box-shadow: #332fb6 3px 3px 6px;
     transition: ease 0.2s;
+    cursor: pointer;
 }
 
 #facebook:hover {
     background-position: 100% 5px;
     box-shadow: #332fb6 3px 3px 6px;
     transition: ease 0.2s;
+    cursor: pointer;
 }
 
 #instagram:hover {
     background-position: 102% 4px;
     box-shadow: #332fb6 3px 3px 6px;
     transition: ease 0.2s;
+    cursor: pointer;
 }
