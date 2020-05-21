@@ -1,6 +1,3 @@
-console.log("%cajinkya.space", "position: absolute; top: 10px; padding:5px; font-weight: 400; font-family: Roboto; font-size: 20px; margin:0 auto; align:center;");
-console.log("%cApache\/2.4.29 (Ubuntu)", "position: absolute; top: 10px; padding:5px; font-weight: 400; font-family: Roboto; font-size: 15px; margin:0 auto; align:center;");
-
 function goToConnect(el) {
 
     setTimeout(function() {

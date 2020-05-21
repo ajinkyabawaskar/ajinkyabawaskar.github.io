@@ -6,37 +6,34 @@ if (isset($_POST['contactForm'])) {
     unset($_POST);
     @$ip = $_SERVER['HTTP_CF_CONNECTING_IP'];
     require 'PHPMailer/PHPMailerAutoload.php';
-            $subject = $subject;
-	    $body = "IP: ".$ip."<hr><br> From: ".$name." <br> Subject: ".$subject."<br>Message:<br><br>".$message;
-            $replyEmail = "hello@ajinkya.space";
-            $replyName = "Ajinkya Bawaskar";
-            $success = true;
+    $subject = $subject;
+    $body = "IP: " . $ip . "<hr><br> From: " . $name . " <br> Subject: " . $subject . "<br>Message:<br><br>" . $message;
+    $replyEmail = "hello@ajinkya.space";
+    $replyName = "Ajinkya Bawaskar";
+    $mail = new PHPMailer;
+    $mail->isSMTP();
+    $mail->SMTPDebug = 0;
+    $mail->Debugoutput = 'html';
+    $mail->Host = 'smtp.zoho.in';
+    $mail->Port = 587;
+    $mail->SMTPSecure = 'tls';
+    $mail->SMTPAuth = true;
+    $mail->Username = "support@growpartner.in";
+    $mail->Password = "Bn4IrT5u3BQA";
+    $mail->CharSet = 'utf-8';
 
-            $mail = new PHPMailer;
-            $mail->isSMTP();
-            $mail->SMTPDebug = 0;
-            $mail->Debugoutput = 'html';
-            $mail->Host = 'smtp.zoho.in';
-            $mail->Port = 587;
-            $mail->SMTPSecure = 'tls';
-            $mail->SMTPAuth = true;
-            $mail->Username = "support@growpartner.in";
-            $mail->Password = "Bn4IrT5u3BQA";
-            $mail->CharSet = 'utf-8';
-
-            $mail->setFrom('support@growpartner.in', 'Contact Form - ajinkya.space');
-            $mail->addReplyTo($replyEmail, $replyName);
-            $mail->Subject = $subject;
-            $mail->Body = $body;
-            $mail->AltBody = 'Unable to verify this mail.';
-            $mail->addAddress("hello@ajinkya.space");
-            if (!$mail->send()) {
-                $success = false;
-                echo `<script>console.log("Mail Not Sent");</script>`;
-            } else  {
-                echo `<script>console.log("Mail Sent");</script>`;
-            }
-        }
+    $mail->setFrom('support@growpartner.in', 'Contact Form - ajinkya.space');
+    $mail->addReplyTo($replyEmail, $replyName);
+    $mail->Subject = $subject;
+    $mail->Body = $body;
+    $mail->AltBody = 'Unable to verify this mail.';
+    $mail->addAddress("hello@ajinkya.space");
+    if (!$mail->send()) {
+        echo `<script>console.log("Mail Not Sent");</script>`;
+    } else {
+        echo `<script>console.log("Mail Sent");</script>`;
+    }
+}
 ?>
 <!doctype html>
 <html lang="en">
