@@ -5,14 +5,9 @@ if (isset($_POST['contactForm'])) {
     @$message = $_POST['message'];
     unset($_POST);
     @$ip = $_SERVER['HTTP_CF_CONNECTING_IP'];
-
-    // require 'connection.php'; --already included --
-    require __DIR__ . './PHPMailer/PHPMailerAutoload.php';
-    // function sendMailFunction($toArray, $subject, $body, $replyEmail = null, $replyName = null)
-    // {
-        try {
+    require 'PHPMailer/PHPMailerAutoload.php';
             $subject = $subject;
-            $body = "IP: ".$ip."<hr><br> From: ".$name." <br> Subject: ".$subject."<br>Message:<br><br>".$message;
+	    $body = "IP: ".$ip."<hr><br> From: ".$name." <br> Subject: ".$subject."<br>Message:<br><br>".$message;
             $replyEmail = "hello@ajinkya.space";
             $replyName = "Ajinkya Bawaskar";
             $success = true;
@@ -41,13 +36,7 @@ if (isset($_POST['contactForm'])) {
             } else  {
                 echo `<script>console.log("Mail Sent");</script>`;
             }
-            // return $success;
-        } catch (Exception $e) {
-            // return false;
         }
-        
-    // }
-}
 ?>
 <!doctype html>
 <html lang="en">
