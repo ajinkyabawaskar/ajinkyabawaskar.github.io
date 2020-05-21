@@ -3,6 +3,16 @@
 <html lang="en">
 
 <head>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-143186517-3');
+    </script>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -19,6 +29,10 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
     <title>Ajinkya Bawaskar</title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-143186517-3"></script>
+
+
 </head>
 
 <body>
@@ -31,10 +45,10 @@
                 </a>
                 <div class="d-flex align-items-center justify-content-end flex-fill">
                     <div class="">
-                        <a href="" class="anchorText">About</a>
+                        <a href="./about" class="anchorText">About</a>
                     </div>
                     <div class="ml-4">
-                        Blog
+                    <a href="./blog" class="anchorText">Blog</a>
                     </div>
                 </div>
             </div>
@@ -449,33 +463,33 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-md-4  mb-3">
-                                        <div class="card text-dark p-2 pb-4 rounded-xl " id="email">
+                                        <div class="card text-dark p-2 pb-4 rounded-xl " id="email" onclick="sendMail(this)">
                                             Email
                                             <!-- <small>ajinkyabawaskar2@gmail.com</small> -->
                                         </div>
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <div class="card text-dark p-2 pb-4 rounded-xl " id="linkedin">
+                                        <div class="card text-dark p-2 pb-4 rounded-xl " id="linkedin" onclick="toLinkedIn(this)">
                                             LinkedIn
                                         </div>
                                     </div>
                                     <div class="col-md-4  mb-3">
-                                        <div class="card text-dark p-2 pb-4 rounded-xl " id="whatsapp">
+                                        <div class="card text-dark p-2 pb-4 rounded-xl " id="whatsapp" onclick="toWhatsapp(this)">
                                             WhatsApp
                                         </div>
                                     </div>
                                     <div class="col-md-4  mb-3">
-                                        <div class="card text-dark p-2 pb-4 rounded-xl " id="facebook">
+                                        <div class="card text-dark p-2 pb-4 rounded-xl " id="facebook" onclick="toFacebook(this)">
                                             Facebook
                                         </div>
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <div class="card text-dark p-2 pb-4 rounded-xl " id="twitter">
+                                        <div class="card text-dark p-2 pb-4 rounded-xl " id="twitter" onclick="toTwitter(this)">
                                             Twitter
                                         </div>
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <div class="card text-dark p-2 pb-4 rounded-xl " id="instagram">
+                                        <div class="card text-dark p-2 pb-4 rounded-xl " id="instagram" onclick="toInstagram(this)">
                                             Instagram
                                         </div>
                                     </div>
@@ -496,7 +510,7 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-label-group">
-                                                <input type="text" id="inputName" class="form-control" placeholder="Name" required >
+                                                <input type="text" id="inputName" class="form-control" placeholder="Name" required>
                                                 <label for="inputName">Name</label>
                                             </div>
                                         </div>

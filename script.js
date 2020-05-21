@@ -20,3 +20,46 @@ jokeRequest.onload = () => {
         console.log(`error ${jokeRequest.status} ${jokeRequest.statusText}`);
     }
 }
+
+function sendMail(el) {
+    el.innerText = "Loading..";
+    setTimeout(function() {
+        window.location = "mailto:hello@ajinkya.space?subject=Hi%21%20I%27d%20like%20to%20connect%20with%20you.";
+    }, 499);
+}
+
+function toLinkedIn(el) {
+    el.innerText = "Loading..";
+    setTimeout(function() {
+        window.location = "https://www.linkedin.com/in/ajinkyabawaskar/";
+    }, 499);
+}
+
+function toWhatsapp(el) {
+    el.innerText = "Loading..";
+    setTimeout(function() {
+        window.location = "https://wa.me/7058834841?text=Hi%21%20I%27d%20like%20to%20connect%20with%20you.";
+    }, 499);
+}
+
+
+function toFacebook(el) {
+    el.innerText = "Loading..";
+    setTimeout(function() {
+        window.location = "https://www.facebook.com/ajinkyabawaskar.5/";
+    }, 499);
+}
+
+function toTwitter(el) {
+    el.innerText = "Loading..";
+    setTimeout(function() {
+        window.location = "https://twitter.com/ajinkyabawaskar/";
+    }, 499);
+}
+
+function toInstagram(el) {
+    el.innerText = "Loading..";
+    setTimeout(function() {
+        window.location = "https://www.instagram.com/ajinkya_bawaskar/";
+    }, 499);
+}
