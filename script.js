@@ -63,3 +63,19 @@ function toInstagram(el) {
         window.location = "https://www.instagram.com/ajinkya_bawaskar/";
     }, 499);
 }
+
+function goToMoreProjects(el) {
+    el.innerText = "Loading..";
+    setTimeout(function() {
+        window.location = "https://www.github.com/ajinkyabawaskar/";
+    }, 499);
+}
+
+
+function goToMoreCertificates(el) {
+    initial = el.innerHTML;
+    el.innerText = "To be added soon!";
+    setTimeout(function() {
+        el.innerHTML = initial;
+    }, 2999);
+}

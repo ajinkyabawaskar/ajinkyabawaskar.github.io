@@ -183,12 +183,12 @@
                                                     </div>
                                                     <div class="d-flex">
                                                         <div id="projectLink" class="px-2">
-                                                            <a href="" class="">
+                                                            <a href="#" class="">
                                                                 <i class="fa fa-hand-pointer-o" style="padding-right: 4px"></i> Demo
                                                             </a>
                                                         </div>
                                                         <div id="projectDemo" class="px-2">
-                                                            <a href="https://github.com/ajinkyabawaskar/coronavirus-mohfw">
+                                                            <a href="https://github.com/ajinkyabawaskar/expense-tracker?files=1">
                                                                 <i class="fa fa-code" style="padding-right: 4px"></i> Code
                                                             </a>
                                                         </div>
@@ -216,7 +216,7 @@
                                                             </a>
                                                         </div>
                                                         <div id="projectDemo" class="px-2">
-                                                            <a href="https://github.com/ajinkyabawaskar/coronavirus-mohfw">
+                                                            <a href="https://github.com/ajinkyabawaskar/color-detection?files=1">
                                                                 <i class="fa fa-code" style="padding-right: 4px"></i> Code
                                                             </a>
                                                         </div>
@@ -245,7 +245,7 @@
                                                             </a>
                                                         </div>
                                                         <div id="projectDemo" class="px-2">
-                                                            <a href="https://github.com/ajinkyabawaskar/coronavirus-mohfw">
+                                                            <a href="https://github.com/ajinkyabawaskar/Internship-Portal?files=1">
                                                                 <i class="fa fa-code" style="padding-right: 4px"></i> Code
                                                             </a>
                                                         </div>
@@ -285,7 +285,7 @@
                                         </div> -->
 
                                         <div class="col-md-6 col-lg-4 mb-4" id="morePro">
-                                            <div class="card p-3 px-3 customBorder3 pl-4 h-100 d-flex justify-content-center">
+                                            <div class="card p-3 px-3 customBorder3 pl-4 h-100 d-flex justify-content-center" onclick="goToMoreProjects(this)">
                                                 <div class="d-flex">
                                                     <div class="moreProjects w-100">
                                                         <div class="display-4 pb-2 fs-2" id="moreText">
@@ -424,7 +424,7 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-4 mb-3 certificatesCard" id="cert3">
-                                            <div class="card p-3 h-100 d-flex customBorder3 customBg2 justify-content-center">
+                                            <div class="card p-3 h-100 d-flex customBorder3 customBg2 justify-content-center" onclick="goToMoreCertificates(this)">
                                                 <div class="d-flex">
                                                     <div class="moreProjects w-100">
                                                         <div class="display-4 pb-2 fs-2" id="moreText">
