@@ -9,7 +9,7 @@
     <!-- Page Title Icon -->
     <link rel="shortcut icon" href="favicon.svg" type="image/svg">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <!-- FontAwesome CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
@@ -481,22 +481,50 @@
                                     </div>
                                 </div>
                             </div>
-                            <hr class="white-row">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="text-white text-center">
-                                            <i class="pe-7s-quote"></i>
-                                            <div class="setup">
-                                                Programming Joke
+                            <!-- <hr class="white-row"> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row px-2 px-sm-0">
+                    <div class="col-lg-12 mt-4 mb-0 p-0 px-3 px-sm-0 py-3 customBorder3">
+                        <div class="contactFrom">
+                            <form class="form-signin ">
+                                <div class="text-center mb-4 pl-3">
+                                    <h2 class="h4 mb-3 mb-4 font-weight-normal text-left">Contact</h2>
+                                </div>
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-label-group">
+                                                <input type="text" id="inputName" class="form-control" placeholder="Name" required >
+                                                <label for="inputName">Name</label>
                                             </div>
-                                            <div class="punchline">
-                                                Punchline 😂
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-label-group">
+                                                <input type="text" id="inputSubject" class="form-control" placeholder="Subject" required="">
+                                                <label for="inputSubject">Subject</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-label-group">
+                                                <textarea type="textarea" id="inputMessage" class="form-control" placeholder="Your Message" required=""></textarea>
+                                                <!-- <label for="inputMessage">Subject</label> -->
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-label-group">
+                                                <input type="submit" class="btn contact-btn" type="submit">
+
+                                                </input>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+
+
+
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -504,34 +532,34 @@
         </section>
     </main>
 
-    <footer class="footer mt-auto py-3">
+    <footer class="footer mt-auto py-3 px-2 mx-sm-0">
         <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <span id="ip"><?php echo $_SERVER['HTTP_CF_CONNECTING_IP']?></span>
-                </div>
-                <div class="col-md-6">
-                    Hi
+            <div class="row customBorder2 ">
+                <div class="col-md-12 py-3">
+                    <div class=" text-center">
+                        <div class="setup">
+                            Programming Joke
+                        </div>
+                        <div class="punchline">
+                            Punchline 😂
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <span class="text-muted">
-
-            </span>
         </div>
     </footer>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <?php
-    $date = date("h:i:sa - d M Y, D");
-    $ip = $_SERVER['HTTP_CF_CONNECTING_IP'];
-    $page_load =  number_format(microtime(true) - $starttime, 2);
-    $server = ($_SERVER['SERVER_SOFTWARE']);
-    $data = compact("date", "ip", "page_load", "server");
-    echo '<script>console.log(' . json_encode($data) . ');</script>';
+    // $date = date("h:i:sa - d M Y, D");
+    // $ip = $_SERVER['HTTP_CF_CONNECTING_IP'];
+    // $page_load =  number_format(microtime(true) - $starttime, 2);
+    // $server = ($_SERVER['SERVER_SOFTWARE']);
+    // $data = compact("date", "ip", "page_load", "server");
+    // echo '<script>console.log(' . json_encode($data) . ');</script>';
     // $log = fopen("log.json", "r") or die("Unable to open file!");
     // $json = fread($log, filesize("log.json"));
     // echo "<script>console.log(" . $json . ".after.substr(0, 7))</script>";
