@@ -16,22 +16,22 @@
                                 <div class="main-menu f-right d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><a href="index.php">Home</a></li>
-                                            <li><a href="about.php">About</a></li>
-                                            <li><a href="services.php">Services</a></li>
-                                            <li><a href="work.php">Works</a></li>
-                                            <li><a href="blog.php">Blog</a>
+                                            <li><a href="index">Home</a></li>
+                                            <li><a href="about">About</a></li>
+                                            <li><a href="services">Services</a></li>
+                                            <li><a href="work">Works</a></li>
+                                            <li><a href="blog">Blog</a>
                                                 <ul class="submenu">
-                                                    <li><a href="blog.php">Blog</a></li>
-                                                    <li><a href="single-blog.php">Blog Details</a></li>
+                                                    <li><a href="blog">Blog</a></li>
+                                                    <li><a href="single-blog">Blog Details</a></li>
                                                 </ul>
                                             </li>
                                             <li><a href="#">Pages</a>
                                                 <ul class="submenu">
-                                                    <li><a href="elements.php">Element</a></li>
+                                                    <li><a href="elements">Element</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="contact.php">Contact</a></li>
+                                            <li><a href="contact">Contact</a></li>
                                         </ul>
                                     </nav>
                                 </div>
