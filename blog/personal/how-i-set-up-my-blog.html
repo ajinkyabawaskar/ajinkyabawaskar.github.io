@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>How I Set Up My Blog | Variable</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="How I Set Up My Blog" />
+<meta name="author" content="Ajinkya Bawaskar" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A web log about programming, software, technology, life and my thoughts in general." />
+<meta property="og:description" content="A web log about programming, software, technology, life and my thoughts in general." />
+<link rel="canonical" href="http://localhost:4000/blog/personal/how-i-set-up-my-blog" />
+<meta property="og:url" content="http://localhost:4000/blog/personal/how-i-set-up-my-blog" />
+<meta property="og:site_name" content="Variable" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-09-20T00:00:00+05:30" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"How I Set Up My Blog","dateModified":"2020-09-20T00:00:00+05:30","datePublished":"2020-09-20T00:00:00+05:30","url":"http://localhost:4000/blog/personal/how-i-set-up-my-blog","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/personal/how-i-set-up-my-blog"},"author":{"@type":"Person","name":"Ajinkya Bawaskar"},"description":"A web log about programming, software, technology, life and my thoughts in general.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/blog/feed.xml" title="Variable" />
+
+<link rel="icon" href="/blog/assets/favicon.svg">
+<!-- <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">  --></head><body><header class="site-header">
+
+    <div class="wrapper"><a class="site-title" rel="author" href="/blog/">Variable</a><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+              </svg>
+            </span>
+          </label>
+  
+          <div class="trigger"><a class="page-link" href="/blog/about/">About</a><a class="page-link" href="/blog/categories/">Categories</a></div>
+        </nav></div>
+  </header><main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">How I Set Up My Blog</h1>
+    <p class="post-meta"><time class="dt-published" datetime="2020-09-20T00:00:00+05:30" itemprop="datePublished">
+        Sep 20, 2020
+      </time>• 
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name">Ajinkya Bawaskar</span></span>
+      
+      • In 
+        
+        <a href="/blog/categories/#Personal">Personal</a>
+        
+
+    </p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p><img src="/blog/assets/img/blog.svg" alt="Programming" height="400px" width="400px" /></p>
+
+<p>In this post, I write about how I set up this blog.
+To summarize, this blog is a static website, which means that no back-end processing is required in order to serve any of the webpages that you might see. All the pages of this blog are generated at the time of building the application.</p>
+
+<p>Why would someone want a website, moreover, a blogging website without a backend? One of the biggest factors for me is that there are no costs involved in hosting such a website. Neither do you have to spend a dime for the domain name. So, how does this work? Let’s get in to it right away!</p>
+
+<p>What technologies are used? <a href="https://jekyllrb.com/">Jekyll</a> to develop and <a href="https://pages.github.com/">Github Pages</a> to host.</p>
+
+<p>How did I set this up?</p>
+<ol>
+  <li>Install Ruby: This is fairly straightforward. You can <a href="https://www.ruby-lang.org/en/documentation/installation/#installers">install</a> Ruby on the platform you’re working on. Run <code class="language-plaintext highlighter-rouge">ruby -v</code> to make sure Ruby is installed properly.</li>
+  <li>Install Jekyll: Run <code class="language-plaintext highlighter-rouge">gem install jekyll bundler</code> to install Jekyll. Run <code class="language-plaintext highlighter-rouge">jekyll -v</code> to make sure Jekyll is installed correctly.</li>
+  <li>Create a new project: Navigate to the desired directory and run <code class="language-plaintext highlighter-rouge">jekyll new myblog</code> where myblog is obviously name of your blog. And navigare to (<code class="language-plaintext highlighter-rouge">cd myblog</code>) the same.</li>
+  <li>Build: Run <code class="language-plaintext highlighter-rouge">bundle exec jekyll serve</code> to build your basic jekyll website and serve it on localhost, port 4000 by default.</li>
+  <li>That’s it: Hit the browser of your choice and go to <code class="language-plaintext highlighter-rouge">localhost:4000</code> to see your Jekyll website up and running.</li>
+  <li>Deploying: Assuming familiarity with Git, just push your project directory to a repo on GitHub and enable GitHub pages under the Settings tab. And you’re done!</li>
+</ol>
+
+<p>Isn’t it easy? Anyways, if you try this out and face any difficulties, get in touch via the email in footer and I’ll try my best to get back at the earliest.</p>
+
+  </div><a class="u-url" href="/blog/personal/how-i-set-up-my-blog" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/blog/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+        <ul class="contact-list">
+          <li class="p-name">Ajinkya Bawaskar</li>
+          <li><a class="u-email" href="mailto:ajinkyabawaskar2@gmail.com">ajinkyabawaskar2@gmail.com</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p>A web log about programming, software, technology, life and my thoughts in general.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/ajinkyabawaskar" title="ajinkyabawaskar"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://www.instagram.com/ajinkyabawaskar" title="ajinkyabawaskar"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#instagram"></use></svg></a></li><li><a rel="me" href="https://www.linkedin.com/in/ajinkyabawaskar" title="ajinkyabawaskar"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#linkedin"></use></svg></a></li></ul></div>
+
+  </div>
+
+</footer></body>
+
+</html>
