@@ -462,7 +462,7 @@ a:hover {
 .connectBoxes {}
 
 #email {
-    background-image: url(gmail.svg);
+    background-image: url(../images/gmail.svg);
     background-repeat: no-repeat;
     background-position: 95% 20px;
     /* background-size: contain; */
@@ -470,7 +470,7 @@ a:hover {
 }
 
 #facebook {
-    background-image: url(facebook.svg);
+    background-image: url(../images/facebook.svg);
     background-repeat: no-repeat;
     background-position: 98% 20px;
     /* background-size: contain; */
@@ -478,7 +478,7 @@ a:hover {
 }
 
 #instagram {
-    background-image: url(instagram.svg);
+    background-image: url(../images/instagram.svg);
     background-repeat: no-repeat;
     background-position: 98% 20px;
     /* background-size: contain; */
@@ -486,7 +486,7 @@ a:hover {
 }
 
 #linkedin {
-    background-image: url(linkedin.svg);
+    background-image: url(../images/linkedin.svg);
     background-repeat: no-repeat;
     background-position: 98% 20px;
     /* background-size: contain; */
@@ -494,7 +494,7 @@ a:hover {
 }
 
 #whatsapp {
-    background-image: url(whatsapp.svg);
+    background-image: url(../images/whatsapp.svg);
     background-repeat: no-repeat;
     background-position: 95% 20px;
     /* background-size: contain; */
@@ -502,7 +502,7 @@ a:hover {
 }
 
 #twitter {
-    background-image: url(twitter.svg);
+    background-image: url(../images/twitter.svg);
     background-repeat: no-repeat;
     background-position: 95% 20px;
     /* background-size: contain; */
@@ -511,14 +511,14 @@ a:hover {
 
 @media (min-width: 576px) {
     #facebook {
-        background-image: url(facebook.svg);
+        background-image: url(../images/facebook.svg);
         background-repeat: no-repeat;
         background-position: 100% 20px;
         /* background-size: contain; */
         background-clip: border-box;
     }
     #instagram {
-        background-image: url(instagram.svg);
+        background-image: url(../images/instagram.svg);
         background-repeat: no-repeat;
         background-position: 102% 20px;
         /* background-size: contain; */
