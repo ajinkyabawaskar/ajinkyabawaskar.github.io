@@ -67,7 +67,7 @@ function toInstagram(el) {
 function goToMoreProjects(el) {
     el.innerText = "Loading..";
     setTimeout(function() {
-        window.location = "https://www.github.com/ajinkyabawaskar/";
+        window.location = "https://www.github.com/ajinkyabawaskar/?tab=repositories";
     }, 499);
 }
 
