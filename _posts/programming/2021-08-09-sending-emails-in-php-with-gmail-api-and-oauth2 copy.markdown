@@ -18,7 +18,7 @@ This was the time when I finally decided to let go of PHPMailer and explore the 
 - A Google Cloud Platform project with the [API](https://developers.google.com/workspace/guides/create-project) enabled.
 
 ##### Sample Code:
-Available here: [https://github.com/ajinkyabawaskar/send-email-google-api-oauth2](https://github.com/ajinkyabawaskar/send-email-google-api-oauth2)
+Available here- [https://github.com/ajinkyabawaskar/send-email-google-api-oauth2](https://github.com/ajinkyabawaskar/send-email-google-api-oauth2)
 
 ##### Concept:
 In Layman's language, this is the OAuth2 concept:

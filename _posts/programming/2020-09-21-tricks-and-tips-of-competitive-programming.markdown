@@ -7,7 +7,7 @@ categories: Programming
 
 I have been practicing competitive programming for 1.5 months as of today, and I found out that there are lots of resources for programmers, from StackOverflow to GeeksForGeeks that help with knowledge, language syntax and errors. These are pretty handy when you are working on development, but with competitive programming? Not so much.
 
-![Programming]({{ "/assets/img/js-frameworks.svg" | relative_url }} )
+![Programming]({{ "/assets/img/js-frameworks.svg" | relative_url }}?style=centerme){:height="400px" width="400px"}
 
 Competitive programming requires you to think about a solution to given problem with given constraints, meaning the solution you propose must meet certain complexity requirements. I have compiled (and working on) a list of tips that can help you achieve better algorithms or approaches. To be honest here, I am just a 2 star on CodeChef and I haven't even started on CodeForces yet. But I believe these might help someone down the lane.
 

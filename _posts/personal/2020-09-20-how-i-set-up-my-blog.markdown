@@ -2,7 +2,7 @@
 title: How I Set Up My Blog
 categories: Personal
 ---
-![Programming]({{ "/assets/img/blog.svg" | relative_url }} ){:height="400px" width="400px"}
+![Programming]({{ "/assets/img/blog.svg" | relative_url }}?style=centerme){:height="400px" width="400px"}
 
 In this post, I write about how I set up this blog.
 To summarize, this blog is a static website, which means that no back-end processing is required in order to serve any of the webpages that you might see. All the pages of this blog are generated at the time of building the application. 
