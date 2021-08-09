@@ -5,7 +5,7 @@ date:   2021-08-09 16:35:27 +0530
 categories: Programming
 ---
 
-Assuming you need to make apps for Andoid & iOS platforms. Now, you develop these apps from different code bases to realise you're repeating yourself since most of the business logic you write remains same across platforms (except if you think people with iOS devices are rich and can be charged more than Android users). Then you explore platforms like Flutter & react native. These are good, but nothing can match the versatility native app development gives you.
+Assuming you need to make apps for Android & iOS platforms. Now, you develop these apps from different code bases to realise you're repeating yourself since most of the business logic you write remains same across platforms (except if you think people with iOS devices are rich and can be charged more than Android users). Then you explore platforms like Flutter & react native. These are good, but nothing can match the versatility native app development gives you.
 
 So you look beyond this to think: what if I write the common business logic at one place and just call it from across platforms? Then you encounter CPP in this context: meaning core logic written in CPP, and your clients (Android and iOS) just calling methods, and passing data from UI to CPP. This way you get best of both worlds.
 
