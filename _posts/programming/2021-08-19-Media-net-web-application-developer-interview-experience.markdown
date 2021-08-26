@@ -14,3 +14,5 @@ This post is about interview experience for a position of Web Application Develo
     Output string: "I am good & bad"
 
 Overall, I was able to solve first and third questions completely & second question partially. I am yet to receive the verdict yet, however it was a good interview.
+
+Update - The verdict came in on 23rd, only the next working day after I gave my interview & I **didn't** make it. I didn't receive any feedback from the interviewer/recruiter but the most likely reason for this outcome seems to be that I took longer to solve the questions than expected.
