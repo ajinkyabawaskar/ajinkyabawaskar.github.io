@@ -12,7 +12,7 @@ LXC are a great way of creating linux containers that are lightweight and can be
 ##### Step 0: Installing prerequisites
 
 ```bash
-ajinkya@metaverse:~$ sudo apt-get install ifupdown brctl bridge-utils
+ajinkya@metaverse:~$ sudo apt-get install ifupdown bridge-utils
 ```
 
 ##### Step 1: Configuring your own bridge
@@ -66,7 +66,7 @@ lxc.net.0.hwaddr = 00:16:3e:xx:xx:xx
 
 ajinkya@metaverse:~$ cat .config/lxc/default.conf
 lxc.include = /etc/lxc/default.conf
-# for unprivileged containers
+# for unprivileged containers #output of sudo grep ajinkya /etc/sub{uid,gid} 
 lxc.idmap = u 0 100000 65536
 lxc.idmap = g 0 100000 65536
 ```
@@ -76,7 +76,7 @@ lxc.idmap = g 0 100000 65536
 Creating a lxc container, and verifying the assigned IP address:
 
 ```bash
-ajinkya@metaverse:~$ lxc-create -t download -n mycontainer -- -d ubuntu -r xenial -a amd64 --keyserver hkp:://keyserver.ubuntu.com
+ajinkya@metaverse:~$ lxc-create -t download -n mycontainer -- -d ubuntu -r xenial -a amd64 --keyserver hkp://keyserver.ubuntu.com
 Using image from local cache
 Unpacking the rootfs
 
@@ -88,3 +88,6 @@ NAME         STATE     AUTOSTART    GROUPS  IPV4            UNPRIVILEGED
 mycontainer  RUNNING   0            -       192.168.1.155   true
 ```
 
+Refereneces:
+- [Converting eth0 to br0](https://ubuntu.com/blog/converting-eth0-to-br0-and-getting-all-your-lxc-or-lxd-onto-your-lan)
+- [Discussion at linuxcontainers.org](https://discuss.linuxcontainers.org/t/lxc-container-on-same-network-as-host-with-internet-access/12038)
