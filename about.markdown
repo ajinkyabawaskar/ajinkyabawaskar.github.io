@@ -6,7 +6,7 @@ permalink: /about/
 
 Hello and welcome to the Internet home of Ajinkya Bawaskar! 
 
-I am a software enthusiast, currently working at GlobalLogic as Associate Software Engineer in Innovation and R&D projects.
+I am a software enthusiast, currently working at (GlobalLogic)[https://www.globallogic.com/in/] as Associate Software Engineer in Innovation and R&D projects. I also work with a non-profit organization (Dweebs Global)[https://dweebsglobal.org/], building software that manages their workflow. I am also volunteer with (Foss United)[https://fossunited.org/], another non-profit where I do my bit to promote free and open source software.
 
 The extent to which technology has influced our day-to-day life amazes me. I feel that software, in particular has changed the course of human history, in many many incredible ways. I aspire to write software that solves real-world problems and impact the society as whole.
 
