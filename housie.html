@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambola</title>
+    <style>
+        .column {
+            color: #ffffff;
+            border: 2px solid #004841;
+            box-shadow: 0px 0px 10px #e3e7e5;
+            background: #004841;
+            margin: 8px;
+            font-size: larger;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            cursor: default;
+        }
+
+        .row {
+            display: flex;
+        }
+
+        .flex {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .pt-4 {
+            padding-top: 3.5rem;
+        }
+
+        .pl-4 {
+            padding-left: 3.5rem;
+        }
+
+        body {
+            background-image: url('/assets/img/casino.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-position-y: -250px;
+        }
+
+        .arrange {
+            display: flex;
+        }
+
+        .casino {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            color: white;
+        }
+
+        .overlay {
+            color: black;
+            background: rgba(0, 0, 0, 1);
+        }
+
+        ::selection {
+            color: transparent;
+        }
+
+        .overlay:hover {
+            -webkit-animation: mymove 1s infinite;
+            /* Chrome, Safari, Opera */
+            animation: mymove 0.25s infinite;
+        }
+
+        #scores {
+            padding-right: 3.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            height: 600px;
+            justify-content: flex-start;
+            align-items: stretch;
+            align-content: flex-end;
+            flex-direction: column;
+        }
+
+        .score {
+            border: 1px solid white;
+            background: rgba(255, 255, 255, 1);
+            width: 30px;
+            height: 30px;
+            margin-left: 5px;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: black;
+        }
+
+        .action {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            align-content: center;
+            justify-content: flex-end;
+            align-items: flex-start;
+        }
+
+        /* Standard syntax */
+        @keyframes mymove {
+            from {
+                box-shadow: 0px 0px 10px #e3e7e5;
+            }
+
+            to {
+                box-shadow: 0px 0px 25px #e3e7e5;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="pt-4 pl-4">
+        <div class="flex">
+            <div id="maze" class="arrange"></div>
+            <!-- <div class="action">Button</div> -->
+            <div id="scores" class="casino"></div>
+        </div>
+    </div>
+</body>
+<script>
+
+    const scores = document.getElementById("scores");
+    const luckyNumbers = [];
+    const revealed = [];
+    for (let i = 1; i < 91; i++) {
+        luckyNumbers.push(i);
+        // let score = document.createElement("div");
+        // score.classList.add("score");
+        // score.innerText = 1;
+        // scores.appendChild(score);
+    }
+
+    let maze = document.getElementById("maze");
+    let grid = document.createElement("div");
+    let count = 1;
+
+    for (let i = 0; i < 9; i++) {
+        let row = document.createElement("div");
+        row.classList.add(...["row"]);
+
+        for (let j = 0; j < 10; j++) {
+            let column = document.createElement("div");
+            column.classList.add(...["column", "overlay"]);
+            const luck = luckyNumbers[Math.floor(Math.random() * luckyNumbers.length)];
+            column.innerText = luck;
+            luckyNumbers.splice(luckyNumbers.indexOf(luck), 1);
+            row.appendChild(column);
+        }
+
+        grid.appendChild(row);
+    }
+
+    maze.appendChild(grid);
+
+
+    for (const el of document.getElementsByClassName('column')) {
+        el.addEventListener('click', function (event) {
+            let revealedNumber = parseInt(event.srcElement.innerText);
+            console.log(typeof revealedNumber);
+            if (revealed.indexOf(revealedNumber) == -1) {
+                event.srcElement.classList.remove("overlay");
+                revealed.push(revealedNumber);
+                // revealed.sort((a, b) => a - b);
+                updateScores(revealed);
+
+            }
+        });
+    }
+    function updateScores(revealed) {
+        const scores = document.getElementById("scores");
+        scores.innerHTML = "";
+        for (const revealedNumber of revealed) {
+            let score = document.createElement("div");
+            score.classList.add("score");
+            score.innerText = revealedNumber;
+            scores.appendChild(score);
+        }
+
+    }
+</script>
+
+</html>
