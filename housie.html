@@ -204,9 +204,10 @@
         for (let j = 0; j < 10; j++) {
             let column = document.createElement("div");
             column.classList.add(...["column", "overlay"]);
-            const luck = luckyNumbers[Math.floor(Math.random() * luckyNumbers.length)];
-            column.innerText = luck;
-            luckyNumbers.splice(luckyNumbers.indexOf(luck), 1);
+            // const luck = luckyNumbers[i];
+            column.innerText = count;
+            count++;
+            // luckyNumbers.splice(luckyNumbers.indexOf(luck), 1);
             row.appendChild(column);
         }
         grid.appendChild(row);
