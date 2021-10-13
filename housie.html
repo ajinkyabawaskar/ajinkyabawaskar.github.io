@@ -223,6 +223,7 @@
             <div id="scores" class="casino"></div>
         </div>
     </div>
+    <audio id="audio" src="assets/sounds/applause.mp3"></audio>
 </body>
 <script>
 
@@ -231,7 +232,7 @@
     for (let i = 1; i < 91; i++) {
         luckyNumbers.push(i);
     }
-
+    let audio = document.getElementById("audio");
     let maze = document.getElementById("maze");
     let grid = document.createElement("div");
     let count = 1;
@@ -272,6 +273,7 @@
 
     for (const el of document.getElementsByClassName('prizeTitle')) {
         el.addEventListener('click', function (event) {
+            audio.play();
             if (event.srcElement.classList == "finished") {
                 event.srcElement.classList.remove("finished");
             }
