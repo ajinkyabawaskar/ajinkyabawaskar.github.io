@@ -29,4 +29,30 @@ Coming from a tier-3 (or maybe 4, 5, 6..) roadside engineering college, the only
 -   While the above point would improve your problem solving skills, also make sure to read and understand how software works, how to design robust and scalable systems, and other computer fundamentals from grassroot levels.
 -   Never think you're not that smart. You can achieve your goals through sheer hard work. Talent is just a lottery that you won when you were born.
 
-Never give up.
+_Never give up._
+
+---
+
+#### About internships:
+
+Don't worry too much about them. If you are doing DSA, there's a high chance you'll end up with one. One internship is fine. The whole idea of doing an internship is to know how it feels to be working a job. You get to see how a typical day would look like when you start working as a software engineer. A great introduction to scrum meetings, jira dashboards, and other day-to-day activities.
+
+---
+
+#### About projects:
+
+A couple of major projects (end-to-end e-commerce app would be a great example) are just fine. Remember to learn the underlying concepts of whatever technology you use to build those projects. Use those projects as an opportunity to learn git, CI/CD and other aspects around developing software. Learn software design patterns and write code in a way that's simple, clean, readable, and managable no matter the size.
+
+If you got hold of any technology while developing those projects, there is a high possibility that you'd have used some open-source software or library. Try to make useful contributions to these libraries. What a person donating blood feels like is what software developers feel while contributing to open source.
+
+---
+
+#### Student councils and events:
+
+Participate in 1 or at most 2 communities after carefully examining if you feel aligned to what they do. Most of the times, there will always be a workgroup that involves actively communicating with both, internal and external stakeholders. Try to involve yourself in those workgroups to get opportunity to speak, might be addressing a crowd or team meetings. Such avenues make you a better team player, puts you in a position of responsibility and helps you improve your communication and interpersonal skills.
+
+---
+
+#### Prioritizing:
+
+One can prioritize all this in the sequence in which points in this article are written.
