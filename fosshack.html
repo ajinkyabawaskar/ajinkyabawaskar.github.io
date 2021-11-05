@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOSS Hack 2021</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@4.14.1/css/xterm.css">
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: monospace;
+        }
+
+        input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            /* display: none; */
+            height: 98%;
+            width: 98%;
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="">Welcome to FOSS Hack. </div>
+    <div id="terminal"></div>
+    <script>
+        var commandCounter = 0;
+        var commandHistory = [];
+        var currentHistoryIndex;
+
+        var terminalTag = "hacker@fosshack:~$ <input type=\"text\" ></input>";
+        var t = document.getElementById('terminal');
+        // var fc = setInterval(flashCursor, 700);
+        // var cursor = document.createElement('span');
+        // cursor.innerText = "|";
+        // cursor.id = "cursor";
+        // t.innerText = "$";
+
+        var currentCommand = "";
+        initCommand();
+
+        addEvent(document, "keydown", function (e) {
+
+            e = e || window.event;
+
+            var key = event.keyCode || event.charCode;
+
+            if (key < 32 || key > 126) {
+                //press enter
+                if (key == 13) {
+                    executeCommand(currentCommand);
+                }
+                // del or backspace
+                if (key == 8 || key == 46) {
+                    deleteFromCommand(currentCommand);
+                }
+
+                // tab
+                if (key == 9) {
+                    console.log("autosuggest");
+                }
+            }
+            else {
+
+                if (key > 64 && key < 91) {
+                    key += 32;
+                }
+                if (key >= 37 && key <= 40) {
+                    if (key === 38) {
+                        currentCommand = commandHistory[commandHistoryIndex];
+                        if (commandHistoryIndex > 0) {
+                            commandHistoryIndex -= 1;
+                        }
+                    }
+                    if (key === 40) {
+                        if (commandHistoryIndex < commandHistory.length - 1) {
+                            commandHistoryIndex += 1;
+                        }
+                        currentCommand = commandHistory[commandHistoryIndex];
+                    }
+                } else {
+                    currentCommand += String.fromCharCode(key);
+                }
+                updateTerminal();
+            }
+        });
+
+        function deleteFromCommand(command) {
+            currentCommand = currentCommand.slice(0, -1);
+            updateTerminal();
+        }
+
+        function updateTerminal(content) {
+            var currentCommandInterface = document.getElementById("command_" + commandCounter);
+            if (content === undefined) {
+                var terminalContent = terminalTag + currentCommand;
+                currentCommandInterface.innerHTML = terminalContent;
+            }
+        }
+
+        function executeCommand(command) {
+            updateTerminal();
+            commandCounter += 1;
+            addToHistory(command);
+            currentCommand = "";
+            var output = processCommand(command);
+            initCommand(output);
+        }
+
+        function addToHistory(command) {
+            commandHistory.push(currentCommand);
+            commandHistoryIndex = commandHistory.length - 1;
+        }
+
+        function addEvent(element, eventName, callback) {
+            if (element.addEventListener) {
+                element.addEventListener(eventName, callback, false);
+            } else if (element.attachEvent) {
+                element.attachEvent("on" + eventName, callback);
+            } else {
+                element["on" + eventName] = callback;
+            }
+        }
+
+
+        function flashCursor() {
+            t.append(cursor);
+            setTimeout(() => {
+                t.removeChild(t.lastChild);
+            }, 350);
+        }
+
+        function initCommand(previousOutput) {
+            if (previousOutput === undefined) {
+                // first command
+                var commandInterface = document.createElement('div');
+                commandInterface.innerHTML = terminalTag;
+                commandInterface.id = "command_" + commandCounter;
+                t.append(commandInterface);
+            }
+            else {
+                var currentCommandInterface = document.getElementById("command_" + (commandCounter));
+                var currentCommandResults = document.createElement('div');
+                currentCommandResults.innerText = previousOutput;
+                t.append(currentCommandResults);
+                initCommand();
+            }
+        }
+
+        function clearTerminal() {
+            t.innerHTML = '';
+            commandCounter = 0;
+        }
+
+        function processCommand(command) {
+            var results = "";
+            var knownCommands = ['whoami', 'pwd', 'ls', 'help', 'clear', 'cat', 'history', ''];
+            if (knownCommands.includes(command)) {
+                if (command === "clear") {
+                    results = "";
+                    clearTerminal();
+                }
+                if (command === "help") {
+                    results = "Following commands are available: " + knownCommands.join([separator = ', '])
+                }
+                if (command === "pwd") {
+                    results = "/home/hacker";
+                }
+                if (command === "whoami") {
+                    results = "hacker";
+                }
+                if (command === "history") {
+                    commandHistory.forEach(pastCommand => {
+                        var d = document.createElement('div');
+                        d.innerText = pastCommand;
+                        t.append(d);
+                    });
+                }
+            }
+            else {
+                results = "Command '" + command + "' not found. Try 'help' for more information.";
+            }
+            return results;
+        }
+
+
+    </script>
+</body>
+
+</html>
