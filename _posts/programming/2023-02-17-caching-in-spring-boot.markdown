@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Awesome annotatations in Spring Boot - @EnableCaching
+title: Awesome annotations in Spring Boot - @EnableCaching
 date:   2023-02-17 00:12:00 +0530
 categories: Programming
 ---
