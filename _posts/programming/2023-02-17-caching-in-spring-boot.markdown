@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Awesome annotations in Spring Boot - @EnableCaching
+title: '@EnableCaching - Awesome annotations in Spring Boot'
 date:   2023-02-17 00:12:00 +0530
 categories: Programming
 ---
@@ -12,6 +12,8 @@ Spring Boot is an opinionated framework, meaning it autoconfigures a lot of thin
 
 
 The abilities of this framework are uncovered as one discovers the `@Enable` series of annotations. In this series of blog posts, we will take a brief look of those annotations: `@EnableCaching`, `@EnableScheduling`, `@EnableAsync`, etc. This post focuses on former.
+
+> Post on `@EnableScheduling` is now live at: [@EnableScheduling - Awesome annotations in Spring Boot](https://ajinkyabawaskar.github.io/programming/scheduling-in-spring-boot)
 
 ---
 
