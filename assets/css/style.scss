@@ -1,7 +1,4 @@
 ---
-
+# Intentionally empty: the site runs on native HTML with no styles at all.
+# Kept so the historical /assets/css/style.css URL still resolves (to nothing).
 ---
-
-@import
-  "minima/skins/{{ site.minima.skin | default: 'classic' }}",
-  "minima/initialize";    
