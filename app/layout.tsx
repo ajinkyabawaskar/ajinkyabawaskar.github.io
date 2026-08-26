@@ -34,6 +34,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="icon" href="/favicon.svg" />
         <link rel="alternate" type="application/rss+xml" title="Variable RSS Feed" href="/feed.xml" />
         <Script
@@ -53,24 +55,21 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <header style={{ borderBottom: '1px solid #e0e0e0', padding: '1rem 2rem', maxWidth: '800px', margin: '0 auto' }}>
-          <Link href="/" style={{ fontSize: '1.5rem', fontWeight: 'bold', textDecoration: 'none', color: '#1a1a1a' }}>
-            Variable
-          </Link>
-          <nav style={{ marginTop: '0.5rem' }}>
-            <Link href="/about/" style={{ marginRight: '1rem', textDecoration: 'underline' }}>About</Link>
-            <Link href="/categories/" style={{ textDecoration: 'underline' }}>Categories</Link>
+        <header>
+          <Link href="/">Variable</Link>
+          <p>A web log about programming, software, technology, life and my thoughts in general.</p>
+          <nav>
+            <Link href="/about/">About</Link>
+            <Link href="/categories/">Categories</Link>
           </nav>
         </header>
-        <main style={{ maxWidth: '800px', margin: '2rem auto', padding: '0 1rem' }}>
-          {children}
-        </main>
-        <footer style={{ borderTop: '1px solid #e0e0e0', padding: '1rem 2rem', maxWidth: '800px', margin: '2rem auto 0', fontSize: '0.9rem', color: '#666' }}>
+        <main>{children}</main>
+        <footer>
           <p>A web log about programming, software, technology, life and my thoughts in general.</p>
-          <div style={{ marginTop: '0.5rem' }}>
-            <a href="https://github.com/ajinkyabawaskar" target="_blank" rel="noopener noreferrer" style={{ marginRight: '1rem', textDecoration: 'underline' }}>GitHub</a>
-            <a href="https://instagram.com/ajinkyabawaskar" target="_blank" rel="noopener noreferrer" style={{ marginRight: '1rem', textDecoration: 'underline' }}>Instagram</a>
-            <a href="https://linkedin.com/in/ajinkyabawaskar" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline' }}>LinkedIn</a>
+          <div>
+            <a href="https://github.com/ajinkyabawaskar" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://instagram.com/ajinkyabawaskar" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://linkedin.com/in/ajinkyabawaskar" target="_blank" rel="noopener noreferrer">LinkedIn</a>
           </div>
         </footer>
       </body>
