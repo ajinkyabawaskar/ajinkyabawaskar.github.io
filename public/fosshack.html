@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOSS Hack 2021</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: 'Fira Mono', monospace;
+            font-size: large;
+        }
+
+        a {
+            color: lightblue;
+            text-decoration: none;
+        }
+
+        .text-green {
+            color: lime;
+        }
+
+        .text-blue {
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="" id="intro">Welcome to FOSS Hack CLI. </div>
+    <div id="terminal"></div>
+    <script>
+
+        var commandCounter = 0;
+        var commandHistory = [];
+        var currentHistoryIndex;
+
+        // var terminalTag = "hacker@fosshack:~$ <input type=\"text\" ></input>";
+        var terminalTag = "<span class=\"text-green\">dev@fosshack</span>:<span class=\"text-blue\">~</span>$ ";
+        var t = document.getElementById('terminal');
+        // var fc = setInterval(flashCursor, 700);
+        // var cursor = document.createElement('span');
+        // cursor.innerText = "|";
+        // cursor.id = "cursor";
+        // t.innerText = "$";
+
+        var currentCommand = "";
+        initCommand();
+
+        addEvent(document, "keydown", function (e) {
+
+            e = e || window.event;
+
+            var key = event.keyCode || event.charCode;
+
+            if (key < 32 || key > 126) {
+                //press enter
+                if (key == 13) {
+                    executeCommand(currentCommand);
+                }
+                // del or backspace
+                if (key == 8 || key == 46) {
+                    deleteFromCommand(currentCommand);
+                }
+
+                // tab
+                if (key == 9) {
+                    console.log("autosuggest");
+                }
+
+                //making exception for fullstop
+                if (key === 190) {
+                    currentCommand += String.fromCharCode(46);
+                    updateTerminal();
+                }
+            }
+            else {
+
+                if (key > 64 && key < 91) {
+                    key += 32;
+                }
+                if (key >= 37 && key <= 40) {
+                    if (key === 38) {
+                        currentCommand = commandHistory[commandHistoryIndex];
+                        if (commandHistoryIndex > 0) {
+                            commandHistoryIndex -= 1;
+                        }
+                    }
+                    if (key === 40) {
+                        if (commandHistoryIndex < commandHistory.length - 1) {
+                            commandHistoryIndex += 1;
+                        }
+                        currentCommand = commandHistory[commandHistoryIndex];
+                    }
+                } else {
+                    currentCommand += String.fromCharCode(key);
+                }
+                updateTerminal();
+            }
+        });
+
+        function deleteFromCommand(command) {
+            currentCommand = currentCommand.slice(0, -1);
+            updateTerminal();
+        }
+
+        function updateTerminal(content) {
+            var currentCommandInterface = document.getElementById("command_" + commandCounter);
+            if (content === undefined) {
+                var terminalContent = terminalTag + currentCommand;
+                currentCommandInterface.innerHTML = terminalContent;
+            }
+        }
+
+        function executeCommand(command) {
+            updateTerminal();
+            commandCounter += 1;
+            addToHistory(command);
+            currentCommand = "";
+            var output = processCommand(command);
+            initCommand(output);
+            if (command === "exit" || command === "logout") {
+                clearScreen();
+            }
+        }
+
+        function addToHistory(command) {
+            commandHistory.push(currentCommand);
+            commandHistoryIndex = commandHistory.length - 1;
+        }
+
+        function addEvent(element, eventName, callback) {
+            if (element.addEventListener) {
+                element.addEventListener(eventName, callback, false);
+            } else if (element.attachEvent) {
+                element.attachEvent("on" + eventName, callback);
+            } else {
+                element["on" + eventName] = callback;
+            }
+        }
+
+
+        function flashCursor() {
+            t.append(cursor);
+            setTimeout(() => {
+                t.removeChild(t.lastChild);
+            }, 350);
+        }
+
+        function initCommand(previousOutput) {
+            if (previousOutput === undefined) {
+                // first command
+                var commandInterface = document.createElement('div');
+                commandInterface.innerHTML = terminalTag;
+                commandInterface.id = "command_" + commandCounter;
+                t.append(commandInterface);
+            }
+            else {
+                var currentCommandInterface = document.getElementById("command_" + (commandCounter));
+                var currentCommandResults = document.createElement('div');
+                currentCommandResults.innerHTML = previousOutput;
+                t.append(currentCommandResults);
+                initCommand();
+            }
+        }
+
+        function clearTerminal() {
+            t.innerHTML = '';
+            commandCounter = 0;
+        }
+
+        function clearScreen() {
+            const myNode = document.getElementsByTagName('body')[0];
+            setTimeout(() => {
+                while (myNode.firstChild) {
+                    myNode.removeChild(myNode.lastChild);
+                }
+            }, 1000);
+
+        }
+
+
+        function processCommand(command) {
+            var results = "";
+            var knownCommands = ['cat', 'takemethere', 'whoami', 'l', 'hostname', 'pwd', 'ls', 'help', 'clear', 'version', 'history', 'exit', 'logout'];
+            if (knownCommands.includes(command)) {
+                if (command === "takemethere") {
+                    window.location.href = "https://fossunited.org/login?redirect-to=/fosshack/2021#signup";
+                }
+                if (command === "clear") {
+                    results = "";
+                    clearTerminal();
+                }
+                if (command === "help") {
+                    results = "Following commands are available: " + knownCommands.join([separator = ', '])
+                }
+                if (command === "pwd") {
+                    results = "/home/dev";
+                }
+                if (command === "whoami") {
+                    results = "dev";
+                }
+                if (command === "hostname") {
+                    results = "fosshack";
+                }
+                if (command === "version") {
+                    results = "FOSS Hack 2021 - Second Edition";
+                }
+                if (command === "history") {
+                    commandHistory.forEach(pastCommand => {
+                        var d = document.createElement('div');
+                        d.innerText = pastCommand;
+                        t.append(d);
+                    });
+                }
+                if (command === "cat") {
+                    results = "cat: No such file or directory"
+                }
+                if (command === "ls" || command === "ls -l") {
+                    results = `
+                    -rw-rw-r-- 1 dev dev 1024 Aug 23 23:08 .author<br>
+                    -rw-rw-r-- 1 dev dev 4096 Nov 06 00:12 info<br>
+                    -rw-rw-r-- 1 dev dev 2745 Nov 06 03:32 about<br>
+                    -rw-rw-r-- 1 dev dev 2342 Nov 06 10:43 hackathon<br>
+                    -rw-rw-r-- 1 dev dev 1572 Nov 06 22:16 sponsors<br>
+                    -rw-rw-r-- 1 dev dev 4674 Nov 06 03:11 partners<br>
+                    -rw-rw-r-- 1 dev dev 6865 Nov 06 17:19 volunteers<br>
+                    -rw-rw-r-- 1 dev dev 2877 Nov 06 05:54 register`;
+                }
+                if (command === "exit" || command === "logout") {
+                    return "Goodbye!";
+                }
+            }
+            else {
+                if (command.includes("cat ")) {
+                    var input = command.split(" ")[1];
+                    switch (input) {
+                        case '.author':
+                            results = `Authored by <a href="https://github.com/ajinkyabawaskar">@ajinkyabawaskar</a>`;
+                            break;
+                        case 'help':
+                            results = `Use cat to see contents of a file from the start. Try running 'cat info' or 'cat event'`;
+                            break;
+                        case 'info':
+                            results = `India's Biggest FOSS Hackathon, FOSS Hack 2021 is the second edition of FOSS Hack,<br> an online hackathon to promote Free and Open Source Software by bringing together<br> students and professionals to build or extend FOSS projects. <a href = \"https://fossunited.org/fosshack/2021\">https://fossunited.org/fosshack/2021</a><br> See 'cat event' for more details.`;
+                            break;
+                        case 'hackathon':
+                            results = `<b>FOSS Hack 2021</b> <br> 13th & 14th November 2021 <br> Cash Prizes upto ₹10,00,000<br>Online - <a href="https://fossunited.org/fosshack/2021/home">https://fossunited.org/fosshack/2021/home</a><br>`;
+                            break;
+                        case 'about':
+                            results = `<b>About FOSS United Foundation</b><br>FOSS United Foundation is a registered non-profit founded in 2020,<br> dedicated to the cause of building Free and Open Source (FOSS) projects<br> and communities in India and elsewhere.`;
+                            break;
+                        case 'sponsors':
+                            results = `Sponsors for FOSS Hack 2021 - The awesome companies who are supporting us to make FOSS Hack 2021 possible.<br> ------------------------<br>` +
+                                `Accel<b> · </b> <a href="http://www.accel.com/">http://www.accel.com/</a> <br>` +
+                                `Capillary<b> · </b> <a href="https://www.capillarytech.com/"> https://www.capillarytech.com/</a><br>` +
+                                `Deepsource<b> · </b> <a href="https://deepsource.io/"> https://deepsource.io/</a><br>` +
+                                `Devtron<b> · </b> <a href="https://devtron.ai/"> https://devtron.ai/</a><br>` +
+                                `DigitalOcean<b> · </b> <a href="https://www.digitalocean.com/">https://www.digitalocean.com/</a><br>` +
+                                `Elasticrun<b> · </b> <a href="https://www.elastic.run/">https://www.elastic.run/</a> <br>` +
+                                `Frappe<b> · </b> <a href="https://frappe.io/">https://frappe.io/</a> <br>` +
+                                `GitHub<b> · </b> <a href="https://github.com/">https://github.com/</a> <br>` +
+                                `Helpshift<b> · </b> <a href="https://www.helpshift.com/">https://www.helpshift.com/</a> <br>` +
+                                `Nexus<b> · </b> <a href="https://nexusvp.com/">https://nexusvp.com/</a> <br>` +
+                                `Presidio<b> · </b> <a href="https://www.presidio.com/">https://www.presidio.com/</a> <br>` +
+                                `Nexus<b> · </b> <a href="https://nexusvp.com/">https://nexusvp.com/</a> <br>` +
+                                `Zerodha<b> · </b> <a href="https://zerodha.com/">https://zerodha.com/</a> <br>`
+                                ;
+                            break;
+                        case 'partners':
+                            results = `Community Partners for FOSS Hack 2021 - Communities & Organizations who are helping us spread the word <br> ------------------------<br> <a href="https://fossunited.org/fosshack/2021#partners">https://fossunited.org/fosshack/2021#partners</a><br>`;
+                            break;
+                        case 'volunteers':
+                            results = `Folks running the show behind the scenes.<br> ------------------------<br>` +
+                                `Aadya Anil Kumar<b> · </b> <i>Coding and Design, Student at GEC Thrissur </i><br>` +
+                                `Adethya S Nair<b> · </b> <i>Developer, AI/ML, Student at GEC Thrissur</i><br>` +
+                                `Ajinkya Bawaskar<b> · </b> <i>Software Engineer at GlobalLogic</i><br>` +
+                                `Alan Martin<b> · </b> <i>Flutter developer</i><br>` +
+                                `Anand Chitipothu<b> · </b> <i>Software Artisan, Building Mon School</i><br>` +
+                                `Deepika S R<b> · </b> <i>UI/UX designer & Front-End Developer</i><br>` +
+                                `Devdutt Shenoi<b> · </b> <i>Contributor, Volunteer, SE at Bytebeam</i><br>` +
+                                `Kailash Nadh<b> · </b> <i>Hacker, Tinkerer, CTO at Zerodha</i><br>` +
+                                `Kaustubh Maske Patil<b> · </b> <i>FOSS Enthusiast, Co-Founder of Hyperlog</i><br>` +
+                                `Lia Paul<b> · </b> <i>UI/UX designer, Student at COET Thalassery</i><br>` +
+                                `Manali Modi<b> · </b> <i>Software Engineer at GlobalLogic</i><br>` +
+                                `Rushabh Mehta<b> · </b> <i>Founder and CEO of Frappe</i><br>` +
+                                `Vishal Arya<b> · </b> <i>Community Engagement at FOSS United</i><br>` +
+                                `Vivek R<b> · </b> <i>Developer at ThoughtWorks</i><br>` +
+                                `Yashi Srivastava<b> · </b> <i>Student at VIT Chennai</i><br>`
+                                ;
+                            break;
+                        case 'register':
+                            results = `To register, try 'takemethere'`;
+                            break;
+                        default:
+                            results = `cat: ` + input + `: No such file or directory`;
+                    }
+                }
+                else {
+                    results = "Command '" + command + "' not found. Try running 'help'.";
+                }
+            }
+            return results;
+        }
+    </script>
+</body>
+
+</html>
