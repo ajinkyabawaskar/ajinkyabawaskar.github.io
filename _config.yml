@@ -47,7 +47,7 @@ plugins:
   - jekyll-feed
 
 minima:
-  skin: neon-cyber
+  skin: retro
   date_format: "%b %-d, %Y"
 
   # generate social links in footer
