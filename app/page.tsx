@@ -15,18 +15,18 @@ export default function HomePage() {
       <h1 style={{ fontSize: '2rem', marginBottom: '1.5rem' }}>Posts</h1>
       {categories.map(category => (
         <section key={category} style={{ marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '1.3rem', borderBottom: '1px solid #e0e0e0', paddingBottom: '0.3rem', marginBottom: '1rem' }}>
+          <h2 style={{ fontSize: '1.3rem', borderBottom: '1px solid var(--border)', paddingBottom: '0.3rem', marginBottom: '1rem' }}>
             {category}
           </h2>
-          <ul style={{ listStyle: 'none', padding: 0 }}>
+          <ul className="post-list">
             {postsByCategory[category]?.map(post => (
-              <li key={post.slug} style={{ marginBottom: '0.5rem' }}>
-                <Link href={`/${category.toLowerCase()}/${post.slug}/`} style={{ textDecoration: 'underline' }}>
+              <li key={post.slug}>
+                <Link href={`/${category.toLowerCase()}/${post.slug}/`} className="post-title">
                   {post.title}
                 </Link>
-                <span style={{ marginLeft: '1rem', color: '#666', fontSize: '0.9rem' }}>
-                  {new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
-                </span>
+                <p className="post-meta">
+                  <time>{new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</time>
+                </p>
               </li>
             ))}
           </ul>

@@ -13,9 +13,9 @@ export default function AboutPage() {
   if (!page) return <div>About page not found</div>
 
   return (
-    <article>
+    <article className="about-content">
       <h1 style={{ fontSize: '2rem', marginBottom: '1.5rem' }}>{page.title}</h1>
-      <div style={{ lineHeight: '1.7' }}>
+      <div className="post-content">
         <ReactMarkdown remarkPlugins={[remarkGfm]}>
           {page.content}
         </ReactMarkdown>

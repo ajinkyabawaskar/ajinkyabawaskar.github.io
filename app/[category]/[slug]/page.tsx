@@ -43,21 +43,19 @@ export default async function PostPage({ params }: PageProps) {
   if (!post) notFound()
 
   return (
-    <article>
+    <article className="post-content">
       <header style={{ marginBottom: '1.5rem' }}>
         <h1 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>{post.title}</h1>
-        <time style={{ color: '#666', fontSize: '0.9rem' }}>
+        <time style={{ color: 'var(--muted)', fontSize: '0.9rem' }}>
           {new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
         </time>
       </header>
-      <div style={{ lineHeight: '1.7' }}>
-        <ReactMarkdown
-          remarkPlugins={[remarkGfm]}
-          components={{ img: ImageComponent }}
-        >
-          {post.content}
-        </ReactMarkdown>
-      </div>
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm]}
+        components={{ img: ImageComponent }}
+      >
+        {post.content}
+      </ReactMarkdown>
       <Utterances slug={`/${resolvedParams.category}/${resolvedParams.slug}/`} />
     </article>
   )

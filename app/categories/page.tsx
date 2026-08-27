@@ -16,7 +16,7 @@ export default function CategoriesPage() {
   }, {} as Record<string, typeof posts>)
 
   return (
-    <div>
+    <div className="categories-page">
       <h1 style={{ fontSize: '2rem', marginBottom: '1.5rem' }}>Categories</h1>
       {categories.map(category => {
         const catPosts = postsByCategory[category] || []
@@ -25,15 +25,15 @@ export default function CategoriesPage() {
             <h2 id={category.toLowerCase()} style={{ fontSize: '1.3rem', marginBottom: '1rem' }}>
               {category} ({catPosts.length})
             </h2>
-            <ul style={{ listStyle: 'none', padding: 0 }}>
+            <ul className="post-list">
               {catPosts.map(post => (
-                <li key={post.slug} style={{ marginBottom: '0.5rem' }}>
-                  <Link href={`/${category.toLowerCase()}/${post.slug}/`} style={{ textDecoration: 'underline' }}>
+                <li key={post.slug}>
+                  <Link href={`/${category.toLowerCase()}/${post.slug}/`} className="post-title">
                     {post.title}
                   </Link>
-                  <span style={{ marginLeft: '1rem', color: '#666', fontSize: '0.9rem' }}>
-                    {new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
-                  </span>
+                  <p className="post-meta">
+                    <time>{new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</time>
+                  </p>
                 </li>
               ))}
             </ul>
