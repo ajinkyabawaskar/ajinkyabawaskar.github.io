@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import Script from 'next/script'
 import Link from 'next/link'
+import ThemeToggle from '@/components/ThemeToggle'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -32,7 +33,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -61,6 +62,7 @@ export default function RootLayout({
           <nav>
             <Link href="/about/">About</Link>
             <Link href="/categories/">Categories</Link>
+            <ThemeToggle />
           </nav>
         </header>
         <main>{children}</main>
