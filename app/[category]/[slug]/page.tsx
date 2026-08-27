@@ -28,12 +28,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const ImageComponent: any = (props: any) => {
-  const src = props.src || ''
-  const cleanSrc = src.replace(/\?style=centerme$/, '')
-  const { alt, ...rest } = props
-  return <img src={cleanSrc} alt={alt || ''} style={{ maxWidth: '100%', height: 'auto' }} {...rest} />
+// Preprocess markdown content to fix image paths before rendering
+function preprocessMarkdown(content: string): string {
+  return content
+    .replace(/!\[([^\]]*)\]\(\/assets\/img\/([^)]+)\?style=centerme\)/g, '![$1](/img/$2)')
+    .replace(/!\[([^\]]*)\]\(\/assets\/img\/([^)]+)\)/g, '![$1](/img/$2)')
+    .replace(/\?style=centerme/g, '')
 }
 
 export default async function PostPage({ params }: PageProps) {
@@ -41,6 +41,8 @@ export default async function PostPage({ params }: PageProps) {
   const post = getPostBySlug(resolvedParams.category, resolvedParams.slug)
 
   if (!post) notFound()
+
+  const processedContent = preprocessMarkdown(post.content)
 
   return (
     <article className="post-content">
@@ -50,11 +52,8 @@ export default async function PostPage({ params }: PageProps) {
           {new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
         </time>
       </header>
-      <ReactMarkdown
-        remarkPlugins={[remarkGfm]}
-        components={{ img: ImageComponent }}
-      >
-        {post.content}
+      <ReactMarkdown remarkPlugins={[remarkGfm]}>
+        {processedContent}
       </ReactMarkdown>
       <Utterances slug={`/${resolvedParams.category}/${resolvedParams.slug}/`} />
     </article>
