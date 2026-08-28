@@ -37,7 +37,7 @@ export default function AboutPage() {
       <hr className="thick mb-16 content-width" aria-hidden="true" />
 
       <div className="content-width">
-        <div className="bento-grid bento-grid-2 gap-12 items-start" style={{ alignItems: 'flex-start' }}>
+        <div className="bento-grid bento-grid-2 gap-12 items-start" style={{ alignItems: 'flex-start', gridTemplateColumns: '1fr 2fr' }}>
           {/* Profile Sidebar */}
           <aside className="fade-in-up stagger-1" style={{ position: 'sticky', top: '120px' }}>
             <div className="card" style={{ padding: '2rem' }}>
@@ -98,18 +98,18 @@ export default function AboutPage() {
 
             <section aria-labelledby="connect-heading">
               <h2 id="connect-heading" className="h3 mb-6" style={{ fontFamily: 'var(--font-serif)' }}>Connect</h2>
-              <div className="bento-grid bento-grid-3 bento-grid-auto gap-4">
-                <Link href="https://github.com/ajinkyabawaskar" target="_blank" rel="noopener noreferrer" className="card flex flex-col items-center text-center p-6 hover:border-[var(--color-accent-blue-fg)] transition-colors">
+              <div className="bento-grid bento-grid-3 bento-grid-auto gap-4" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))' }}>
+                <Link href="https://github.com/ajinkyabawaskar" target="_blank" rel="noopener noreferrer" className="card flex flex-col items-center text-center p-6 hover:border-[var(--color-accent-fg)] transition-colors">
                   <GithubLogoIcon size={28} style={{ color: 'var(--color-fg)', marginBottom: '0.75rem' }} aria-hidden="true" />
                   <h3 className="h4" style={{ fontFamily: 'var(--font-serif)', marginBottom: '0.25rem' }}>GitHub</h3>
                   <p className="meta text-sm">Source code & projects</p>
                 </Link>
-                <Link href="https://linkedin.com/in/ajinkyabawaskar" target="_blank" rel="noopener noreferrer" className="card flex flex-col items-center text-center p-6 hover:border-[var(--color-accent-blue-fg)] transition-colors">
+                <Link href="https://linkedin.com/in/ajinkyabawaskar" target="_blank" rel="noopener noreferrer" className="card flex flex-col items-center text-center p-6 hover:border-[var(--color-accent-fg)] transition-colors">
                   <LinkedinLogoIcon size={28} style={{ color: 'var(--color-fg)', marginBottom: '0.75rem' }} aria-hidden="true" />
                   <h3 className="h4" style={{ fontFamily: 'var(--font-serif)', marginBottom: '0.25rem' }}>LinkedIn</h3>
                   <p className="meta text-sm">Professional network</p>
                 </Link>
-                <Link href="/feed.xml" className="card flex flex-col items-center text-center p-6 hover:border-[var(--color-accent-yellow-fg)] transition-colors">
+                <Link href="/feed.xml" className="card flex flex-col items-center text-center p-6 hover:border-[var(--color-accent-fg)] transition-colors">
                   <RssIcon size={28} style={{ color: 'var(--color-fg)', marginBottom: '0.75rem' }} aria-hidden="true" />
                   <h3 className="h4" style={{ fontFamily: 'var(--font-serif)', marginBottom: '0.25rem' }}>RSS Feed</h3>
                   <p className="meta text-sm">Subscribe to updates</p>
@@ -122,12 +122,12 @@ export default function AboutPage() {
             <section aria-labelledby="tech-heading">
               <h2 id="tech-heading" className="h3 mb-6" style={{ fontFamily: 'var(--font-serif)' }}>Currently Exploring</h2>
               <div className="flex flex-wrap gap-2">
-                <span className="tag tag-blue">Go</span>
-                <span className="tag tag-green">Kubernetes</span>
-                <span className="tag tag-yellow">Distributed Systems</span>
-                <span className="tag tag-red">TypeScript</span>
-                <span className="tag tag-blue">PostgreSQL</span>
-                <span className="tag tag-green">Observability</span>
+                <span className="tag tag-accent">Go</span>
+                <span className="tag tag-accent">Kubernetes</span>
+                <span className="tag tag-accent">Distributed Systems</span>
+                <span className="tag tag-accent">TypeScript</span>
+                <span className="tag tag-accent">PostgreSQL</span>
+                <span className="tag tag-accent">Observability</span>
               </div>
             </section>
 
@@ -170,7 +170,7 @@ export default function AboutPage() {
                 </div>
                 <div className="flex gap-4">
                   <dt className="meta" style={{ minWidth: '100px', color: 'var(--color-muted)' }}>Fonts</dt>
-                  <dd>System UI stack · Geist Mono</dd>
+                  <dd>Geist Sans · Instrument Serif · Geist Mono</dd>
                 </div>
               </dl>
             </section>

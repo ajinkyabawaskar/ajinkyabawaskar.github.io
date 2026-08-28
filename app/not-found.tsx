@@ -33,7 +33,7 @@ export default function NotFound() {
 
       <div className="content-width text-center">
         <div className="fade-in-up stagger-1">
-          <span className="tag tag-red mb-6" style={{ fontSize: '11px' }}>
+          <span className="tag tag-accent mb-6" style={{ fontSize: '11px' }}>
             <MagnifyingGlassIcon />
             404 Not Found
           </span>
@@ -42,7 +42,7 @@ export default function NotFound() {
         <h1 className="fade-in-up stagger-2" style={{
           fontFamily: 'var(--font-serif)',
           fontSize: 'clamp(6rem, 15vw, 12rem)',
-          fontWeight: 500,
+          fontWeight: 400,
           lineHeight: 0.85,
           letterSpacing: '-0.04em',
           color: 'var(--color-fg)',
@@ -56,7 +56,7 @@ export default function NotFound() {
         </p>
 
         <div className="fade-in-up stagger-4 flex items-center justify-center gap-4 flex-wrap mt-10">
-          <Link href="/" className="btn btn-primary">
+          <Link href="/" className="btn btn-accent">
             <HouseIcon />
             Return Home
           </Link>

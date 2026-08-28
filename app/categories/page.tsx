@@ -29,11 +29,11 @@ export default function CategoriesPage() {
           Index of all transmissions grouped by classification.
         </p>
         <div className="mt-8 flex items-center gap-4 flex-wrap fade-in-up stagger-3">
-          <span className="tag tag-blue">
+          <span className="tag tag-accent">
             <FolderIcon size={12} />
             {categories.length} Categories
           </span>
-          <span className="tag tag-green">
+          <span className="tag tag-muted">
             <BookOpenIcon size={12} />
             {totalPosts} Total Posts
           </span>
@@ -44,7 +44,7 @@ export default function CategoriesPage() {
 
       {categories.length > 0 ? (
         <div className="content-width">
-          <div className="bento-grid bento-grid-auto gap-6" role="list" aria-label="Category index">
+          <div className="bento-grid bento-grid-auto gap-6" role="list" aria-label="Category index" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))' }}>
             {categories.map((category, index) => {
               const catPosts = postsByCategory[category] || []
               const latestPost = catPosts[0]
@@ -59,7 +59,7 @@ export default function CategoriesPage() {
                   <Link href={`/${category.toLowerCase()}/`} className="block">
                     <header className="flex items-baseline justify-between gap-4 mb-6 flex-wrap">
                       <div className="flex items-center gap-3">
-                        <span className="tag tag-blue">
+                        <span className="tag tag-accent">
                           <FolderIcon size={12} />
                           {category}
                         </span>
@@ -93,7 +93,7 @@ export default function CategoriesPage() {
                       ))}
                       {catPosts.length > 4 && (
                         <li className="post-item" style={{ border: 'none', paddingTop: '0.5rem', textAlign: 'right' }}>
-                          <Link href={`/${category.toLowerCase()}/`} className="meta" style={{ color: 'var(--color-accent-blue-fg)' }}>
+                          <Link href={`/${category.toLowerCase()}/`} className="meta" style={{ color: 'var(--color-accent-fg)' }}>
                             + {catPosts.length - 4} more entries
                             <ArrowRightIcon size={12} />
                           </Link>

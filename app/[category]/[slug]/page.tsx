@@ -59,7 +59,7 @@ export default async function PostPage({ params }: PageProps) {
 
       <header className="article-header content-width fade-in-up stagger-1">
         <div className="flex items-center gap-3 mb-4 flex-wrap">
-          <Link href={`/${resolvedParams.category.toLowerCase()}/`} className="tag tag-blue">
+          <Link href={`/${resolvedParams.category.toLowerCase()}/`} className="tag tag-accent">
             <FolderIcon size={12} />
             {resolvedParams.category}
           </Link>

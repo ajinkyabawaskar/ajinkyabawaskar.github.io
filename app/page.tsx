@@ -32,42 +32,42 @@ export default function HomePage() {
             </p>
           </header>
 
-          {/* Stats Bar */}
-          <div className="bento-grid bento-grid-3 bento-grid-auto gap-4 fade-in-up stagger-3" role="list" aria-label="Site statistics">
-            <article className="card" role="listitem">
+          {/* Stats Bar - Asymmetric layout */}
+          <div className="bento-grid bento-grid-auto gap-4 fade-in-up stagger-3" role="list" aria-label="Site statistics" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))' }}>
+            <article className="card card-float" role="listitem" style={{ padding: '2rem 1.5rem' }}>
               <div className="flex items-center gap-3 mb-2">
-                <span className="tag tag-blue" aria-label="Total posts">
+                <span className="tag tag-accent" aria-label="Total posts">
                   <BookOpenIcon size={12} />
                   Posts
                 </span>
               </div>
-              <p className="h1" style={{ fontFamily: 'var(--font-serif)', lineHeight: 1, color: 'var(--color-fg)' }}>
+              <p className="h1" style={{ fontFamily: 'var(--font-serif)', lineHeight: 1, color: 'var(--color-fg)', marginBottom: '0.5rem' }}>
                 {totalPosts}
               </p>
               <p className="meta mt-1">Total entries published</p>
             </article>
 
-            <article className="card" role="listitem">
+            <article className="card" role="listitem" style={{ padding: '1.5rem' }}>
               <div className="flex items-center gap-3 mb-2">
-                <span className="tag tag-green" aria-label="Categories">
+                <span className="tag tag-muted" aria-label="Categories">
                   <FolderIcon size={12} />
                   Categories
                 </span>
               </div>
-              <p className="h1" style={{ fontFamily: 'var(--font-serif)', lineHeight: 1, color: 'var(--color-fg)' }}>
+              <p className="h2" style={{ fontFamily: 'var(--font-serif)', lineHeight: 1.15, color: 'var(--color-fg)', marginBottom: '0.5rem' }}>
                 {categories}
               </p>
               <p className="meta mt-1">Active classifications</p>
             </article>
 
-            <article className="card" role="listitem">
+            <article className="card" role="listitem" style={{ padding: '1.5rem' }}>
               <div className="flex items-center gap-3 mb-2">
-                <span className="tag tag-yellow" aria-label="Latest update">
+                <span className="tag tag-muted" aria-label="Latest update">
                   <ClockIcon size={12} />
                   Latest
                 </span>
               </div>
-              <p className="h1" style={{ fontFamily: 'var(--font-serif)', lineHeight: 1, color: 'var(--color-fg)' }}>
+              <p className="h2" style={{ fontFamily: 'var(--font-serif)', lineHeight: 1.15, color: 'var(--color-fg)', marginBottom: '0.5rem' }}>
                 {latestPost ? new Date(latestPost.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '—'}
               </p>
               <p className="meta mt-1">Most recent publication</p>
@@ -90,10 +90,10 @@ export default function HomePage() {
               </Link>
             </header>
 
-            <article className="card bento-grid bento-grid-2 gap-8 fade-in-up stagger-3" style={{ padding: '2.5rem' }}>
+            <article className="card bento-grid gap-8 fade-in-up stagger-3" style={{ padding: '2.5rem', gridTemplateColumns: '1fr 1fr', alignItems: 'center' }}>
               <div>
                 <div className="flex items-center gap-3 mb-4 flex-wrap">
-                  <Link href={`/${latestPost.category.toLowerCase()}/${latestPost.slug}/`} className="tag tag-blue">
+                  <Link href={`/${latestPost.category.toLowerCase()}/${latestPost.slug}/`} className="tag tag-accent">
                     {latestPost.category}
                   </Link>
                   <time dateTime={latestPost.date} className="meta">
@@ -110,7 +110,7 @@ export default function HomePage() {
                 </p>
               </div>
               <div className="flex items-end justify-end">
-                <Link href={`/${latestPost.category.toLowerCase()}/${latestPost.slug}/`} className="btn btn-primary">
+                <Link href={`/${latestPost.category.toLowerCase()}/${latestPost.slug}/`} className="btn btn-accent">
                   Read Article
                   <ArrowRightIcon size={14} />
                 </Link>
@@ -140,7 +140,7 @@ export default function HomePage() {
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-3 mb-2 flex-wrap">
-                        <span className="tag tag-blue">{post.category}</span>
+                        <span className="tag tag-accent">{post.category}</span>
                         <time dateTime={post.date} className="meta">
                           {new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
                         </time>
@@ -178,10 +178,10 @@ export default function HomePage() {
             System Status
           </h2>
         </header>
-        <div className="bento-grid bento-grid-3 bento-grid-auto gap-4">
-          <article className="card fade-in-up stagger-2" role="listitem">
+        <div className="bento-grid bento-grid-auto gap-4" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))' }}>
+          <article className="card fade-in-up stagger-2" role="listitem" style={{ padding: '1.5rem' }}>
             <div className="flex items-center gap-3 mb-3">
-              <span className="tag tag-green">
+              <span className="tag tag-accent">
                 <TerminalIcon size={12} />
                 Build
               </span>
@@ -189,9 +189,9 @@ export default function HomePage() {
             <p className="h3" style={{ fontFamily: 'var(--font-serif)', lineHeight: 1.2, color: 'var(--color-fg)', marginBottom: '0.5rem' }}>Passing</p>
             <p className="meta">Last deploy: {new Date().toISOString().split('T')[0]}</p>
           </article>
-          <article className="card fade-in-up stagger-3" role="listitem">
+          <article className="card fade-in-up stagger-3" role="listitem" style={{ padding: '1.5rem' }}>
             <div className="flex items-center gap-3 mb-3">
-              <span className="tag tag-blue">
+              <span className="tag tag-accent">
                 <BookOpenIcon size={12} />
                 Engine
               </span>
@@ -199,9 +199,9 @@ export default function HomePage() {
             <p className="h3" style={{ fontFamily: 'var(--font-serif)', lineHeight: 1.2, color: 'var(--color-fg)', marginBottom: '0.5rem' }}>Next.js 15</p>
             <p className="meta">React 19 · TypeScript · Static Export</p>
           </article>
-          <article className="card fade-in-up stagger-4" role="listitem">
+          <article className="card fade-in-up stagger-4" role="listitem" style={{ padding: '1.5rem' }}>
             <div className="flex items-center gap-3 mb-3">
-              <span className="tag tag-yellow">
+              <span className="tag tag-accent">
                 <FolderIcon size={12} />
                 Deploy
               </span>
