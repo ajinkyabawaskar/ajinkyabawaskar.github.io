@@ -48,10 +48,13 @@ export default function Utterances({ slug }: UtterancesProps) {
 
     const iframe = containerRef.current.querySelector('iframe')
     if (iframe) {
-      iframe.style.border = '2px solid var(--border)'
-      iframe.style.backgroundColor = 'var(--bg)'
+      iframe.style.border = '1px solid var(--color-border)'
+      iframe.style.backgroundColor = 'var(--color-canvas)'
+      iframe.style.borderRadius = 'var(--radius-md)'
     }
   }, [theme])
 
-  return <div ref={containerRef} className="utterances" />
+  return (
+    <div ref={containerRef} className="utterances" style={{ marginTop: '4rem', paddingTop: '3rem', borderTop: '1px solid var(--color-border)' }} />
+  )
 }
