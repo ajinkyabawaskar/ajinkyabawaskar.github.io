@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 interface UtterancesProps {
   slug: string
@@ -8,9 +8,15 @@ interface UtterancesProps {
 
 export default function Utterances({ slug }: UtterancesProps) {
   const containerRef = useRef<HTMLDivElement>(null)
+  const [theme, setTheme] = useState<'github-light' | 'github-dark'>('github-light')
 
   useEffect(() => {
     if (!containerRef.current) return
+
+    const saved = localStorage.getItem('theme') as 'light' | 'dark' | null
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const currentTheme = saved ?? (prefersDark ? 'dark' : 'light')
+    setTheme(currentTheme === 'dark' ? 'github-dark' : 'github-light')
 
     const script = document.createElement('script')
     script.src = 'https://utteranc.es/client.js'
@@ -18,7 +24,7 @@ export default function Utterances({ slug }: UtterancesProps) {
     script.crossOrigin = 'anonymous'
     script.setAttribute('repo', 'ajinkyabawaskar/ajinkyabawaskar.github.io')
     script.setAttribute('issue-term', 'pathname')
-    script.setAttribute('theme', 'github-light')
+    script.setAttribute('theme', currentTheme === 'dark' ? 'github-dark' : 'github-light')
     script.setAttribute('label', 'comment')
 
     containerRef.current.appendChild(script)
@@ -30,5 +36,22 @@ export default function Utterances({ slug }: UtterancesProps) {
     }
   }, [slug])
 
-  return <div ref={containerRef} />
+  useEffect(() => {
+    const saved = localStorage.getItem('theme') as 'light' | 'dark' | null
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const currentTheme = saved ?? (prefersDark ? 'dark' : 'light')
+    setTheme(currentTheme === 'dark' ? 'github-dark' : 'github-light')
+  }, [])
+
+  useEffect(() => {
+    if (!containerRef.current) return
+
+    const iframe = containerRef.current.querySelector('iframe')
+    if (iframe) {
+      iframe.style.border = '2px solid var(--border)'
+      iframe.style.backgroundColor = 'var(--bg)'
+    }
+  }, [theme])
+
+  return <div ref={containerRef} className="utterances" />
 }

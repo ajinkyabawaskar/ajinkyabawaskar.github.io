@@ -23,17 +23,17 @@ export default function ThemeToggle() {
   }
 
   if (!mounted) {
-    return <button className="theme-toggle" aria-hidden="true">…</button>
+    return <button className="theme-toggle" aria-hidden="true">[THEME]</button>
   }
 
   return (
     <button
       className="theme-toggle"
       onClick={toggle}
-      aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
-      title={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+      aria-label={theme === 'light' ? 'SWITCH TO DARK MODE' : 'SWITCH TO LIGHT MODE'}
+      title={theme === 'light' ? 'SWITCH TO DARK MODE' : 'SWITCH TO LIGHT MODE'}
     >
-      {theme === 'light' ? '🌙' : '☀️'}
+      {theme === 'light' ? '[ DARK ]' : '[ LIGHT ]'}
     </button>
   )
 }
