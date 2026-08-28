@@ -1,30 +1,7 @@
 import Link from 'next/link'
 import { getAllPosts, getAllCategories } from '@/lib/posts'
 import { Metadata } from 'next'
-
-const ArrowRightIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">
-    <path d="M56,216a16,16,0,0,0,22.63,22.63l54.87-54.87H216a16,16,0,0,0,0-32H133.5l54.87-54.86A16,16,0,0,0,56,40l80,80A16,16,0,0,0,56,216Z"/>
-  </svg>
-)
-
-const FolderIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">
-    <path d="M216,48H94.83L82.34,35.51A16,16,0,0,0,68,32H40a24,24,0,0,0-24,24v160a24,24,0,0,0,24,24h176a24,24,0,0,0,24-24V72A24,24,0,0,0,216,48ZM40,72h176v160H40Z"/>
-  </svg>
-)
-
-const BookOpenIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">
-    <path d="M216,48H94.83L82.34,35.51A16,16,0,0,0,68,32H40a24,24,0,0,0-24,24v160a24,24,0,0,0,24,24h176a24,24,0,0,0,24-24V72A24,24,0,0,0,216,48ZM40,72h176v160H40Z"/>
-  </svg>
-)
-
-const ClockIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">
-    <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192A88,88,0,1,1,216,128,88.1,88.1,0,0,1,128,216ZM128,104a8,8,0,0,1,8,8v48a8,8,0,0,1-16,0V120a8,8,0,0,1,8-8Zm0,80a16,16,0,1,1-16-16A16,16,0,0,1,128,184Z"/>
-  </svg>
-)
+import { ArrowRightIcon, FolderIcon, BookOpenIcon, ClockIcon } from '@/components/Icons'
 
 export const metadata: Metadata = {
   title: 'Categories',
@@ -53,11 +30,11 @@ export default function CategoriesPage() {
         </p>
         <div className="mt-8 flex items-center gap-4 flex-wrap fade-in-up stagger-3">
           <span className="tag tag-blue">
-            <FolderIcon />
+            <FolderIcon size={12} />
             {categories.length} Categories
           </span>
           <span className="tag tag-green">
-            <BookOpenIcon />
+            <BookOpenIcon size={12} />
             {totalPosts} Total Posts
           </span>
         </div>
@@ -83,12 +60,12 @@ export default function CategoriesPage() {
                     <header className="flex items-baseline justify-between gap-4 mb-6 flex-wrap">
                       <div className="flex items-center gap-3">
                         <span className="tag tag-blue">
-                          <FolderIcon />
+                          <FolderIcon size={12} />
                           {category}
                         </span>
                       </div>
                       <span className="meta flex items-center gap-1">
-                        <BookOpenIcon />
+                        <BookOpenIcon size={12} />
                         {catPosts.length} {catPosts.length === 1 ? 'entry' : 'entries'}
                       </span>
                     </header>
@@ -103,12 +80,12 @@ export default function CategoriesPage() {
                                   {post.title}
                                 </h3>
                                 <time dateTime={post.date} className="meta flex items-center gap-1">
-                                  <ClockIcon />
+                                  <ClockIcon size={12} />
                                   {new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                                 </time>
                               </div>
                               <span className="flex items-center gap-1 text-[var(--color-muted-light)] transition-colors group-hover:text-[var(--color-fg)]" aria-hidden="true">
-                                <ArrowRightIcon />
+                                <ArrowRightIcon size={12} />
                               </span>
                             </div>
                           </Link>
@@ -118,7 +95,7 @@ export default function CategoriesPage() {
                         <li className="post-item" style={{ border: 'none', paddingTop: '0.5rem', textAlign: 'right' }}>
                           <Link href={`/${category.toLowerCase()}/`} className="meta" style={{ color: 'var(--color-accent-blue-fg)' }}>
                             + {catPosts.length - 4} more entries
-                            <ArrowRightIcon />
+                            <ArrowRightIcon size={12} />
                           </Link>
                         </li>
                       )}
@@ -130,7 +107,7 @@ export default function CategoriesPage() {
                       </span>
                       <Link href={`/${category.toLowerCase()}/`} className="btn btn-ghost" style={{ padding: '0.5rem 0.75rem' }}>
                         View All
-                        <ArrowRightIcon />
+                        <ArrowRightIcon size={14} />
                       </Link>
                     </div>
                   </Link>

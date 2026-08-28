@@ -1,36 +1,7 @@
 import Link from 'next/link'
 import { getAllPosts } from '@/lib/posts'
 import { Metadata } from 'next'
-
-const ArrowRightIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">
-    <path d="M56,216a16,16,0,0,0,22.63,22.63l54.87-54.87H216a16,16,0,0,0,0-32H133.5l54.87-54.86A16,16,0,0,0,56,40l80,80A16,16,0,0,0,56,216Z"/>
-  </svg>
-)
-
-const ClockIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">
-    <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192A88,88,0,1,1,216,128,88.1,88.1,0,0,1,128,216ZM128,104a8,8,0,0,1,8,8v48a8,8,0,0,1-16,0V120a8,8,0,0,1,8-8Zm0,80a16,16,0,1,1-16-16A16,16,0,0,1,128,184Z"/>
-  </svg>
-)
-
-const FolderIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">
-    <path d="M216,48H94.83L82.34,35.51A16,16,0,0,0,68,32H40a24,24,0,0,0-24,24v160a24,24,0,0,0,24,24h176a24,24,0,0,0,24-24V72A24,24,0,0,0,216,48ZM40,72h176v160H40Z"/>
-  </svg>
-)
-
-const BookOpenIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">
-    <path d="M216,48H94.83L82.34,35.51A16,16,0,0,0,68,32H40a24,24,0,0,0-24,24v160a24,24,0,0,0,24,24h176a24,24,0,0,0,24-24V72A24,24,0,0,0,216,48ZM40,72h176v160H40Z"/>
-  </svg>
-)
-
-const TerminalIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">
-    <path d="M200,32H56a24,24,0,0,0-24,24v168a24,24,0,0,0,24,24h144a24,24,0,0,0,24-24V56A24,24,0,0,0,200,32ZM104,112a8,8,0,0,1,8-8h80a8,8,0,0,1,0,16H112a8,8,0,0,1-8-8Zm0,48a8,8,0,0,1,8-8h56a8,8,0,0,1,0,16H112a8,8,0,0,1-8-8Zm0,48a8,8,0,0,1,8-8h24a8,8,0,0,1,0,16H112a8,8,0,0,1-8-8Z"/>
-  </svg>
-)
+import { ArrowRightIcon, ClockIcon, FolderIcon, BookOpenIcon, TerminalIcon } from '@/components/Icons'
 
 export const metadata: Metadata = {
   title: 'Variable',
@@ -66,7 +37,7 @@ export default function HomePage() {
             <article className="card" role="listitem">
               <div className="flex items-center gap-3 mb-2">
                 <span className="tag tag-blue" aria-label="Total posts">
-                  <BookOpenIcon />
+                  <BookOpenIcon size={12} />
                   Posts
                 </span>
               </div>
@@ -79,7 +50,7 @@ export default function HomePage() {
             <article className="card" role="listitem">
               <div className="flex items-center gap-3 mb-2">
                 <span className="tag tag-green" aria-label="Categories">
-                  <FolderIcon />
+                  <FolderIcon size={12} />
                   Categories
                 </span>
               </div>
@@ -92,7 +63,7 @@ export default function HomePage() {
             <article className="card" role="listitem">
               <div className="flex items-center gap-3 mb-2">
                 <span className="tag tag-yellow" aria-label="Latest update">
-                  <ClockIcon />
+                  <ClockIcon size={12} />
                   Latest
                 </span>
               </div>
@@ -115,7 +86,7 @@ export default function HomePage() {
               <h2 id="featured-heading" className="fade-in-up stagger-1">Latest Transmission</h2>
               <Link href="/categories/" className="btn btn-ghost fade-in-up stagger-2">
                 View Archive
-                <ArrowRightIcon />
+                <ArrowRightIcon size={14} />
               </Link>
             </header>
 
@@ -141,7 +112,7 @@ export default function HomePage() {
               <div className="flex items-end justify-end">
                 <Link href={`/${latestPost.category.toLowerCase()}/${latestPost.slug}/`} className="btn btn-primary">
                   Read Article
-                  <ArrowRightIcon />
+                  <ArrowRightIcon size={14} />
                 </Link>
               </div>
             </article>
@@ -158,7 +129,7 @@ export default function HomePage() {
             <h2 id="recent-heading" className="fade-in-up stagger-1">Recent Transmissions</h2>
             <Link href="/categories/" className="btn btn-ghost fade-in-up stagger-2">
               View All
-              <ArrowRightIcon />
+              <ArrowRightIcon size={14} />
             </Link>
           </header>
 
@@ -179,7 +150,7 @@ export default function HomePage() {
                       </h3>
                     </div>
                     <span className="flex items-center gap-1 text-[var(--color-muted-light)] transition-colors group-hover:text-[var(--color-fg)]" aria-hidden="true">
-                      <ArrowRightIcon />
+                      <ArrowRightIcon size={12} />
                     </span>
                   </div>
                 </Link>
@@ -191,7 +162,7 @@ export default function HomePage() {
             <div className="text-center mt-12 fade-in-up stagger-1">
               <Link href="/categories/" className="btn btn-secondary">
                 Load Full Archive ({posts.length} entries)
-                <ArrowRightIcon />
+                <ArrowRightIcon size={14} />
               </Link>
             </div>
           )}
@@ -211,7 +182,7 @@ export default function HomePage() {
           <article className="card fade-in-up stagger-2" role="listitem">
             <div className="flex items-center gap-3 mb-3">
               <span className="tag tag-green">
-                <TerminalIcon />
+                <TerminalIcon size={12} />
                 Build
               </span>
             </div>
@@ -221,7 +192,7 @@ export default function HomePage() {
           <article className="card fade-in-up stagger-3" role="listitem">
             <div className="flex items-center gap-3 mb-3">
               <span className="tag tag-blue">
-                <BookOpenIcon />
+                <BookOpenIcon size={12} />
                 Engine
               </span>
             </div>
@@ -231,7 +202,7 @@ export default function HomePage() {
           <article className="card fade-in-up stagger-4" role="listitem">
             <div className="flex items-center gap-3 mb-3">
               <span className="tag tag-yellow">
-                <FolderIcon />
+                <FolderIcon size={12} />
                 Deploy
               </span>
             </div>
