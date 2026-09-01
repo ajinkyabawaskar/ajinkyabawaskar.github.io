@@ -1,129 +1,73 @@
 import Link from 'next/link'
 import { getAllPosts, getAllCategories } from '@/lib/posts'
 import { Metadata } from 'next'
-import { ArrowRightIcon, FolderIcon, BookOpenIcon, ClockIcon } from '@/components/Icons'
+import { ArrowRightIcon } from '@/components/Icons'
 
 export const metadata: Metadata = {
-  title: 'Categories',
-  description: 'Browse all posts by category.',
+  title: 'Archive',
+  description: 'Browse all essays by category.',
 }
 
 export default function CategoriesPage() {
   const posts = getAllPosts()
   const categories = getAllCategories()
-
   const postsByCategory = categories.reduce((acc, cat) => {
     acc[cat] = posts.filter(p => p.category.toLowerCase() === cat.toLowerCase())
     return acc
   }, {} as Record<string, typeof posts>)
 
-  const totalPosts = posts.length
-
   return (
-    <div className="section-xl">
-      <div className="ambient-glow" aria-hidden="true" />
-
-      <header className="content-width mb-16">
-        <h1 className="fade-in-up stagger-1">Categories</h1>
-        <p className="lead mt-4 fade-in-up stagger-2 max-w-[50ch]">
-          Index of all transmissions grouped by classification.
+    <div className="section" style={{ paddingTop: '2.5rem' }}>
+      <header className="content-wide mb-10 reveal reveal-1">
+        <p className="meta mb-3" style={{ color: 'var(--color-accent)' }}>Archive</p>
+        <h1 style={{ marginBottom: '0.75rem' }}>Archive</h1>
+        <p className="lead" style={{ maxWidth: '52ch' }}>
+          {posts.length} essays across {categories.length} categories. Chronological index, no algorithm.
         </p>
-        <div className="mt-8 flex items-center gap-4 flex-wrap fade-in-up stagger-3">
-          <span className="tag tag-accent">
-            <FolderIcon size={12} />
-            {categories.length} Categories
-          </span>
-          <span className="tag tag-muted">
-            <BookOpenIcon size={12} />
-            {totalPosts} Total Posts
-          </span>
-        </div>
       </header>
 
-      <hr className="thick mb-16 content-width" aria-hidden="true" />
+      <hr className="thick content-wide" style={{ marginBottom: '2rem' }} aria-hidden="true" />
 
-      {categories.length > 0 ? (
-        <div className="content-width">
-          <div className="bento-grid bento-grid-auto gap-6" role="list" aria-label="Category index" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))' }}>
-            {categories.map((category, index) => {
+      <div className="content-wide">
+        {categories.length === 0 ? (
+          <p className="meta" style={{ textAlign: 'center', padding: '3rem 0' }}>No essays yet.</p>
+        ) : (
+          <div style={{ display: 'grid', gap: '2.5rem' }}>
+            {categories.map((category, idx) => {
               const catPosts = postsByCategory[category] || []
-              const latestPost = catPosts[0]
-
               return (
-                <article
-                  key={category}
-                  className="card fade-in-up"
-                  style={{ animationDelay: `${Math.min(index * 80 + 160, 800)}ms` }}
-                  role="listitem"
-                >
-                  <Link href={`/${category.toLowerCase()}/`} className="block">
-                    <header className="flex items-baseline justify-between gap-4 mb-6 flex-wrap">
-                      <div className="flex items-center gap-3">
-                        <span className="tag tag-accent">
-                          <FolderIcon size={12} />
-                          {category}
-                        </span>
-                      </div>
-                      <span className="meta flex items-center gap-1">
-                        <BookOpenIcon size={12} />
-                        {catPosts.length} {catPosts.length === 1 ? 'entry' : 'entries'}
-                      </span>
-                    </header>
-
-                    <ul className="post-list mb-6" role="list">
-                      {catPosts.slice(0, 4).map((post, postIndex) => (
-                        <li key={post.slug} className="post-item" style={{ padding: postIndex === 0 ? '0 0 1rem' : '1rem 0 1rem' }}>
-                          <Link href={`/${post.category.toLowerCase()}/${post.slug}/`} className="post-link">
-                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                              <div className="flex-1 min-w-0">
-                                <h3 className="post-title" style={{ fontSize: '1.0625rem' }}>
-                                  {post.title}
-                                </h3>
-                                <time dateTime={post.date} className="meta flex items-center gap-1">
-                                  <ClockIcon size={12} />
-                                  {new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                                </time>
-                              </div>
-                              <span className="flex items-center gap-1 text-[var(--color-muted-light)] transition-colors group-hover:text-[var(--color-fg)]" aria-hidden="true">
-                                <ArrowRightIcon size={12} />
-                              </span>
-                            </div>
-                          </Link>
-                        </li>
-                      ))}
-                      {catPosts.length > 4 && (
-                        <li className="post-item" style={{ border: 'none', paddingTop: '0.5rem', textAlign: 'right' }}>
-                          <Link href={`/${category.toLowerCase()}/`} className="meta" style={{ color: 'var(--color-accent-fg)' }}>
-                            + {catPosts.length - 4} more entries
-                            <ArrowRightIcon size={12} />
-                          </Link>
-                        </li>
-                      )}
-                    </ul>
-
-                    <div className="flex items-center justify-between pt-4 border-t" style={{ borderColor: 'var(--color-border)' }}>
-                      <span className="meta">
-                        Latest: {latestPost ? new Date(latestPost.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '—'}
-                      </span>
-                      <Link href={`/${category.toLowerCase()}/`} className="btn btn-ghost" style={{ padding: '0.5rem 0.75rem' }}>
-                        View All
-                        <ArrowRightIcon size={14} />
-                      </Link>
-                    </div>
-                  </Link>
-                </article>
+                <section key={category} className={`reveal reveal-${Math.min(idx + 1, 4)}`}>
+                  <div className="flex items-baseline justify-between gap-4 mb-4">
+                    <h2 style={{ fontSize: '20px' }}>{category}</h2>
+                    <span className="meta">{catPosts.length} essays</span>
+                  </div>
+                  <ul className="archive-list" role="list">
+                    {catPosts.map((post) => (
+                      <li key={post.slug} className="archive-item" role="listitem">
+                        <time dateTime={post.date} className="archive-date">
+                          {new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                        </time>
+                        <Link href={`/${post.category.toLowerCase()}/${post.slug}/`} style={{ minWidth: 0 }}>
+                          <span className="archive-title">{post.title}</span>
+                        </Link>
+                        <Link href={`/${post.category.toLowerCase()}/${post.slug}/`} className="meta" aria-label={`Read ${post.title}`} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', color: 'var(--color-muted)', whiteSpace: 'nowrap' }}>
+                          Read <ArrowRightIcon size={10} />
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
               )
             })}
           </div>
+        )}
+
+        <hr className="thick" style={{ margin: '2.5rem 0' }} aria-hidden="true" />
+        <div className="flex items-center gap-3 flex-wrap">
+          <Link href="/" className="btn btn-secondary">Back to home</Link>
+          <a href="/feed.xml" className="btn btn-ghost">Subscribe via RSS</a>
         </div>
-      ) : (
-        <div className="content-width text-center py-16 fade-in-up">
-          <div className="card" style={{ maxWidth: '400px', margin: '0 auto' }}>
-            <p className="meta mb-4">No categories found</p>
-            <p>Transmissions will appear here once published.</p>
-          </div>
-        </div>
-      )}
+      </div>
     </div>
   )
 }

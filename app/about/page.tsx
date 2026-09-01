@@ -3,175 +3,114 @@ import remarkGfm from 'remark-gfm'
 import { getPage } from '@/lib/posts'
 import { Metadata } from 'next'
 import Link from 'next/link'
-import { GithubLogoIcon, LinkedinLogoIcon, RssIcon, MapPinIcon, BriefcaseIcon, MailboxIcon } from '@/components/Icons'
+import { GithubLogoIcon, LinkedinLogoIcon, RssIcon } from '@/components/Icons'
 
 export const metadata: Metadata = {
   title: 'About',
-  description: 'About Ajinkya Bawaskar — software engineer, writer, and the author of Variable.',
+  description: 'About Ajinkya Bawaskar, software engineer, writer, and the author of Variable.',
 }
 
 export default function AboutPage() {
   const page = getPage('about')
 
   if (!page) return (
-    <div className="section-xl">
-      <div className="content-width text-center">
-        <div className="card" style={{ maxWidth: '400px', margin: '0 auto' }}>
-          <p className="meta mb-4">About page not found</p>
-        </div>
-      </div>
+    <div className="section" style={{ textAlign: 'center' }}>
+      <p className="meta">About page not found</p>
     </div>
   )
 
   return (
-    <div className="section-xl">
-      <div className="ambient-glow" aria-hidden="true" />
-
-      <header className="content-width mb-16">
-        <h1 className="fade-in-up stagger-1">About</h1>
-        <p className="lead mt-4 fade-in-up stagger-2 max-w-[50ch]">
-          Software engineer. Writer. Builder of things that live on the internet.
+    <div className="section" style={{ paddingTop: '2.5rem' }}>
+      <header className="content-wide mb-10 reveal reveal-1">
+        <p className="meta mb-3" style={{ color: 'var(--color-accent)' }}>About</p>
+        <h1 style={{ marginBottom: '1rem' }}>Ajinkya Bawaskar</h1>
+        <p className="lead" style={{ maxWidth: '52ch' }}>
+          Software engineer and writer based in Pune. I build backend systems and write to think clearly.
         </p>
       </header>
 
-      <hr className="thick mb-16 content-width" aria-hidden="true" />
+      <hr className="thick content-wide" style={{ marginBottom: '2.5rem' }} aria-hidden="true" />
 
-      <div className="content-width">
-        <div className="bento-grid bento-grid-2 gap-12 items-start" style={{ alignItems: 'flex-start', gridTemplateColumns: '1fr 2fr' }}>
-          {/* Profile Sidebar */}
-          <aside className="fade-in-up stagger-1" style={{ position: 'sticky', top: '120px' }}>
-            <div className="card" style={{ padding: '2rem' }}>
-              <div className="mb-8">
-                <div className="aspect-square rounded-[var(--radius-md)] bg-[var(--color-canvas-warm)] border border-[var(--color-border)] flex items-center justify-center overflow-hidden mb-6" style={{ maxWidth: '200px', margin: '0 auto 1.5rem' }}>
-                  <div className="text-center" style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.5rem, 4vw, 2.5rem)', letterSpacing: '-0.03em', color: 'var(--color-muted)', userSelect: 'none' }}>
-                    AJB
-                  </div>
+      <div className="content-wide">
+        <div className="grid lg:grid-cols-[0.9fr_1.6fr] gap-10 lg:gap-12 items-start">
+          <aside className="reveal reveal-2" style={{ position: 'sticky', top: '88px' }}>
+            <div className="card" style={{ padding: 0, overflow: 'hidden', borderRadius: '16px' }}>
+              <img
+                src="https://picsum.photos/seed/ajinkya-portrait/560/680"
+                alt="Portrait placeholder for Ajinkya Bawaskar"
+                width={560}
+                height={680}
+                style={{ width: '100%', aspectRatio: '4 / 4.8', objectFit: 'cover', display: 'block' }}
+              />
+              <div style={{ padding: '1.25rem 1.25rem 1.1rem', borderTop: '1px solid var(--color-border)' }}>
+                <p style={{ fontFamily: 'var(--font-serif)', fontSize: '17px', letterSpacing: '-0.02em', color: 'var(--color-fg)', marginBottom: '0.25rem' }}>Ajinkya Bawaskar</p>
+                <p className="meta" style={{ textTransform: 'none', letterSpacing: '0', fontSize: '12px' }}>Backend, distributed systems, Go, TypeScript</p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: '1rem' }}>
+                  <a href="https://github.com/ajinkyabawaskar" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2" style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--color-muted)', border: '1px solid var(--color-border)', borderRadius: '100px', padding: '0.55rem 0.85rem' }}>
+                    <GithubLogoIcon size={13} /> GitHub
+                  </a>
+                  <a href="https://linkedin.com/in/ajinkyabawaskar" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2" style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--color-muted)', border: '1px solid var(--color-border)', borderRadius: '100px', padding: '0.55rem 0.85rem' }}>
+                    <LinkedinLogoIcon size={13} /> LinkedIn
+                  </a>
+                  <a href="mailto:ajinkyabawaskar2@gmail.com" className="flex items-center gap-2" style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--color-muted)', border: '1px solid var(--color-border)', borderRadius: '100px', padding: '0.55rem 0.85rem' }}>
+                    <RssIcon size={13} /> Email
+                  </a>
                 </div>
-                <h2 className="h3" style={{ fontFamily: 'var(--font-serif)', textAlign: 'center', marginBottom: '0.25rem' }}>Ajinkya Bawaskar</h2>
-                <p className="meta text-center" style={{ fontSize: '14px' }}>Software Engineer</p>
-              </div>
-
-              <div className="space-y-4 mb-8">
-                <a href="https://github.com/ajinkyabawaskar" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 rounded-[var(--radius-sm)] border border-[var(--color-border)] hover:bg-[var(--color-canvas-warm)] transition-colors">
-                  <GithubLogoIcon size={18} style={{ color: 'var(--color-muted)' }} aria-hidden="true" />
-                  <span className="text-sm" style={{ color: 'var(--color-fg-soft)' }}>@ajinkyabawaskar</span>
-                </a>
-                <a href="https://linkedin.com/in/ajinkyabawaskar" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 rounded-[var(--radius-sm)] border border-[var(--color-border)] hover:bg-[var(--color-canvas-warm)] transition-colors">
-                  <LinkedinLogoIcon size={18} style={{ color: 'var(--color-muted)' }} aria-hidden="true" />
-                  <span className="text-sm" style={{ color: 'var(--color-fg-soft)' }}>ajinkyabawaskar</span>
-                </a>
-                <a href="/feed.xml" className="flex items-center gap-3 p-3 rounded-[var(--radius-sm)] border border-[var(--color-border)] hover:bg-[var(--color-canvas-warm)] transition-colors">
-                  <RssIcon size={18} style={{ color: 'var(--color-muted)' }} aria-hidden="true" />
-                  <span className="text-sm" style={{ color: 'var(--color-fg-soft)' }}>RSS Feed</span>
-                </a>
-              </div>
-
-              <div className="pt-6 border-t" style={{ borderColor: 'var(--color-border)' }}>
-                <h3 className="h4 mb-4" style={{ fontFamily: 'var(--font-sans)', textTransform: 'uppercase', letterSpacing: '0.05em', fontSize: '11px', color: 'var(--color-muted)' }}>Details</h3>
-                <dl className="space-y-3 text-sm" style={{ color: 'var(--color-fg-soft)' }}>
-                  <div className="flex items-center gap-3">
-                    <MapPinIcon size={16} style={{ color: 'var(--color-muted-light)' }} aria-hidden="true" />
-                    <dd>Pune, India</dd>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <BriefcaseIcon size={16} style={{ color: 'var(--color-muted-light)' }} aria-hidden="true" />
-                    <dd>Full-stack / Backend</dd>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <MailboxIcon size={16} style={{ color: 'var(--color-muted-light)' }} aria-hidden="true" />
-                    <dd>ajinkyabawaskar2@gmail.com</dd>
-                  </div>
+                <dl style={{ marginTop: '1.25rem', paddingTop: '1rem', borderTop: '1px solid var(--color-border)', display: 'grid', gap: '0.5rem' }}>
+                  <div className="flex items-center justify-between gap-2"><dt className="meta">Location</dt><dd style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--color-fg-soft)' }}>Pune, India</dd></div>
+                  <div className="flex items-center justify-between gap-2"><dt className="meta">Writing since</dt><dd style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--color-fg-soft)' }}>2020</dd></div>
+                  <div className="flex items-center justify-between gap-2"><dt className="meta">Focus</dt><dd style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--color-fg-soft)' }}>Backend systems</dd></div>
                 </dl>
               </div>
             </div>
           </aside>
 
-          {/* Main Content */}
-          <main className="fade-in-up stagger-2">
-            <div className="article-content prose" style={{ maxWidth: 'none' }}>
+          <main className="reveal reveal-3">
+            <div className="article-content" style={{ maxWidth: 'none' }}>
               <ReactMarkdown remarkPlugins={[remarkGfm]}>
                 {page.content}
               </ReactMarkdown>
             </div>
 
-            <hr className="thick my-12" aria-hidden="true" />
+            <hr className="thick" style={{ margin: '2.5rem 0' }} aria-hidden="true" />
 
             <section aria-labelledby="connect-heading">
-              <h2 id="connect-heading" className="h3 mb-6" style={{ fontFamily: 'var(--font-serif)' }}>Connect</h2>
-              <div className="bento-grid bento-grid-3 bento-grid-auto gap-4" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))' }}>
-                <Link href="https://github.com/ajinkyabawaskar" target="_blank" rel="noopener noreferrer" className="card flex flex-col items-center text-center p-6 hover:border-[var(--color-accent-fg)] transition-colors">
-                  <GithubLogoIcon size={28} style={{ color: 'var(--color-fg)', marginBottom: '0.75rem' }} aria-hidden="true" />
-                  <h3 className="h4" style={{ fontFamily: 'var(--font-serif)', marginBottom: '0.25rem' }}>GitHub</h3>
-                  <p className="meta text-sm">Source code & projects</p>
+              <h2 id="connect-heading" style={{ fontSize: '20px', marginBottom: '1rem' }}>Keep reading</h2>
+              <div className="grid sm:grid-cols-3 gap-3">
+                <Link href="/categories/" className="card" style={{ padding: '1.1rem', textAlign: 'left' }}>
+                  <span className="meta" style={{ display: 'block', marginBottom: '0.4rem' }}>Archive</span>
+                  <span style={{ fontFamily: 'var(--font-serif)', fontSize: '15px', color: 'var(--color-fg)' }}>Browse essays</span>
                 </Link>
-                <Link href="https://linkedin.com/in/ajinkyabawaskar" target="_blank" rel="noopener noreferrer" className="card flex flex-col items-center text-center p-6 hover:border-[var(--color-accent-fg)] transition-colors">
-                  <LinkedinLogoIcon size={28} style={{ color: 'var(--color-fg)', marginBottom: '0.75rem' }} aria-hidden="true" />
-                  <h3 className="h4" style={{ fontFamily: 'var(--font-serif)', marginBottom: '0.25rem' }}>LinkedIn</h3>
-                  <p className="meta text-sm">Professional network</p>
-                </Link>
-                <Link href="/feed.xml" className="card flex flex-col items-center text-center p-6 hover:border-[var(--color-accent-fg)] transition-colors">
-                  <RssIcon size={28} style={{ color: 'var(--color-fg)', marginBottom: '0.75rem' }} aria-hidden="true" />
-                  <h3 className="h4" style={{ fontFamily: 'var(--font-serif)', marginBottom: '0.25rem' }}>RSS Feed</h3>
-                  <p className="meta text-sm">Subscribe to updates</p>
-                </Link>
+                <a href="https://github.com/ajinkyabawaskar" target="_blank" rel="noopener noreferrer" className="card" style={{ padding: '1.1rem', textAlign: 'left' }}>
+                  <span className="meta" style={{ display: 'block', marginBottom: '0.4rem' }}>Code</span>
+                  <span style={{ fontFamily: 'var(--font-serif)', fontSize: '15px', color: 'var(--color-fg)' }}>GitHub</span>
+                </a>
+                <a href="/feed.xml" className="card" style={{ padding: '1.1rem', textAlign: 'left' }}>
+                  <span className="meta" style={{ display: 'block', marginBottom: '0.4rem' }}>Subscribe</span>
+                  <span style={{ fontFamily: 'var(--font-serif)', fontSize: '15px', color: 'var(--color-fg)' }}>RSS feed</span>
+                </a>
               </div>
             </section>
 
-            <hr className="thick my-12" aria-hidden="true" />
-
-            <section aria-labelledby="tech-heading">
-              <h2 id="tech-heading" className="h3 mb-6" style={{ fontFamily: 'var(--font-serif)' }}>Currently Exploring</h2>
+            <section style={{ marginTop: '2.5rem', padding: '1.25rem', background: 'var(--color-canvas-warm)', border: '1px solid var(--color-border)', borderRadius: '12px' }}>
+              <h3 style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--color-muted)', marginBottom: '0.75rem' }}>Currently exploring</h3>
               <div className="flex flex-wrap gap-2">
-                <span className="tag tag-accent">Go</span>
-                <span className="tag tag-accent">Kubernetes</span>
-                <span className="tag tag-accent">Distributed Systems</span>
-                <span className="tag tag-accent">TypeScript</span>
-                <span className="tag tag-accent">PostgreSQL</span>
-                <span className="tag tag-accent">Observability</span>
+                <span className="tag">Go</span>
+                <span className="tag">Kubernetes</span>
+                <span className="tag">Distributed systems</span>
+                <span className="tag">TypeScript</span>
+                <span className="tag">PostgreSQL</span>
+                <span className="tag">Observability</span>
               </div>
             </section>
 
-            <hr className="thick my-12" aria-hidden="true" />
-
-            <section aria-labelledby="colophon-heading">
-              <h2 id="colophon-heading" className="h3 mb-4" style={{ fontFamily: 'var(--font-serif)' }}>Colophon</h2>
-              <dl className="space-y-2 text-sm" style={{ color: 'var(--color-fg-soft)', maxWidth: '40ch' }}>
-                <div className="flex gap-4">
-                  <dt className="meta" style={{ minWidth: '100px', color: 'var(--color-muted)' }}>Engine</dt>
-                  <dd>Next.js 15 (App Router)</dd>
-                </div>
-                <div className="flex gap-4">
-                  <dt className="meta" style={{ minWidth: '100px', color: 'var(--color-muted)' }}>Runtime</dt>
-                  <dd>React 19 · TypeScript</dd>
-                </div>
-                <div className="flex gap-4">
-                  <dt className="meta" style={{ minWidth: '100px', color: 'var(--color-muted)' }}>Styling</dt>
-                  <dd>Tailwind CSS v4 · Custom design system</dd>
-                </div>
-                <div className="flex gap-4">
-                  <dt className="meta" style={{ minWidth: '100px', color: 'var(--color-muted)' }}>Deployment</dt>
-                  <dd>GitHub Pages (static export)</dd>
-                </div>
-                <div className="flex gap-4">
-                  <dt className="meta" style={{ minWidth: '100px', color: 'var(--color-muted)' }}>Content</dt>
-                  <dd>Markdown · Gray Matter · React Markdown</dd>
-                </div>
-                <div className="flex gap-4">
-                  <dt className="meta" style={{ minWidth: '100px', color: 'var(--color-muted)' }}>Comments</dt>
-                  <dd>Utterances (GitHub Issues)</dd>
-                </div>
-                <div className="flex gap-4">
-                  <dt className="meta" style={{ minWidth: '100px', color: 'var(--color-muted)' }}>Analytics</dt>
-                  <dd>Google Analytics (GA4)</dd>
-                </div>
-                <div className="flex gap-4">
-                  <dt className="meta" style={{ minWidth: '100px', color: 'var(--color-muted)' }}>Icons</dt>
-                  <dd>Inline SVGs</dd>
-                </div>
-                <div className="flex gap-4">
-                  <dt className="meta" style={{ minWidth: '100px', color: 'var(--color-muted)' }}>Fonts</dt>
-                  <dd>Geist Sans · Instrument Serif · Geist Mono</dd>
-                </div>
+            <section style={{ marginTop: '2.5rem' }}>
+              <h3 style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--color-muted)', marginBottom: '0.75rem' }}>Colophon</h3>
+              <dl style={{ display: 'grid', gap: '0.35rem', fontSize: '13px', color: 'var(--color-fg-soft)' }}>
+                <div className="flex gap-3"><dt className="meta" style={{ minWidth: '120px' }}>Engine</dt><dd>Next.js 15, React 19</dd></div>
+                <div className="flex gap-3"><dt className="meta" style={{ minWidth: '120px' }}>Styling</dt><dd>Tailwind v4, EB Garamond, Geist</dd></div>
+                <div className="flex gap-3"><dt className="meta" style={{ minWidth: '120px' }}>Content</dt><dd>Markdown, Gray Matter</dd></div>
+                <div className="flex gap-3"><dt className="meta" style={{ minWidth: '120px' }}>Hosting</dt><dd>GitHub Pages, static export</dd></div>
               </dl>
             </section>
           </main>

@@ -38,6 +38,7 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
         <link rel="icon" href="/favicon.svg" />
         <link rel="alternate" type="application/rss+xml" title="Variable RSS Feed" href="/feed.xml" />
         <Script
@@ -61,14 +62,12 @@ export default function RootLayout({
         <header className="site-header" role="banner">
           <div className="container">
             <div className="header-inner">
-              <div>
-                <Link href="/" className="site-title" aria-label="Variable Home">
-                  Variable
-                </Link>
-              </div>
+              <Link href="/" className="site-title" aria-label="Variable Home">
+                Variable<em> Ajinkya Bawaskar</em>
+              </Link>
               <nav className="nav" role="navigation" aria-label="Main navigation">
                 <Link href="/about/" className="nav-link">About</Link>
-                <Link href="/categories/" className="nav-link">Categories</Link>
+                <Link href="/categories/" className="nav-link">Archive</Link>
                 <ThemeToggle />
               </nav>
             </div>
@@ -86,30 +85,30 @@ export default function RootLayout({
                 <Link href="/" className="site-title" aria-label="Variable Home">
                   Variable
                 </Link>
-                <p className="footer-tagline">A web log about programming, software, technology, life and my thoughts in general.</p>
+                <p className="footer-tagline">A web log about programming, software, technology, life and my thoughts in general. Written and coded by Ajinkya Bawaskar since 2020.</p>
               </div>
               <div className="footer-links">
                 <a href="https://github.com/ajinkyabawaskar" target="_blank" rel="noopener noreferrer" className="footer-link" aria-label="GitHub">
-                  <GithubLogoIcon size={14} />
+                  <GithubLogoIcon size={13} />
                   <span>GitHub</span>
                 </a>
                 <a href="https://instagram.com/ajinkyabawaskar" target="_blank" rel="noopener noreferrer" className="footer-link" aria-label="Instagram">
-                  <InstagramLogoIcon size={14} />
+                  <InstagramLogoIcon size={13} />
                   <span>Instagram</span>
                 </a>
                 <a href="https://linkedin.com/in/ajinkyabawaskar" target="_blank" rel="noopener noreferrer" className="footer-link" aria-label="LinkedIn">
-                  <LinkedinLogoIcon size={14} />
+                  <LinkedinLogoIcon size={13} />
                   <span>LinkedIn</span>
                 </a>
                 <a href="/feed.xml" className="footer-link" aria-label="RSS Feed">
-                  <RssIcon size={14} />
-                  <span>RSS Feed</span>
+                  <RssIcon size={13} />
+                  <span>RSS</span>
                 </a>
               </div>
             </div>
             <div className="footer-bottom">
               <span>© {new Date().getFullYear()} Ajinkya Bawaskar</span>
-              <span>Built with Next.js 15 · Deployed on GitHub Pages</span>
+              <span>Next.js 15 / GitHub Pages / EB Garamond and Geist</span>
             </div>
           </div>
         </footer>
