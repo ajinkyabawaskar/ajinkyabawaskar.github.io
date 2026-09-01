@@ -67,7 +67,7 @@ export default async function PostPage({ params }: PageProps) {
     <article className="section" aria-labelledby="post-title" style={{ paddingTop: '2.5rem' }}>
       <div className="content-wide">
         <header className="article-header reveal reveal-1">
-          <div className="flex items-center gap-2 mb-5 flex-wrap">
+          <div className="flex items-center gap-2 mb-8 flex-wrap">
             <Link href={`/${resolvedParams.category.toLowerCase()}/`} className="tag">{resolvedParams.category}</Link>
             <span className="meta">{formattedDate} / {readTime}</span>
           </div>
