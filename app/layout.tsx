@@ -63,7 +63,7 @@ export default function RootLayout({
           <div className="container">
             <div className="header-inner">
               <Link href="/" className="site-title" aria-label="Variable Home">
-                Variable<em> Ajinkya Bawaskar</em>
+                Variable
               </Link>
               <nav className="nav" role="navigation" aria-label="Main navigation">
                 <Link href="/about/" className="nav-link">About</Link>
