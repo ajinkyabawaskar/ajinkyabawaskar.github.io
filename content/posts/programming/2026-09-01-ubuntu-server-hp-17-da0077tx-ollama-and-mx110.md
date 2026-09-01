@@ -1,52 +1,50 @@
 ---
-title: 'Ubuntu Server 26.04 on an HP 17 da0077tx: wifi, static IP, Ollama, and testing the MX110'
+title: 'Turning my old HP laptop into a local AI server'
 date: '2026-09-01'
 categories:
   - Programming
 ---
 
-I put Ubuntu Server 26.04 on my HP 17 da0077tx. The laptop has a 500 GB SSD where I installed the OS and a 1 TB HDD mounted at `/mnt/storage`. I also wanted to run local models with Ollama and Open WebUI, and see if the NVIDIA MX110 helps at all. This is the full sequence, including the parts where it did not work as expected.
+I had an HP 17 da0077tx sitting around. It is not a fast machine anymore, Intel i5-8250U, 4 cores 8 threads, UHD 620, and an MX110 with 2 GB VRAM. I added a 500 GB SSD for the OS and kept the original 1 TB HDD at `/mnt/storage`. The idea was simple. Put a light server OS on it, run Ollama and Open WebUI, and see if I could get a usable ChatGPT-like setup at home without paying for API calls.
 
-### The machine
+It mostly worked. The interesting part was not the install, it was figuring out where the hardware actually helps and where it does not.
 
-HP 17 da0077tx. 8th gen Intel Core i5-8250U or i7-8550U in this series, 4 physical cores and 8 threads, Intel UHD Graphics 620, NVIDIA GeForce MX110 with 2 GB VRAM. Ubuntu Server 26.04 LTS on the 500 GB SSD. `/mnt/storage` is the 1 TB HDD.
+### Why Ubuntu Server
 
-### Installing Ubuntu Server
+I wanted something minimal that stays on. Ubuntu Server 26.04 LTS made sense because the install is quick and everything I needed has a package.
 
-You need an 8 GB or larger USB drive and a tool like Rufus on Windows or BalenaEtcher on macOS or Linux.
+I grabbed the ISO from the Ubuntu download page and flashed it to an 8 GB USB drive with BalenaEtcher. Rufus works too if you are on Windows.
 
-Download the Ubuntu Server 26.04 LTS ISO from the official download page. Flash it to the USB drive. On HP, shut the laptop down, press power and tap F10 repeatedly to get into BIOS Setup. Under System Configuration then Boot Options, set Secure Boot to Disabled and make sure USB Boot is Enabled. Save and exit.
+On this HP you tap F10 right after power on to get into BIOS. Under System Configuration, Boot Options, I turned Secure Boot off and made sure USB Boot was on. Then F9 on the next boot to pick the USB drive, and on the GRUB screen I chose Try or Install Ubuntu Server.
 
-Plug in the USB, power on, tap F9 repeatedly for the Boot Menu, pick the USB drive, and on the GRUB screen pick Try or Install Ubuntu Server.
+I plugged in Ethernet for the install. Wifi during Server setup is hit or miss, and a cable just avoids that. I picked language and keyboard, left proxy and mirror on defaults, chose Use an entire disk on the 500 GB SSD and left LVM on, created my user and server name, and checked Install OpenSSH Server. I skipped extra snaps. Reboot, pull the USB stick when it asks, and it came up headless. From another laptop on the same network I could already `ssh` in over Ethernet.
 
-The installer is straightforward. Pick language and keyboard, let the network get an address over DHCP if you have Ethernet plugged in, leave proxy and mirror on defaults unless you need a proxy, and for storage pick Use an entire disk. I left LVM enabled. Then create your name, server name, username and password. Check Install OpenSSH Server so you can SSH in later. You can skip extra snaps or add Docker and others if you want. When it finishes, pick Reboot Now, remove the USB when prompted, and press Enter. A wired connection helps here because wifi during Server install is unreliable.
+That part felt smooth. The next boot without Ethernet is where it got annoying.
 
-### Wifi did not work after install
+### Wifi was the first real problem
 
-Ubuntu Server uses systemd-networkd by default. It does not come with nmcli or nmtui, so wifi is awkward.
+Ubuntu Server ships with systemd-networkd. There is no `nmtui`, no `nmcli`, nothing interactive for wifi. So after I unplugged Ethernet, I had no network.
 
-I used USB tethering from my phone to get temporary internet, then switched the backend to NetworkManager.
-
-First, with the phone plugged in and USB tethering enabled:
+I tethered my phone over USB to get temporary internet. That was enough to install what I actually wanted:
 
 ```bash
 sudo apt update
 sudo apt install network-manager wpasupplicant
 ```
 
-Then tell Netplan to use NetworkManager. List the files in `/etc/netplan`:
+Then I told Netplan to hand off to NetworkManager. First I checked what file I had:
 
 ```bash
 ls /etc/netplan/
 ```
 
-Edit the main YAML file. Mine was `50-cloud-init.yaml` but yours may be `01-netcfg.yaml` or similar:
+Mine was `50-cloud-init.yaml`. Yours might be `01-netcfg.yaml`. I edited it:
 
 ```bash
 sudo nano /etc/netplan/50-cloud-init.yaml
 ```
 
-Make sure the file has:
+And made sure it contained:
 
 ```yaml
 network:
@@ -54,22 +52,14 @@ network:
   renderer: NetworkManager
 ```
 
-Save, exit, then apply and enable the service:
+Then:
 
 ```bash
 sudo netplan apply
 sudo systemctl enable --now NetworkManager
 ```
 
-Now you can connect to wifi.
-
-The easiest way on Server is the text UI that comes with NetworkManager:
-
-```bash
-sudo nmtui
-```
-
-Pick Activate a connection, choose your SSID, enter the password, and activate. You can also do it directly with nmcli:
+After that `sudo nmtui` worked, which is the text UI that comes with NetworkManager. No separate package needed. I picked Activate a connection, chose my SSID, entered the password, and it connected. You can do the same with `nmcli` if you prefer:
 
 ```bash
 sudo nmcli radio wifi on
@@ -77,19 +67,23 @@ sudo nmcli device wifi list
 sudo nmcli device wifi connect "YOUR_SSID" password "YOUR_PASSWORD"
 ```
 
-Check with `ip a` or `nmcli connection show`. Once wifi has an address you can unplug the phone. `nmtui` is part of the `network-manager` package, so there is no extra install for the TUI itself.
+`ip a` showed `wlan0` with an address, and `nmcli connection show` confirmed it. I unplugged the phone and wifi stayed up.
 
-### Getting a static IP so SSH is stable
+In hindsight I should have just started with NetworkManager. For a laptop that lives on wifi, systemd-networkd adds friction for no benefit.
 
-To SSH in reliably you want the same address after every reboot. There are three ways to do it.
+### Making SSH reliable
 
-In nmtui: run `sudo nmtui`, pick Edit a connection, pick your wifi or Ethernet connection, change IPv4 CONFIGURATION from Automatic to Manual, pick Show, then fill in Addresses like `192.168.1.150/24`, Gateway like `192.168.1.1`, and DNS like `192.168.1.1` or `8.8.8.8`. Save, exit, then reapply:
+DHCP kept moving the IP around, which meant my `ssh` command broke every reboot. I wanted one address I could remember.
+
+There are three ways, and I tried two.
+
+With `nmtui`, pick Edit a connection, choose your wifi connection, change IPv4 CONFIGURATION from Automatic to Manual, pick Show, and fill in Addresses `192.168.1.150/24`, Gateway `192.168.1.1`, DNS `192.168.1.1` or `8.8.8.8`. Save and reapply:
 
 ```bash
 sudo nmcli connection up "YOUR_CONNECTION_NAME"
 ```
 
-With nmcli directly:
+The same with `nmcli`:
 
 ```bash
 sudo nmcli connection modify "MyWiFi" ipv4.addresses 192.168.1.150/24
@@ -99,38 +93,40 @@ sudo nmcli connection modify "MyWiFi" ipv4.method manual
 sudo nmcli connection down "MyWiFi" && sudo nmcli connection up "MyWiFi"
 ```
 
-Or do it on the router. Log into your router at `192.168.1.1` or `192.168.0.1`, find DHCP Address Reservation, and bind the laptop MAC to an IP. This avoids conflicts if two devices pick the same static address.
+For a home network the cleanest option is actually on the router. Log into `192.168.1.1` or `192.168.0.1`, find DHCP reservation, bind the laptop MAC to an IP. That way the laptop still asks for DHCP but always gets the same address, and you avoid an accidental conflict. I ended up doing it that way after testing the manual setting.
 
-Verify with `ip addr show` and from another machine on the same network:
+Either way, `ip addr show` now always shows the same address, and from my main laptop:
 
 ```bash
 ssh username@192.168.1.150
 ```
 
-### Ollama with models on the HDD
+just works.
 
-LLM weights are large, 4 GB to 40 GB per model, so I did not want them on the OS SSD. I pointed Ollama at the HDD.
+### Putting Ollama on the HDD on purpose
 
-Install Ollama:
+LLM files are big. Even a small quantized model is a few GB, and they add up fast. I did not want the 500 GB SSD to fill up, so I put all models on the 1 TB drive.
+
+Ollama itself installs in one line:
 
 ```bash
 curl -fsSL https://ollama.com/install.sh | sh
 ```
 
-Make a directory on the HDD and give ownership to the `ollama` user:
+Then I made a place for models and gave it to the `ollama` user:
 
 ```bash
 sudo mkdir -p /mnt/storage/ollama_models
 sudo chown -R ollama:ollama /mnt/storage/ollama_models
 ```
 
-Tell systemd where to store models:
+To point Ollama there I edited the service:
 
 ```bash
 sudo systemctl edit ollama.service
 ```
 
-Add:
+and added:
 
 ```
 [Service]
@@ -144,7 +140,7 @@ sudo systemctl daemon-reload
 sudo systemctl restart ollama
 ```
 
-Pull something small. The MX110 and this CPU are not fast, so 1B to 3B quantized models are the only ones that feel usable:
+I started with small models because this CPU and GPU cannot handle much else:
 
 ```bash
 ollama run llama3.2
@@ -152,13 +148,15 @@ ollama run qwen2.5-coder:1.5b
 ollama run deepseek-r1:1.5b
 ```
 
-If you want other machines on the LAN to reach Ollama, expose it. Edit the same service file again, add `Environment="OLLAMA_HOST=0.0.0.0"` under `[Service]`, then `sudo systemctl restart ollama`. By default it only listens on 127.0.0.1.
+If you want other devices on the LAN to reach Ollama, add `Environment="OLLAMA_HOST=0.0.0.0"` in the same service override and restart. By default it only listens on `127.0.0.1`.
 
-### Docker and Open WebUI
+This bit was uneventful, which I appreciated after the wifi detour.
 
-Open WebUI gives you a ChatGPT-like UI that talks to your local Ollama.
+### Open WebUI and a small Docker hiccup
 
-Install Docker:
+I wanted a browser UI like ChatGPT that talks to the local models. Open WebUI with Docker is the easiest way.
+
+Docker:
 
 ```bash
 curl -fsSL https://get.docker.com -o get-docker.sh
@@ -167,7 +165,7 @@ sudo usermod -aG docker $USER
 newgrp docker
 ```
 
-Run Open WebUI linked to the host Ollama:
+Then Open WebUI:
 
 ```bash
 docker run -d \
@@ -179,17 +177,17 @@ docker run -d \
   ghcr.io/open-webui/open-webui:main
 ```
 
-If you get:
+I hit the classic permission error on the first try:
 
 ```
 permission denied while trying to connect to the docker API at unix:///var/run/docker.sock
 ```
 
-it means your current shell has not picked up the `docker` group yet. Run `newgrp docker` and try again, or prefix with `sudo` as a quick workaround. If it still fails after a new SSH session, make sure you were added correctly with `sudo usermod -aG docker jinkya` and restart Docker with `sudo systemctl restart docker`.
+It just meant my shell had not picked up the `docker` group yet. `newgrp docker` fixed it in that shell, and prefixing with `sudo` works as a quick bypass. If it still fails after a fresh SSH login, check `sudo usermod -aG docker jinkya` and `sudo systemctl restart docker`.
 
-Once the container is up, find the server IP with `ip a`, then open `http://<YOUR_SERVER_IP>:8080` from any device on the same wifi. The first account you create becomes admin. Pick a model from the dropdown at the top and start chatting.
+Once the container was up, `ip a` gave me the server IP and I opened `http://<YOUR_SERVER_IP>:8080` from my phone on the same wifi. The first account becomes admin. Pick a model from the top dropdown and you can chat.
 
-Useful checks:
+Handy checks when something feels off:
 
 ```bash
 sudo docker ps
@@ -197,42 +195,37 @@ sudo docker logs -f open-webui
 sudo docker restart open-webui
 ```
 
-### Trying to use the MX110
+At this point I had a private AI box on the local network. It felt good, until I tried to be clever with the GPU.
 
-The MX110 is Maxwell, compute capability 5.0, 2 GB VRAM. My hope was to get some acceleration, even if not all layers fit.
+### I thought the MX110 would help. It mostly did not.
 
-First, check the driver:
+The HP has an NVIDIA GeForce MX110, Maxwell, compute capability 5.0, 2 GB VRAM. On paper, any GPU should be faster than a low voltage laptop CPU. I wanted to measure it properly, same prompt on CPU and on GPU.
+
+Driver was already there:
 
 ```bash
 nvidia-smi
 ```
 
-Mine showed:
+showed `580.173.02`, CUDA `13.0`, `GeForce MX110 0MiB / 2048MiB`. Running `sudo ubuntu-drivers install` said all drivers already installed, plus a harmless `aplay command not found` warning because that tool looks for an audio utility.
 
-```
-NVIDIA-SMI 580.173.02   Driver Version: 580.173.02   CUDA Version: 13.0
-GeForce MX110   0MiB / 2048MiB
-```
-
-Driver was already installed. The `aplay command not found` message from `sudo ubuntu-drivers install` is harmless. It is just the driver tool looking for an audio utility.
-
-Restart Ollama so it probes for CUDA:
+I made sure Ollama could see CUDA:
 
 ```bash
 sudo systemctl restart ollama
 ollama run qwen2.5-coder:1.5b --verbose
 ```
 
-In another SSH session while it generates:
+and in a second SSH window while it generated:
 
 ```bash
 ollama ps
 nvidia-smi
 ```
 
-I sent the same prompt both times for comparison: `Write a Python script to perform binary search on an array.`
+Same prompt both times: `Write a Python script to perform binary search on an array.`
 
-CPU only gave:
+CPU only:
 
 ```
 total duration: 3m6.95s
@@ -241,7 +234,7 @@ eval count: 617 tokens
 eval rate: 3.34 tokens/s
 ```
 
-With the GPU enabled the run was:
+With GPU enabled:
 
 ```
 total duration: 1m49.17s
@@ -250,9 +243,9 @@ eval count: 352 tokens
 eval rate: 3.41 tokens/s
 ```
 
-Same speed per token. The second run was shorter only because it generated fewer tokens.
+The total time was shorter only because it generated fewer tokens. Per token, 3.34 vs 3.41, basically identical.
 
-Logs explained it:
+Logs told the story:
 
 ```bash
 journalctl -u ollama.service --no-pager | grep -i -E "gpu|cuda|detect|compute"
@@ -269,74 +262,74 @@ dropping integrated GPU; to enable, set OLLAMA_IGPU_ENABLE=1
 inference compute ... id=cpu ...
 ```
 
-And later when a model actually loaded:
+And when the model actually loaded:
 
 ```
 load_tensors: offloaded 2/29 layers to GPU
 load_tensors: offloaded 4/29 layers to GPU
 ```
 
-Ollama skipped the MX110 for its main CUDA path because 5.0 is not in the compiled arch list, fell back to Vulkan or a compatibility runner, and then could only fit 2 to 4 layers out of 29 into 2 GB after buffers and overhead. The rest stayed on CPU. Moving tensors between RAM and VRAM for just a few layers added overhead that canceled any gain. That is why the eval rate stayed around 3.3 to 3.4 tokens per second.
+That was the moment it clicked. The MX110 is compute 5.0, and the CUDA build Ollama ships expects 7.5 and newer. So Ollama skips the main CUDA path, falls back to a Vulkan or compatibility runner, and then can only squeeze 2 to 4 layers out of 29 into 2 GB after buffers. The rest stays on CPU. Shuffling tensors between RAM and VRAM for just those few layers costs more than it saves, so the eval rate stays stuck around 3.3 tokens per second.
 
-Forcing CPU only looks like this. Edit the override:
+You can force CPU only to compare cleanly:
 
 ```bash
 sudo systemctl edit ollama.service
 ```
 
-Add:
+add:
 
 ```
 [Service]
 Environment="CUDA_VISIBLE_DEVICES="
 ```
 
-Then `sudo systemctl daemon-reload` and `sudo systemctl restart ollama`. To undo, `sudo systemctl revert ollama.service` and restart again.
+then `sudo systemctl daemon-reload` and `sudo systemctl restart ollama`. Remove it with `sudo systemctl revert ollama.service`.
 
-If you really want to see the MX110 fully used, pull a tiny model that fits entirely in 2 GB:
+If you want to see the MX110 fully used, you need a tiny model that fits entirely in 2 GB:
 
 ```bash
 ollama run qwen2.5:0.5b --verbose
 ```
 
-Check offload in the same way:
+and check:
 
 ```bash
 journalctl -u ollama.service -n 20 --no-pager | grep "offloaded"
 ```
 
-When it says `offloaded 29/29 layers to GPU`, that model is running on the GPU. Even then, 0.5B is quick but not very capable.
+When it says `offloaded 29/29 layers to GPU`, it is all on the GPU. Even then, 0.5B is fast but limited.
 
-### Threads
+### Threads did not save it either
 
-I also tried tuning `OLLAMA_NUM_THREADS`. On this laptop it is 4 physical cores, 8 threads.
-
-Check:
+I also tried tuning threads. This chip is 4 cores, 8 threads.
 
 ```bash
 lscpu | grep -E "Core\(s\) per socket|Socket\(s\)"
 ```
 
-Set:
+I set:
 
 ```bash
 sudo systemctl edit ollama.service
 ```
 
-Add:
+with:
 
 ```
 [Service]
 Environment="OLLAMA_NUM_THREADS=4"
 ```
 
-Then `sudo systemctl daemon-reload` and `sudo systemctl restart ollama`. Verify with `journalctl -u ollama.service -n 30 --no-pager | grep "n_threads"` and look for `n_threads = 4`.
+then `sudo systemctl daemon-reload` and `sudo systemctl restart ollama`. Check with `journalctl -u ollama.service -n 30 --no-pager | grep "n_threads"` and look for `n_threads = 4`.
 
-It did not change the rate. Another run after setting threads to 4 was `3.39 tokens/s`, basically the same as before. On this low voltage CPU the bottleneck is memory bandwidth, how fast DDR4 can feed weights to the cores, not thread count. Setting threads to 8 can even make it slower from context switching and heat.
+Result after the change: `3.39 tokens/s`. No real difference from `3.34` and `3.41` before. On this U-series CPU the limit is memory bandwidth, how fast DDR4 can feed weights to the cores, not thread count. Setting it to 8 was actually a bit slower for me, more context switching and heat.
 
-### What I actually use now
+### What I settled on
 
-For 1.5B to 3B models I leave the MX110 out of it and run CPU only. The hybrid offload of 2 layers is not worth it. For daily chat I use smaller models:
+For 1.5B to 3B models I just run CPU now. Offloading 2 layers to the MX110 is not worth the overhead on this card.
+
+For everyday use I reach for smaller models that fit better in cache and need less bandwidth:
 
 ```bash
 ollama run qwen2.5:0.5b --verbose
@@ -344,6 +337,8 @@ ollama run smollm2:360m --verbose
 ollama run llama3.2:1b --verbose
 ```
 
-Those get 15 to 50 tokens per second on this hardware instead of 3, and responses come back in seconds. `OLLAMA_NUM_THREADS=4` stays as the setting to avoid thermal throttling.
+Those give 15 to 50 tokens per second on this laptop instead of 3, and answers come back in seconds, not minutes. I kept `OLLAMA_NUM_THREADS=4` because it runs cooler and does not throttle as quickly.
 
-The MX110 works fine for display, but for modern Ollama builds it is too old to be useful for LLM inference. The CPU does most of the work, so picking a smaller quantized model matters more than any driver tweak.
+The MX110 is still fine for display, but for current Ollama builds it is too old to help with LLM inference. The bigger win was picking a smaller quantized model and keeping the models on the HDD so the SSD stays clean.
+
+If you have a similar old laptop, that is the setup I would start with: Ubuntu Server, NetworkManager for wifi, a reserved IP on the router, Ollama with `OLLAMA_MODELS` on a second disk, Docker plus Open WebUI, and modest expectations for the old NVIDIA card.
