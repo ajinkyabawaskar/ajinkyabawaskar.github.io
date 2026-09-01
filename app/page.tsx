@@ -118,7 +118,7 @@ export default function HomePage() {
 
       {/* Archive: chronological index, editorial list */}
       <section className="section" aria-labelledby="recent-heading">
-        <div className="flex items-baseline justify-between gap-4 mb-8">
+        <div className="flex items-baseline justify-between gap-4" style={{ marginBottom: '2.25rem' }}>
           <h2 id="recent-heading" className="reveal reveal-1" style={{ fontSize: '22px' }}>Recent essays</h2>
           <span className="meta reveal reveal-1">{posts.length} total</span>
         </div>
