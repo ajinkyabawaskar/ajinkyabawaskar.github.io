@@ -123,21 +123,31 @@ hr.thick { border-top-width: 1px; }
   backdrop-filter: saturate(180%) blur(16px);
   border-bottom: 1px solid var(--color-border);
   height: var(--header-height);
+  display: flex; align-items: center;
 }
 html.dark .site-header { background: color-mix(in srgb, var(--color-canvas) 88%, transparent); }
-.header-inner { display: flex; align-items: center; justify-content: space-between; height: 100%; gap: 1rem; }
+.header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; width: 100%; height: var(--header-height); }
 .site-title {
   font-family: var(--font-serif); font-size: 22px; letter-spacing: -0.03em; font-weight: 500;
-  color: var(--color-fg); line-height: 1;
+  color: var(--color-fg); line-height: 1; display: inline-flex; align-items: center; gap: 0.4rem; white-space: nowrap;
 }
-.site-title em { font-style: italic; font-weight: 400; color: var(--color-muted); }
-.nav { display: flex; align-items: center; gap: 0.25rem; }
+.site-title em { font-style: italic; font-weight: 400; color: var(--color-muted); font-size: 14.5px; letter-spacing: -0.02em; line-height: 1; }
+.nav { display: flex; align-items: center; gap: 0.35rem; }
 .nav-link {
   font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
   color: var(--color-muted); padding: 0.5rem 0.75rem; border-radius: var(--radius-sm);
-  transition: color var(--transition-fast), background var(--transition-fast);
+  transition: color var(--transition-fast), background var(--transition-fast); line-height: 1;
 }
 .nav-link:hover { color: var(--color-fg); background: var(--color-canvas-warm); }
+.theme-toggle {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; flex-shrink: 0;
+  border-radius: 100px; border: 1px solid transparent; background: transparent; color: var(--color-muted);
+  cursor: pointer; transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+}
+.theme-toggle:hover { background: var(--color-canvas-warm); color: var(--color-fg); border-color: var(--color-border); }
+.theme-toggle:active { transform: scale(0.96); }
+.theme-toggle svg { display: block; }
 
 /* - footer - */
 .site-footer { border-top: 1px solid var(--color-border); margin-top: 0; }

@@ -28,11 +28,11 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={toggle}
-      className="btn btn-ghost"
+      className="theme-toggle"
       aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
       aria-pressed={theme === 'dark'}
     >
-      {theme === 'light' ? <MoonIcon size={18} /> : <SunIcon size={18} />}
+      {theme === 'light' ? <MoonIcon size={16} /> : <SunIcon size={16} />}
     </button>
   )
 }
