@@ -8,6 +8,10 @@ const SITE_URL = 'https://ajinkyabawaskar.github.io'
 const POSTS_DIR = path.join(process.cwd(), 'content/posts')
 const OUT_DIR = path.join(process.cwd(), 'out')
 
+function slugFromFilename(filename) {
+  return filename.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/\.md$/, '')
+}
+
 function getAllPosts() {
   const posts = []
   const categories = fs.readdirSync(POSTS_DIR)
@@ -23,7 +27,7 @@ function getAllPosts() {
       const fileContent = fs.readFileSync(filePath, 'utf-8')
       const { data, content } = matter(fileContent)
 
-      const slug = file.replace('.md', '')
+      const slug = slugFromFilename(file)
       posts.push({
         slug,
         category,

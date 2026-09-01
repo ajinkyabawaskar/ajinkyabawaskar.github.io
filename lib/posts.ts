@@ -13,6 +13,23 @@ export interface Post {
   content: string
 }
 
+function slugFromFilename(filename: string): string {
+  return filename.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/\.md$/, '')
+}
+
+function findFileForSlug(category: string, slug: string): string | null {
+  const categoryPath = path.join(POSTS_DIR, category)
+  if (!fs.existsSync(categoryPath)) return null
+  const files = fs.readdirSync(categoryPath).filter(f => f.endsWith('.md'))
+  for (const file of files) {
+    if (slugFromFilename(file) === slug) return path.join(categoryPath, file)
+  }
+  // fallback for files without date prefix
+  const direct = path.join(categoryPath, `${slug}.md`)
+  if (fs.existsSync(direct)) return direct
+  return null
+}
+
 export function getAllPosts(): Post[] {
   const posts: Post[] = []
   const categories = fs.readdirSync(POSTS_DIR)
@@ -28,7 +45,7 @@ export function getAllPosts(): Post[] {
       const fileContent = fs.readFileSync(filePath, 'utf-8')
       const { data, content } = matter(fileContent)
 
-      const slug = file.replace('.md', '')
+      const slug = slugFromFilename(file)
       posts.push({
         slug,
         category,
@@ -43,8 +60,8 @@ export function getAllPosts(): Post[] {
 }
 
 export function getPostBySlug(category: string, slug: string): Post | null {
-  const filePath = path.join(POSTS_DIR, category, `${slug}.md`)
-  if (!fs.existsSync(filePath)) return null
+  const filePath = findFileForSlug(category, slug)
+  if (!filePath) return null
 
   const fileContent = fs.readFileSync(filePath, 'utf-8')
   const { data, content } = matter(fileContent)
