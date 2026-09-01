@@ -47,7 +47,7 @@ export default function HomePage() {
               </Link>
               <Link href="/about/" className="btn btn-secondary">About the author</Link>
             </div>
-            <p className="meta mt-6" style={{ textTransform: 'none', letterSpacing: '0', fontSize: '12px', color: 'var(--color-muted)' }}>
+            <p className="meta" style={{ textTransform: 'none', letterSpacing: '0', fontSize: '12px', color: 'var(--color-muted)', marginTop: '2.25rem', paddingTop: '1.25rem', borderTop: '1px solid var(--color-border)' }}>
               {totalPosts} essays, {[...new Set(posts.map(p => p.category))].length} topics, updated {latestPost ? new Date(latestPost.date).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }) : 'recently'}
             </p>
           </div>
@@ -75,8 +75,8 @@ export default function HomePage() {
 
       {/* Featured essay: horizontal editorial card, different layout from hero */}
       {latestPost && (
-        <section className="section" aria-labelledby="featured-heading">
-          <div className="flex items-baseline justify-between gap-4 mb-6">
+        <section className="section" aria-labelledby="featured-heading" style={{ paddingBottom: '4rem' }}>
+          <div className="flex items-baseline justify-between gap-4" style={{ marginBottom: '1.75rem' }}>
             <h2 id="featured-heading" className="reveal reveal-1" style={{ fontSize: '22px', letterSpacing: '-0.03em' }}>Latest essay</h2>
             <Link href="/categories/" className="meta reveal reveal-1" style={{ textDecoration: 'underline', textUnderlineOffset: '3px' }}>Browse archive</Link>
           </div>
@@ -125,8 +125,8 @@ export default function HomePage() {
 
         <div className="reveal reveal-2">
           {years.map((year) => (
-            <div key={year} style={{ marginBottom: '2rem' }}>
-              <div className="flex items-center gap-3 mb-3">
+            <div key={year} style={{ marginBottom: '2.75rem' }}>
+              <div className="flex items-center gap-3" style={{ marginBottom: '1rem' }}>
                 <span style={{ fontFamily: 'var(--font-serif)', fontSize: '13px', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--color-muted)', borderLeft: '2px solid var(--color-accent)', paddingLeft: '0.6rem' }}>{year}</span>
                 <span style={{ flex: 1, height: '1px', background: 'var(--color-border)' }} aria-hidden="true" />
                 <span className="meta">{groupedByYear[year].length} essays</span>
