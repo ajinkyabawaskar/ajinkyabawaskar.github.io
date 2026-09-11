@@ -1,11 +1,23 @@
-import Link from 'next/link'
-import { getAllPosts } from '@/lib/posts'
-import { Metadata } from 'next'
-import { ArrowRightIcon } from '@/components/Icons'
+import Link from "next/link"
+import type { Metadata } from "next"
+import { ArrowRight } from "lucide-react"
+
+import { getAllPosts } from "@/lib/posts"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { Separator } from "@/components/ui/separator"
 
 export const metadata: Metadata = {
-  title: 'Variable',
-  description: 'A web log about programming, software, technology, life and my thoughts in general.',
+  title: "Variable",
+  description:
+    "A web log about programming, software, technology, life and my thoughts in general.",
 }
 
 function estimateReadTime(content: string): string {
@@ -19,128 +31,209 @@ export default function HomePage() {
   const latestPost = posts[0]
   const totalPosts = posts.length
 
-  const groupedByYear = recentPosts.reduce<Record<string, typeof recentPosts>>((acc, post) => {
-    const year = new Date(post.date).getFullYear().toString()
-    if (!acc[year]) acc[year] = []
-    acc[year].push(post)
-    return acc
-  }, {})
+  const groupedByYear = recentPosts.reduce<Record<string, typeof recentPosts>>(
+    (acc, post) => {
+      const year = new Date(post.date).getFullYear().toString()
+      if (!acc[year]) acc[year] = []
+      acc[year].push(post)
+      return acc
+    },
+    {}
+  )
   const years = Object.keys(groupedByYear).sort((a, b) => Number(b) - Number(a))
+  const topics = [...new Set(posts.map((p) => p.category))]
 
   return (
-    <div>
-      {/* Hero: asymmetric split, fits viewport */}
-      <section className="section" aria-labelledby="hero-heading" style={{ paddingTop: '3rem', paddingBottom: '3rem', minHeight: 'auto' }}>
-        <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-10 lg:gap-12 items-center">
-          <div className="reveal reveal-1">
-            <p className="meta mb-4" style={{ color: 'var(--color-accent)' }}>Est. 2020 · Pune</p>
-            <h1 id="hero-heading" style={{ marginBottom: '1rem' }}>
-              Writing about <em style={{ fontStyle: 'italic', fontWeight: 400, color: 'var(--color-muted)' }}>software</em> and the people who make it.
+    <div className="py-10 sm:py-14">
+      {/* Hero */}
+      <section aria-labelledby="hero-heading" className="pb-12">
+        <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12">
+          <div>
+            <p className="mb-4 font-mono text-xs uppercase tracking-widest text-muted-foreground">
+              Est. 2020 · Pune
+            </p>
+            <h1
+              id="hero-heading"
+              className="mb-4 font-serif text-5xl font-medium leading-[1.05] tracking-tight sm:text-6xl"
+            >
+              Writing about{" "}
+              <em className="font-normal italic text-muted-foreground">
+                software
+              </em>{" "}
+              and the people who make it.
             </h1>
-            <p className="lead" style={{ marginBottom: '1.75rem' }}>
-              Notes on programming, distributed systems, and learning in public by Ajinkya Bawaskar.
+            <p className="mb-7 max-w-xl text-lg leading-relaxed text-muted-foreground">
+              Notes on programming, distributed systems, and learning in public
+              by Ajinkya Bawaskar.
             </p>
-            <div className="flex items-center gap-3 flex-wrap">
-              <Link href={latestPost ? `/${latestPost.category.toLowerCase()}/${latestPost.slug}/` : '/categories/'} className="btn btn-accent">
-                Read the latest
-                <ArrowRightIcon size={14} />
-              </Link>
-              <Link href="/about/" className="btn btn-secondary">About the author</Link>
+            <div className="flex flex-wrap items-center gap-3">
+              <Button asChild>
+                <Link
+                  href={
+                    latestPost
+                      ? `/${latestPost.category.toLowerCase()}/${latestPost.slug}/`
+                      : "/categories/"
+                  }
+                >
+                  Read the latest
+                  <ArrowRight />
+                </Link>
+              </Button>
+              <Button variant="outline" asChild>
+                <Link href="/about/">About the author</Link>
+              </Button>
             </div>
-            <p className="meta" style={{ textTransform: 'none', letterSpacing: '0', fontSize: '12px', color: 'var(--color-muted)', marginTop: '2.25rem', paddingTop: '1.25rem', borderTop: '1px solid var(--color-border)' }}>
-              {totalPosts} essays, {[...new Set(posts.map(p => p.category))].length} topics, updated {latestPost ? new Date(latestPost.date).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }) : 'recently'}
-            </p>
+            <div className="mt-9 border-t pt-5">
+              <p className="font-mono text-xs text-muted-foreground">
+                {totalPosts} essays, {topics.length} topics, updated{" "}
+                {latestPost
+                  ? new Date(latestPost.date).toLocaleDateString("en-US", {
+                      month: "long",
+                      year: "numeric",
+                    })
+                  : "recently"}
+              </p>
+            </div>
           </div>
 
-          <div className="reveal reveal-2">
-            <div className="card" style={{ padding: 0, overflow: 'hidden', borderRadius: '16px' }}>
-              <img
-                src="https://picsum.photos/seed/variable-hero-typewriter/800/640"
-                alt="Minimal desk with open notebook and soft window light"
-                width={800}
-                height={640}
-                style={{ width: '100%', aspectRatio: '4 / 3.2', objectFit: 'cover', display: 'block' }}
-                loading="eager"
-              />
-              <div className="flex items-center justify-between gap-3" style={{ padding: '0.9rem 1.1rem', borderTop: '1px solid var(--color-border)', background: 'var(--color-canvas-warm)' }}>
-                <span className="meta" style={{ letterSpacing: '0.06em' }}>Currently reading: Caching in Spring Boot</span>
-                <span className="meta" style={{ color: 'var(--color-muted-light)' }}>2023</span>
-              </div>
-            </div>
-          </div>
+          <Card className="overflow-hidden p-0">
+            <img
+              src="https://picsum.photos/seed/variable-hero-typewriter/800/640"
+              alt="Minimal desk with open notebook and soft window light"
+              width={800}
+              height={640}
+              className="block aspect-[4/3.2] w-full object-cover"
+              loading="eager"
+            />
+            <CardContent className="flex items-center justify-between gap-3 border-t bg-muted/50 p-4">
+              <span className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
+                Currently reading: Caching in Spring Boot
+              </span>
+              <span className="font-mono text-[11px] text-muted-foreground/70">
+                2023
+              </span>
+            </CardContent>
+          </Card>
         </div>
       </section>
 
-      <hr className="thick" aria-hidden="true" />
+      <Separator />
 
-      {/* Featured essay: horizontal editorial card, different layout from hero */}
+      {/* Latest essay */}
       {latestPost && (
-        <section className="section" aria-labelledby="featured-heading" style={{ paddingBottom: '4rem' }}>
-          <div className="flex items-baseline justify-between gap-4" style={{ marginBottom: '1.75rem' }}>
-            <h2 id="featured-heading" className="reveal reveal-1" style={{ fontSize: '22px', letterSpacing: '-0.03em' }}>Latest essay</h2>
-            <Link href="/categories/" className="meta reveal reveal-1" style={{ textDecoration: 'underline', textUnderlineOffset: '3px' }}>Browse archive</Link>
+        <section aria-labelledby="featured-heading" className="py-12">
+          <div className="mb-6 flex items-baseline justify-between gap-4">
+            <h2
+              id="featured-heading"
+              className="font-serif text-2xl font-medium tracking-tight"
+            >
+              Latest essay
+            </h2>
+            <Button variant="link" size="sm" asChild className="h-auto p-0">
+              <Link href="/categories/">Browse archive</Link>
+            </Button>
           </div>
 
-          <Link href={`/${latestPost.category.toLowerCase()}/${latestPost.slug}/`} className="card reveal reveal-2" style={{ display: 'grid', gridTemplateColumns: '1fr', padding: 0, overflow: 'hidden', borderRadius: '16px', textDecoration: 'none' }}>
-            <div className="grid md:grid-cols-[1.05fr_0.95fr] gap-0">
-              <div style={{ padding: '2rem 1.75rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                <div className="flex items-center gap-2 mb-4 flex-wrap">
-                  <span className="tag">{latestPost.category}</span>
-                  <span className="meta">{new Date(latestPost.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })} / {estimateReadTime(latestPost.content)} read</span>
+          <Link
+            href={`/${latestPost.category.toLowerCase()}/${latestPost.slug}/`}
+            className="block"
+          >
+            <Card className="overflow-hidden p-0 transition-shadow hover:shadow-lg">
+              <div className="grid md:grid-cols-[1.05fr_0.95fr]">
+                <div className="flex flex-col justify-center p-7 sm:p-8">
+                  <div className="mb-4 flex flex-wrap items-center gap-2">
+                    <Badge variant="secondary">{latestPost.category}</Badge>
+                    <span className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
+                      {new Date(latestPost.date).toLocaleDateString("en-US", {
+                        month: "long",
+                        day: "numeric",
+                        year: "numeric",
+                      })}{" "}
+                      / {estimateReadTime(latestPost.content)} read
+                    </span>
+                  </div>
+                  <h3 className="mb-3 font-serif text-2xl font-medium leading-tight tracking-tight sm:text-3xl">
+                    {latestPost.title}
+                  </h3>
+                  <p className="mb-5 line-clamp-3 max-w-[52ch] text-[15px] leading-relaxed text-muted-foreground">
+                    {latestPost.content
+                      .slice(0, 190)
+                      .replace(/[#*`[\]]/g, "")
+                      .trim()}
+                    ...
+                  </p>
+                  <Button size="sm" className="self-start">
+                    Continue reading
+                    <ArrowRight />
+                  </Button>
                 </div>
-                <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.4rem, 2.8vw, 1.9rem)', lineHeight: 1.15, letterSpacing: '-0.03em', color: 'var(--color-fg)', marginBottom: '0.75rem' }}>
-                  {latestPost.title}
-                </h3>
-                <p style={{ fontSize: '15px', lineHeight: 1.65, color: 'var(--color-muted)', maxWidth: '52ch', marginBottom: '1.25rem' }}>
-                  {latestPost.content.slice(0, 190).replace(/[#*`\[\]]/g, '').trim()}...
-                </p>
-                <span className="btn btn-primary" style={{ alignSelf: 'flex-start' }}>
-                  Continue reading
-                  <ArrowRightIcon size={12} />
-                </span>
+                <div className="min-h-64 overflow-hidden border-t bg-muted md:border-l md:border-t-0">
+                  <img
+                    src={`https://picsum.photos/seed/${latestPost.slug}/720/560`}
+                    alt=""
+                    width={720}
+                    height={560}
+                    className="block h-full w-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
               </div>
-              <div style={{ background: 'var(--color-canvas-warm)', borderLeft: '1px solid var(--color-border)', minHeight: '280px', overflow: 'hidden' }}>
-                <img
-                  src={`https://picsum.photos/seed/${latestPost.slug}/720/560`}
-                  alt=""
-                  width={720}
-                  height={560}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                  loading="lazy"
-                />
-              </div>
-            </div>
+            </Card>
           </Link>
         </section>
       )}
 
-      <hr className="thick" aria-hidden="true" />
+      <Separator />
 
-      {/* Archive: chronological index, editorial list */}
-      <section className="section" aria-labelledby="recent-heading">
-        <div className="flex items-baseline justify-between gap-4" style={{ marginBottom: '2.25rem' }}>
-          <h2 id="recent-heading" className="reveal reveal-1" style={{ fontSize: '22px' }}>Recent essays</h2>
-          <span className="meta reveal reveal-1">{posts.length} total</span>
+      {/* Recent essays */}
+      <section aria-labelledby="recent-heading" className="py-12">
+        <div className="mb-8 flex items-baseline justify-between gap-4">
+          <h2
+            id="recent-heading"
+            className="font-serif text-2xl font-medium tracking-tight"
+          >
+            Recent essays
+          </h2>
+          <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+            {posts.length} total
+          </span>
         </div>
 
-        <div className="reveal reveal-2">
+        <div className="space-y-10">
           {years.map((year) => (
-            <div key={year} style={{ marginBottom: '2.75rem' }}>
-              <div className="flex items-center gap-3" style={{ marginBottom: '1rem' }}>
-                <span style={{ fontFamily: 'var(--font-serif)', fontSize: '13px', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--color-muted)', borderLeft: '2px solid var(--color-accent)', paddingLeft: '0.6rem' }}>{year}</span>
-                <span style={{ flex: 1, height: '1px', background: 'var(--color-border)' }} aria-hidden="true" />
-                <span className="meta">{groupedByYear[year].length} essays</span>
+            <div key={year}>
+              <div className="mb-2 flex items-center gap-3">
+                <span className="border-l-2 border-foreground/30 pl-2.5 font-mono text-xs uppercase tracking-widest text-muted-foreground">
+                  {year}
+                </span>
+                <Separator className="flex-1" />
+                <span className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
+                  {groupedByYear[year].length} essays
+                </span>
               </div>
-              <ul className="archive-list" role="list">
+              <ul role="list" className="divide-y">
                 {groupedByYear[year].map((post) => (
-                  <li key={post.slug} className="archive-item" role="listitem">
-                    <time dateTime={post.date} className="archive-date">
-                      {new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
-                    </time>
-                    <Link href={`/${post.category.toLowerCase()}/${post.slug}/`} style={{ minWidth: 0 }}>
-                      <span className="archive-title">{post.title}</span>
+                  <li key={post.slug} role="listitem">
+                    <Link
+                      href={`/${post.category.toLowerCase()}/${post.slug}/`}
+                      className="group grid grid-cols-[1fr_auto] items-baseline gap-x-4 gap-y-1 rounded-md py-4 transition-colors hover:bg-muted/60 hover:px-3 sm:grid-cols-[110px_1fr_auto]"
+                    >
+                      <time
+                        dateTime={post.date}
+                        className="col-span-full font-mono text-[11px] uppercase tracking-wider text-muted-foreground/70 sm:col-span-1"
+                      >
+                        {new Date(post.date).toLocaleDateString("en-US", {
+                          month: "short",
+                          day: "numeric",
+                        })}
+                      </time>
+                      <span className="min-w-0 font-serif text-lg leading-snug tracking-tight group-hover:underline group-hover:underline-offset-4">
+                        {post.title}
+                      </span>
+                      <Badge variant="outline" className="justify-self-end">
+                        {post.category}
+                      </Badge>
                     </Link>
-                    <span className="archive-category">{post.category}</span>
                   </li>
                 ))}
               </ul>
@@ -149,38 +242,84 @@ export default function HomePage() {
         </div>
 
         {posts.length > 7 && (
-          <div className="text-center" style={{ marginTop: '2rem' }}>
-            <Link href="/categories/" className="btn btn-secondary">
-              View full archive
-              <ArrowRightIcon size={14} />
-            </Link>
+          <div className="mt-8 text-center">
+            <Button variant="outline" asChild>
+              <Link href="/categories/">
+                View full archive
+                <ArrowRight />
+              </Link>
+            </Button>
           </div>
         )}
       </section>
 
-      <hr className="thick" aria-hidden="true" />
+      <Separator />
 
-      {/* Quiet closing: no bento, just type and hairline */}
-      <section className="section" aria-labelledby="colophon-heading" style={{ paddingBottom: '4rem' }}>
-        <div className="content-wide">
-          <div className="grid md:grid-cols-[1.1fr_0.9fr] gap-10 md:gap-12 items-start">
-            <div className="reveal reveal-1">
-              <p style={{ fontFamily: 'var(--font-serif)', fontSize: '22px', lineHeight: 1.35, letterSpacing: '-0.02em', color: 'var(--color-fg)', fontStyle: 'italic', marginBottom: '1rem' }}>
-                Software is less about software and more about people.
-              </p>
-              <p style={{ fontSize: '14px', lineHeight: 1.7, color: 'var(--color-muted)', maxWidth: '42ch' }}>
-                This site has been my public notebook since 2020. I write to clarify my own thinking and to leave a trail for anyone on a similar path.
-              </p>
-            </div>
-            <div className="reveal reveal-2" style={{ borderLeft: '1px solid var(--color-border)', paddingLeft: '1.5rem' }}>
-              <p className="meta mb-3">Explore</p>
-              <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
-                <li><Link href="/categories/" style={{ fontFamily: 'var(--font-serif)', fontSize: '16px', color: 'var(--color-fg)', textDecoration: 'underline', textUnderlineOffset: '3px', textDecorationColor: 'var(--color-border)' }}>Browse by category</Link><span className="meta" style={{ marginLeft: '0.5rem' }}>{[...new Set(posts.map(p => p.category))].join(', ')}</span></li>
-                <li><Link href="/about/" style={{ fontFamily: 'var(--font-serif)', fontSize: '16px', color: 'var(--color-fg)', textDecoration: 'underline', textUnderlineOffset: '3px', textDecorationColor: 'var(--color-border)' }}>About the author</Link><span className="meta" style={{ marginLeft: '0.5rem' }}>Pune, Backend, Writing</span></li>
-                <li><a href="/feed.xml" style={{ fontFamily: 'var(--font-serif)', fontSize: '16px', color: 'var(--color-fg)', textDecoration: 'underline', textUnderlineOffset: '3px', textDecorationColor: 'var(--color-border)' }}>Subscribe via RSS</a><span className="meta" style={{ marginLeft: '0.5rem' }}>Stay updated</span></li>
-              </ul>
-            </div>
+      {/* Closing */}
+      <section aria-labelledby="colophon-heading" className="py-12">
+        <div className="mx-auto grid max-w-4xl items-start gap-10 md:grid-cols-[1.1fr_0.9fr] md:gap-12">
+          <div>
+            <p className="mb-4 font-serif text-2xl italic leading-snug tracking-tight">
+              Software is less about software and more about people.
+            </p>
+            <p className="max-w-[42ch] text-sm leading-relaxed text-muted-foreground">
+              This site has been my public notebook since 2020. I write to
+              clarify my own thinking and to leave a trail for anyone on a
+              similar path.
+            </p>
           </div>
+          <div className="border-l pl-6">
+            <p className="mb-3 font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
+              Explore
+            </p>
+            <ul className="flex flex-col gap-3">
+              <li>
+                <Button variant="link" asChild className="h-auto p-0 font-serif text-base">
+                  <Link href="/categories/">Browse by category</Link>
+                </Button>
+                <span className="ml-2 font-mono text-[11px] text-muted-foreground">
+                  {topics.join(", ")}
+                </span>
+              </li>
+              <li>
+                <Button variant="link" asChild className="h-auto p-0 font-serif text-base">
+                  <Link href="/about/">About the author</Link>
+                </Button>
+                <span className="ml-2 font-mono text-[11px] text-muted-foreground">
+                  Pune, Backend, Writing
+                </span>
+              </li>
+              <li>
+                <Button variant="link" asChild className="h-auto p-0 font-serif text-base">
+                  <a href="/feed.xml">Subscribe via RSS</a>
+                </Button>
+                <span className="ml-2 font-mono text-[11px] text-muted-foreground">
+                  Stay updated
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="mx-auto mt-12 grid max-w-4xl gap-3 sm:grid-cols-3">
+          {[
+            { k: "Essays", v: `${totalPosts} published` },
+            { k: "Topics", v: topics.join(" · ") },
+            { k: "Since", v: "2020, Pune" },
+          ].map((s) => (
+            <Card key={s.k}>
+              <CardHeader className="p-5 pb-1">
+                <CardDescription className="font-mono text-[11px] uppercase tracking-widest">
+                  {s.k}
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="p-5 pt-1">
+                <CardTitle className="font-serif text-base font-medium">
+                  {s.v}
+                </CardTitle>
+              </CardContent>
+            </Card>
+          ))}
         </div>
       </section>
     </div>

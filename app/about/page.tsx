@@ -1,119 +1,218 @@
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
-import { getPage } from '@/lib/posts'
-import { Metadata } from 'next'
-import Link from 'next/link'
-import { GithubLogoIcon, LinkedinLogoIcon, RssIcon } from '@/components/Icons'
+import ReactMarkdown from "react-markdown"
+import remarkGfm from "remark-gfm"
+import type { Metadata } from "next"
+import Link from "next/link"
+import { Mail } from "lucide-react"
+
+import { GithubIcon, LinkedinIcon } from "@/components/icons"
+
+import { getPage } from "@/lib/posts"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { Separator } from "@/components/ui/separator"
 
 export const metadata: Metadata = {
-  title: 'About',
-  description: 'About Ajinkya Bawaskar, software engineer, writer, and the author of Variable.',
+  title: "About",
+  description:
+    "About Ajinkya Bawaskar, software engineer, writer, and the author of Variable.",
 }
 
 export default function AboutPage() {
-  const page = getPage('about')
+  const page = getPage("about")
 
-  if (!page) return (
-    <div className="section" style={{ textAlign: 'center' }}>
-      <p className="meta">About page not found</p>
-    </div>
-  )
+  if (!page)
+    return (
+      <div className="py-20 text-center">
+        <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+          About page not found
+        </p>
+      </div>
+    )
 
   return (
-    <div className="section" style={{ paddingTop: '2.5rem' }}>
-      <header className="content-wide mb-10 reveal reveal-1">
-        <p className="meta mb-3" style={{ color: 'var(--color-accent)' }}>About</p>
-        <h1 style={{ marginBottom: '1rem' }}>Ajinkya Bawaskar</h1>
-        <p className="lead" style={{ maxWidth: '52ch' }}>
-          Software engineer and writer based in Pune. I build backend systems and write to think clearly.
+    <div className="py-10">
+      <header className="mx-auto mb-8 max-w-3xl">
+        <p className="mb-2 font-mono text-xs uppercase tracking-widest text-muted-foreground">
+          About
+        </p>
+        <h1 className="mb-3 font-serif text-4xl font-medium tracking-tight sm:text-5xl">
+          Ajinkya Bawaskar
+        </h1>
+        <p className="max-w-xl text-lg leading-relaxed text-muted-foreground">
+          Software engineer and writer based in Pune. I build backend systems
+          and write to think clearly.
         </p>
       </header>
 
-      <hr className="thick content-wide" style={{ marginBottom: '2.5rem' }} aria-hidden="true" />
+      <Separator className="mx-auto mb-8 max-w-3xl" />
 
-      <div className="content-wide">
-        <div className="grid lg:grid-cols-[0.9fr_1.6fr] gap-10 lg:gap-12 items-start">
-          <aside className="reveal reveal-2" style={{ position: 'sticky', top: '88px' }}>
-            <div className="card" style={{ padding: 0, overflow: 'hidden', borderRadius: '16px' }}>
+      <div className="mx-auto max-w-3xl">
+        <div className="grid items-start gap-8 lg:grid-cols-[0.9fr_1.6fr] lg:gap-10">
+          <aside className="lg:sticky lg:top-20">
+            <Card className="overflow-hidden p-0">
               <img
                 src="https://picsum.photos/seed/ajinkya-portrait/560/680"
                 alt="Portrait placeholder for Ajinkya Bawaskar"
                 width={560}
                 height={680}
-                style={{ width: '100%', aspectRatio: '4 / 4.8', objectFit: 'cover', display: 'block' }}
+                className="block aspect-[4/4.8] w-full object-cover"
               />
-              <div style={{ padding: '1.25rem 1.25rem 1.1rem', borderTop: '1px solid var(--color-border)' }}>
-                <p style={{ fontFamily: 'var(--font-serif)', fontSize: '17px', letterSpacing: '-0.02em', color: 'var(--color-fg)', marginBottom: '0.25rem' }}>Ajinkya Bawaskar</p>
-                <p className="meta" style={{ textTransform: 'none', letterSpacing: '0', fontSize: '12px' }}>Backend, distributed systems, Go, TypeScript</p>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: '1rem' }}>
-                  <a href="https://github.com/ajinkyabawaskar" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2" style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--color-muted)', border: '1px solid var(--color-border)', borderRadius: '100px', padding: '0.55rem 0.85rem' }}>
-                    <GithubLogoIcon size={13} /> GitHub
+              <CardHeader className="border-t p-5">
+                <CardTitle className="font-serif text-lg font-medium">
+                  Ajinkya Bawaskar
+                </CardTitle>
+                <CardDescription className="font-mono text-xs normal-case tracking-normal">
+                  Backend, distributed systems, Go, TypeScript
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="flex flex-col gap-2 p-5 pt-0">
+                <Button variant="outline" size="sm" asChild>
+                  <a
+                    href="https://github.com/ajinkyabawaskar"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <GithubIcon />
+                    GitHub
                   </a>
-                  <a href="https://linkedin.com/in/ajinkyabawaskar" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2" style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--color-muted)', border: '1px solid var(--color-border)', borderRadius: '100px', padding: '0.55rem 0.85rem' }}>
-                    <LinkedinLogoIcon size={13} /> LinkedIn
+                </Button>
+                <Button variant="outline" size="sm" asChild>
+                  <a
+                    href="https://linkedin.com/in/ajinkyabawaskar"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <LinkedinIcon />
+                    LinkedIn
                   </a>
-                  <a href="mailto:ajinkyabawaskar2@gmail.com" className="flex items-center gap-2" style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--color-muted)', border: '1px solid var(--color-border)', borderRadius: '100px', padding: '0.55rem 0.85rem' }}>
-                    <RssIcon size={13} /> Email
+                </Button>
+                <Button variant="outline" size="sm" asChild>
+                  <a href="mailto:ajinkyabawaskar2@gmail.com">
+                    <Mail />
+                    Email
                   </a>
-                </div>
-                <dl style={{ marginTop: '1.25rem', paddingTop: '1rem', borderTop: '1px solid var(--color-border)', display: 'grid', gap: '0.5rem' }}>
-                  <div className="flex items-center justify-between gap-2"><dt className="meta">Location</dt><dd style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--color-fg-soft)' }}>Pune, India</dd></div>
-                  <div className="flex items-center justify-between gap-2"><dt className="meta">Writing since</dt><dd style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--color-fg-soft)' }}>2020</dd></div>
-                  <div className="flex items-center justify-between gap-2"><dt className="meta">Focus</dt><dd style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--color-fg-soft)' }}>Backend systems</dd></div>
+                </Button>
+                <dl className="mt-3 grid gap-2 border-t pt-4">
+                  {[
+                    ["Location", "Pune, India"],
+                    ["Writing since", "2020"],
+                    ["Focus", "Backend systems"],
+                  ].map(([k, v]) => (
+                    <div
+                      key={k}
+                      className="flex items-center justify-between gap-2"
+                    >
+                      <dt className="font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
+                        {k}
+                      </dt>
+                      <dd className="font-mono text-[11px]">{v}</dd>
+                    </div>
+                  ))}
                 </dl>
-              </div>
-            </div>
+              </CardContent>
+            </Card>
           </aside>
 
-          <main className="reveal reveal-3">
-            <div className="article-content" style={{ maxWidth: 'none' }}>
+          <div>
+            <div className="prose-blog">
               <ReactMarkdown remarkPlugins={[remarkGfm]}>
                 {page.content}
               </ReactMarkdown>
             </div>
 
-            <hr className="thick" style={{ margin: '2.5rem 0' }} aria-hidden="true" />
+            <Separator className="my-8" />
 
             <section aria-labelledby="connect-heading">
-              <h2 id="connect-heading" style={{ fontSize: '20px', marginBottom: '1rem' }}>Keep reading</h2>
-              <div className="grid sm:grid-cols-3 gap-3">
-                <Link href="/categories/" className="card" style={{ padding: '1.1rem', textAlign: 'left' }}>
-                  <span className="meta" style={{ display: 'block', marginBottom: '0.4rem' }}>Archive</span>
-                  <span style={{ fontFamily: 'var(--font-serif)', fontSize: '15px', color: 'var(--color-fg)' }}>Browse essays</span>
-                </Link>
-                <a href="https://github.com/ajinkyabawaskar" target="_blank" rel="noopener noreferrer" className="card" style={{ padding: '1.1rem', textAlign: 'left' }}>
-                  <span className="meta" style={{ display: 'block', marginBottom: '0.4rem' }}>Code</span>
-                  <span style={{ fontFamily: 'var(--font-serif)', fontSize: '15px', color: 'var(--color-fg)' }}>GitHub</span>
-                </a>
-                <a href="/feed.xml" className="card" style={{ padding: '1.1rem', textAlign: 'left' }}>
-                  <span className="meta" style={{ display: 'block', marginBottom: '0.4rem' }}>Subscribe</span>
-                  <span style={{ fontFamily: 'var(--font-serif)', fontSize: '15px', color: 'var(--color-fg)' }}>RSS feed</span>
-                </a>
+              <h2
+                id="connect-heading"
+                className="mb-4 font-serif text-xl font-medium tracking-tight"
+              >
+                Keep reading
+              </h2>
+              <div className="grid gap-3 sm:grid-cols-3">
+                {[
+                  { k: "Archive", v: "Browse essays", href: "/categories/" },
+                  {
+                    k: "Code",
+                    v: "GitHub",
+                    href: "https://github.com/ajinkyabawaskar",
+                  },
+                  { k: "Subscribe", v: "RSS feed", href: "/feed.xml" },
+                ].map((item) => (
+                  <Card key={item.k} className="transition-shadow hover:shadow-md">
+                    <CardHeader className="p-4">
+                      <CardDescription className="font-mono text-[11px] uppercase tracking-widest">
+                        {item.k}
+                      </CardDescription>
+                      <CardTitle className="font-serif text-[15px] font-medium">
+                        {item.href.startsWith("http") ? (
+                          <a
+                            href={item.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {item.v}
+                          </a>
+                        ) : (
+                          <Link href={item.href}>{item.v}</Link>
+                        )}
+                      </CardTitle>
+                    </CardHeader>
+                  </Card>
+                ))}
               </div>
             </section>
 
-            <section style={{ marginTop: '2.5rem', padding: '1.25rem', background: 'var(--color-canvas-warm)', border: '1px solid var(--color-border)', borderRadius: '12px' }}>
-              <h3 style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--color-muted)', marginBottom: '0.75rem' }}>Currently exploring</h3>
-              <div className="flex flex-wrap gap-2">
-                <span className="tag">Go</span>
-                <span className="tag">Kubernetes</span>
-                <span className="tag">Distributed systems</span>
-                <span className="tag">TypeScript</span>
-                <span className="tag">PostgreSQL</span>
-                <span className="tag">Observability</span>
-              </div>
-            </section>
+            <Card className="mt-8 bg-muted/50">
+              <CardHeader className="p-5 pb-2">
+                <CardDescription className="font-mono text-[11px] uppercase tracking-widest">
+                  Currently exploring
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="flex flex-wrap gap-2 p-5 pt-1">
+                {[
+                  "Go",
+                  "Kubernetes",
+                  "Distributed systems",
+                  "TypeScript",
+                  "PostgreSQL",
+                  "Observability",
+                ].map((t) => (
+                  <Badge key={t} variant="secondary">
+                    {t}
+                  </Badge>
+                ))}
+              </CardContent>
+            </Card>
 
-            <section style={{ marginTop: '2.5rem' }}>
-              <h3 style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--color-muted)', marginBottom: '0.75rem' }}>Colophon</h3>
-              <dl style={{ display: 'grid', gap: '0.35rem', fontSize: '13px', color: 'var(--color-fg-soft)' }}>
-                <div className="flex gap-3"><dt className="meta" style={{ minWidth: '120px' }}>Engine</dt><dd>Next.js 15, React 19</dd></div>
-                <div className="flex gap-3"><dt className="meta" style={{ minWidth: '120px' }}>Styling</dt><dd>Tailwind v4, EB Garamond, Geist</dd></div>
-                <div className="flex gap-3"><dt className="meta" style={{ minWidth: '120px' }}>Content</dt><dd>Markdown, Gray Matter</dd></div>
-                <div className="flex gap-3"><dt className="meta" style={{ minWidth: '120px' }}>Hosting</dt><dd>GitHub Pages, static export</dd></div>
+            <section className="mt-8">
+              <h3 className="mb-3 font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
+                Colophon
+              </h3>
+              <dl className="grid gap-1.5 text-[13px]">
+                {[
+                  ["Engine", "Next.js 15, React 19"],
+                  ["UI", "shadcn, Tailwind v4, IBM Plex"],
+                  ["Content", "Markdown, Gray Matter"],
+                  ["Hosting", "GitHub Pages, static export"],
+                ].map(([k, v]) => (
+                  <div key={k} className="flex gap-3">
+                    <dt className="min-w-28 font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
+                      {k}
+                    </dt>
+                    <dd className="text-muted-foreground">{v}</dd>
+                  </div>
+                ))}
               </dl>
             </section>
-          </main>
+          </div>
         </div>
       </div>
     </div>

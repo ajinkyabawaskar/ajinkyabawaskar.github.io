@@ -1,71 +1,123 @@
-import Link from 'next/link'
-import { getAllPosts, getAllCategories } from '@/lib/posts'
-import { Metadata } from 'next'
-import { ArrowRightIcon } from '@/components/Icons'
+import Link from "next/link"
+import type { Metadata } from "next"
+import { ArrowRight } from "lucide-react"
+
+import { getAllPosts, getAllCategories } from "@/lib/posts"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { Separator } from "@/components/ui/separator"
 
 export const metadata: Metadata = {
-  title: 'Archive',
-  description: 'Browse all essays by category.',
+  title: "Archive",
+  description: "Browse all essays by category.",
 }
 
 export default function CategoriesPage() {
   const posts = getAllPosts()
   const categories = getAllCategories()
-  const postsByCategory = categories.reduce((acc, cat) => {
-    acc[cat] = posts.filter(p => p.category.toLowerCase() === cat.toLowerCase())
-    return acc
-  }, {} as Record<string, typeof posts>)
+  const postsByCategory = categories.reduce(
+    (acc, cat) => {
+      acc[cat] = posts.filter(
+        (p) => p.category.toLowerCase() === cat.toLowerCase()
+      )
+      return acc
+    },
+    {} as Record<string, typeof posts>
+  )
 
   return (
-    <div className="section" style={{ paddingTop: '2.5rem' }}>
-      <header className="content-wide mb-10 reveal reveal-1">
-        <p className="meta mb-3" style={{ color: 'var(--color-accent)' }}>Archive</p>
-        <h1 style={{ marginBottom: '0.75rem' }}>Archive</h1>
-        <p className="lead" style={{ maxWidth: '52ch' }}>
-          {posts.length} essays across {categories.length} categories. Chronological index, no algorithm.
-        </p>
-      </header>
+    <div className="py-10">
+      <div className="mx-auto max-w-3xl">
+        <header className="mb-8">
+          <p className="mb-2 font-mono text-xs uppercase tracking-widest text-muted-foreground">
+            Archive
+          </p>
+          <h1 className="mb-3 font-serif text-4xl font-medium tracking-tight sm:text-5xl">
+            Archive
+          </h1>
+          <p className="max-w-xl text-lg leading-relaxed text-muted-foreground">
+            {posts.length} essays across {categories.length} categories.
+            Chronological index, no algorithm.
+          </p>
+        </header>
 
-      <hr className="thick content-wide" style={{ marginBottom: '2rem' }} aria-hidden="true" />
+        <Separator className="mb-8" />
 
-      <div className="content-wide">
         {categories.length === 0 ? (
-          <p className="meta" style={{ textAlign: 'center', padding: '3rem 0' }}>No essays yet.</p>
+          <Card>
+            <CardHeader>
+              <CardDescription>No essays yet.</CardDescription>
+            </CardHeader>
+          </Card>
         ) : (
-          <div style={{ display: 'grid', gap: '2.5rem' }}>
-            {categories.map((category, idx) => {
+          <div className="grid gap-10">
+            {categories.map((category) => {
               const catPosts = postsByCategory[category] || []
               return (
-                <section key={category} className={`reveal reveal-${Math.min(idx + 1, 4)}`}>
-                  <div className="flex items-baseline justify-between gap-4 mb-4">
-                    <h2 style={{ fontSize: '20px' }}>{category}</h2>
-                    <span className="meta">{catPosts.length} essays</span>
-                  </div>
-                  <ul className="archive-list" role="list">
-                    {catPosts.map((post) => (
-                      <li key={post.slug} className="archive-item" role="listitem">
-                        <time dateTime={post.date} className="archive-date">
-                          {new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                        </time>
-                        <Link href={`/${post.category.toLowerCase()}/${post.slug}/`} style={{ minWidth: 0 }}>
-                          <span className="archive-title">{post.title}</span>
-                        </Link>
-                        <Link href={`/${post.category.toLowerCase()}/${post.slug}/`} className="meta" aria-label={`Read ${post.title}`} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', color: 'var(--color-muted)', whiteSpace: 'nowrap' }}>
-                          Read <ArrowRightIcon size={10} />
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
+                <section key={category} aria-label={`${category} essays`}>
+                  <Card className="overflow-hidden p-0">
+                    <CardHeader className="flex flex-row items-baseline justify-between gap-4 space-y-0 border-b bg-muted/50 p-5">
+                      <CardTitle className="font-serif text-xl font-medium tracking-tight">
+                        {category}
+                      </CardTitle>
+                      <Badge variant="secondary">
+                        {catPosts.length} essays
+                      </Badge>
+                    </CardHeader>
+                    <ul role="list" className="divide-y">
+                      {catPosts.map((post) => (
+                        <li key={post.slug} role="listitem">
+                          <Link
+                            href={`/${post.category.toLowerCase()}/${post.slug}/`}
+                            className="group flex items-baseline justify-between gap-4 p-5 transition-colors hover:bg-muted/60"
+                          >
+                            <div className="min-w-0">
+                              <span className="block font-serif text-lg leading-snug tracking-tight group-hover:underline group-hover:underline-offset-4">
+                                {post.title}
+                              </span>
+                              <time
+                                dateTime={post.date}
+                                className="mt-1 block font-mono text-[11px] uppercase tracking-wider text-muted-foreground"
+                              >
+                                {new Date(post.date).toLocaleDateString(
+                                  "en-US",
+                                  {
+                                    month: "short",
+                                    day: "numeric",
+                                    year: "numeric",
+                                  }
+                                )}
+                              </time>
+                            </div>
+                            <span className="inline-flex shrink-0 items-center gap-1 font-mono text-[11px] uppercase tracking-wider text-muted-foreground group-hover:text-foreground">
+                              Read
+                              <ArrowRight className="h-3 w-3" />
+                            </span>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </Card>
                 </section>
               )
             })}
           </div>
         )}
 
-        <hr className="thick" style={{ margin: '2.5rem 0' }} aria-hidden="true" />
-        <div className="flex items-center gap-3 flex-wrap">
-          <Link href="/" className="btn btn-secondary">Back to home</Link>
-          <a href="/feed.xml" className="btn btn-ghost">Subscribe via RSS</a>
+        <Separator className="my-8" />
+        <div className="flex flex-wrap items-center gap-2">
+          <Button variant="outline" asChild>
+            <Link href="/">Back to home</Link>
+          </Button>
+          <Button variant="ghost" asChild>
+            <a href="/feed.xml">Subscribe via RSS</a>
+          </Button>
         </div>
       </div>
     </div>

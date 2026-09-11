@@ -1,10 +1,21 @@
-import { notFound } from 'next/navigation'
-import { Metadata } from 'next'
-import Link from 'next/link'
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
-import { getPostBySlug, getAllPosts } from '@/lib/posts'
-import Utterances from '@/components/Utterances'
+import { notFound } from "next/navigation"
+import type { Metadata } from "next"
+import Link from "next/link"
+import ReactMarkdown from "react-markdown"
+import remarkGfm from "remark-gfm"
+import { ArrowLeft, ArrowRight } from "lucide-react"
+
+import { getPostBySlug, getAllPosts } from "@/lib/posts"
+import Utterances from "@/components/Utterances"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { Separator } from "@/components/ui/separator"
 
 interface PageProps {
   params: Promise<{ category: string; slug: string }>
@@ -12,35 +23,37 @@ interface PageProps {
 
 export async function generateStaticParams() {
   const posts = getAllPosts()
-  return posts.map(post => ({
+  return posts.map((post) => ({
     category: post.category.toLowerCase(),
     slug: post.slug,
   }))
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const resolvedParams = await params
   const post = getPostBySlug(resolvedParams.category, resolvedParams.slug)
-  if (!post) return { title: 'Post Not Found' }
+  if (!post) return { title: "Post Not Found" }
 
   return {
     title: post.title,
-    description: post.content.slice(0, 160).replace(/[#*`\[\]]/g, ''),
+    description: post.content.slice(0, 160).replace(/[#*`[\]]/g, ""),
     openGraph: {
       title: post.title,
-      description: post.content.slice(0, 160).replace(/[#*`\[\]]/g, ''),
-      type: 'article',
+      description: post.content.slice(0, 160).replace(/[#*`[\]]/g, ""),
+      type: "article",
       publishedTime: post.date,
-      authors: ['Ajinkya Bawaskar'],
+      authors: ["Ajinkya Bawaskar"],
     },
   }
 }
 
 function preprocessMarkdown(content: string): string {
   return content
-    .replace(/!\[([^\]]*)\]\(\/assets\/img\/([^)]+)\?style=centerme\)/g, '![$1](/img/$2)')
-    .replace(/!\[([^\]]*)\]\(\/assets\/img\/([^)]+)\)/g, '![$1](/img/$2)')
-    .replace(/\?style=centerme/g, '')
+    .replace(/!\[([^\]]*)\]\(\/assets\/img\/([^)]+)\?style=centerme\)/g, "![$1](/img/$2)")
+    .replace(/!\[([^\]]*)\]\(\/assets\/img\/([^)]+)\)/g, "![$1](/img/$2)")
+    .replace(/\?style=centerme/g, "")
 }
 
 function estimateReadTime(content: string): string {
@@ -55,60 +68,134 @@ export default async function PostPage({ params }: PageProps) {
   if (!post) notFound()
 
   const processedContent = preprocessMarkdown(post.content)
-  const formattedDate = new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+  const formattedDate = new Date(post.date).toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  })
   const readTime = estimateReadTime(post.content)
 
   const allPosts = getAllPosts()
-  const idx = allPosts.findIndex(p => p.slug === resolvedParams.slug && p.category.toLowerCase() === resolvedParams.category.toLowerCase())
+  const idx = allPosts.findIndex(
+    (p) =>
+      p.slug === resolvedParams.slug &&
+      p.category.toLowerCase() === resolvedParams.category.toLowerCase()
+  )
   const nextPost = idx > 0 ? allPosts[idx - 1] : null
-  const prevPost = idx >= 0 && idx < allPosts.length - 1 ? allPosts[idx + 1] : null
+  const prevPost =
+    idx >= 0 && idx < allPosts.length - 1 ? allPosts[idx + 1] : null
 
   return (
-    <article className="section" aria-labelledby="post-title" style={{ paddingTop: '2.5rem' }}>
-      <div className="content-wide">
-        <header className="article-header reveal reveal-1">
-          <div className="flex items-center gap-2 mb-8 flex-wrap">
-            <Link href={`/${resolvedParams.category.toLowerCase()}/`} className="tag">{resolvedParams.category}</Link>
-            <span className="meta">{formattedDate} / {readTime}</span>
+    <article aria-labelledby="post-title" className="py-10">
+      <div className="mx-auto max-w-3xl">
+        <header className="pb-8">
+          <div className="mb-6 flex flex-wrap items-center gap-2">
+            <Badge variant="secondary" asChild>
+              <Link href={`/${resolvedParams.category.toLowerCase()}/`}>
+                {resolvedParams.category}
+              </Link>
+            </Badge>
+            <span className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
+              {formattedDate} / {readTime}
+            </span>
           </div>
-          <h1 id="post-title" className="article-title">
+          <h1
+            id="post-title"
+            className="mb-6 font-serif text-4xl font-medium leading-tight tracking-tight sm:text-5xl"
+          >
             {post.title}
           </h1>
-          <div className="flex items-center gap-3 mt-6 flex-wrap">
-            <Link href="/" className="btn btn-ghost" style={{ paddingLeft: 0 }}>← Back to index</Link>
-            <span className="meta" style={{ color: 'var(--color-border)' }} aria-hidden="true">/</span>
-            <Link href="/about/" className="meta" style={{ textDecoration: 'underline', textUnderlineOffset: '3px' }}>About the author</Link>
+          <div className="flex flex-wrap items-center gap-2">
+            <Button variant="ghost" size="sm" asChild className="px-0">
+              <Link href="/">
+                <ArrowLeft />
+                Back to index
+              </Link>
+            </Button>
+            <span aria-hidden="true" className="text-border">
+              /
+            </span>
+            <Button variant="link" size="sm" asChild className="h-auto p-0">
+              <Link href="/about/">About the author</Link>
+            </Button>
           </div>
         </header>
 
-        <div className="reveal reveal-2">
-          <div className="article-content">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>
-              {processedContent}
-            </ReactMarkdown>
-          </div>
+        <Separator className="mb-8" />
+
+        <div className="prose-blog">
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>
+            {processedContent}
+          </ReactMarkdown>
         </div>
 
-        <hr className="thick" style={{ margin: '3rem 0' }} aria-hidden="true" />
+        <Separator className="my-10" />
 
-        <nav aria-label="Post navigation" className="grid md:grid-cols-2 gap-4 reveal reveal-3">
+        <nav aria-label="Post navigation" className="grid gap-3 md:grid-cols-2">
           {prevPost ? (
-            <Link href={`/${prevPost.category.toLowerCase()}/${prevPost.slug}/`} className="card" style={{ padding: '1.25rem' }}>
-              <span className="meta mb-2" style={{ display: 'block' }}>Previous</span>
-              <span style={{ fontFamily: 'var(--font-serif)', fontSize: '16px', lineHeight: 1.3, color: 'var(--color-fg)' }}>{prevPost.title}</span>
-            </Link>
-          ) : <div />}
+            <Button
+              variant="outline"
+              asChild
+              className="h-auto justify-start p-0"
+            >
+              <Link
+                href={`/${prevPost.category.toLowerCase()}/${prevPost.slug}/`}
+                className="block w-full"
+              >
+                <Card className="w-full border-0 shadow-none">
+                  <CardHeader className="p-5 text-left">
+                    <CardDescription className="font-mono text-[11px] uppercase tracking-widest">
+                      Previous
+                    </CardDescription>
+                    <CardTitle className="font-serif text-base font-medium leading-snug">
+                      {prevPost.title}
+                    </CardTitle>
+                  </CardHeader>
+                </Card>
+              </Link>
+            </Button>
+          ) : (
+            <div />
+          )}
           {nextPost ? (
-            <Link href={`/${nextPost.category.toLowerCase()}/${nextPost.slug}/`} className="card" style={{ padding: '1.25rem', textAlign: 'right' }}>
-              <span className="meta mb-2" style={{ display: 'block' }}>Next</span>
-              <span style={{ fontFamily: 'var(--font-serif)', fontSize: '16px', lineHeight: 1.3, color: 'var(--color-fg)' }}>{nextPost.title}</span>
-            </Link>
-          ) : <div />}
+            <Button
+              variant="outline"
+              asChild
+              className="h-auto justify-end p-0"
+            >
+              <Link
+                href={`/${nextPost.category.toLowerCase()}/${nextPost.slug}/`}
+                className="block w-full"
+              >
+                <Card className="w-full border-0 shadow-none">
+                  <CardHeader className="p-5 text-right">
+                    <CardDescription className="font-mono text-[11px] uppercase tracking-widest">
+                      Next
+                    </CardDescription>
+                    <CardTitle className="font-serif text-base font-medium leading-snug">
+                      {nextPost.title}
+                    </CardTitle>
+                  </CardHeader>
+                </Card>
+              </Link>
+            </Button>
+          ) : (
+            <div />
+          )}
         </nav>
 
-        <div className="reveal reveal-4">
-          <Utterances slug={`/${resolvedParams.category}/${resolvedParams.slug}/`} />
+        <div className="mt-4 flex items-center gap-2">
+          <Button variant="outline" size="sm" asChild>
+            <Link href="/categories/">
+              All essays
+              <ArrowRight />
+            </Link>
+          </Button>
         </div>
+
+        <Utterances
+          slug={`/${resolvedParams.category}/${resolvedParams.slug}/`}
+        />
       </div>
     </article>
   )

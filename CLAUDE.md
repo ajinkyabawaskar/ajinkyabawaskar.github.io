@@ -28,14 +28,16 @@ npm run migrate-posts            # one-time migration from old Jekyll _posts/
 
 ## Structure
 
-- `app/` — Next.js App Router pages:
-  - `layout.tsx` — root layout, metadata, header/footer, GA, utterances
-  - `page.tsx` — homepage: post list grouped by category
+- `app/` — Next.js App Router pages (shadcn/ui + Tailwind v4, IBM Plex via `next/font`):
+  - `layout.tsx` — root layout, `ThemeProvider` (system default, light/dark only), header/footer, GA
+  - `page.tsx` — homepage: hero, latest essay card, year-grouped essay index
   - `[category]/[slug]/page.tsx` — post page with markdown rendering + utterances
   - `about/page.tsx` — about page from `content/pages/about.md`
   - `categories/page.tsx` — category index with post counts
   - `not-found.tsx` — 404 page
-  - `globals.css` — Tailwind v4 import + minimal bare styles
+  - `globals.css` — shadcn design tokens (`:root` / `.dark`), Tailwind v4 `@theme inline`, `.prose-blog` markdown styles
+- `components/` — `site-header.tsx`, `site-footer.tsx`, `mode-toggle.tsx`, `theme-provider.tsx`, `icons.tsx` (brand SVGs: GitHub/Instagram/LinkedIn), `Utterances.tsx` (follows `next-themes`), `ui/` (shadcn: `button`, `card`, `badge`, `separator`)
+- `components.json` — shadcn config (new-york style, `@/components` aliases)
 - `content/posts/<category>/*.md` — blog posts (migrated from Jekyll)
 - `content/pages/about.md` — about page content
 - `lib/posts.ts` — post utilities (`getAllPosts`, `getPostBySlug`, `getAllCategories`, `getPage`)
@@ -59,7 +61,7 @@ npm run migrate-posts            # one-time migration from old Jekyll _posts/
 - Description: "A web log about programming, software, technology, life and my thoughts in general."
 - Social links in footer: GitHub, Instagram, LinkedIn → all `ajinkyabawaskar`
 - Google Analytics: `UA-143186517-3` (note: Universal Analytics sunset 2023–24; ID kept for continuity but may need replacement)
-- Utterances comments: repo `ajinkyabawaskar/ajinkyabawaskar.github.io`, `issue-term=pathname`, theme `github-light`
+- Utterances comments: repo `ajinkyabawaskar/ajinkyabawaskar.github.io`, `issue-term=pathname`, theme follows `next-themes` (`github-light` / `github-dark`)
 
 ## Key dependencies
 
@@ -67,6 +69,8 @@ npm run migrate-posts            # one-time migration from old Jekyll _posts/
 - `gray-matter`, `react-markdown`, `remark-gfm`
 - `feed` (RSS generation)
 - Tailwind v4 via `@tailwindcss/postcss` (wired, essentially bare at launch)
+- shadcn/ui primitives (`class-variance-authority`, `clsx`, `tailwind-merge`, `@radix-ui/react-slot`, `@radix-ui/react-separator`), `lucide-react` icons, `next-themes` (light/dark, system default)
+- IBM Plex family via `next/font/google` (`IBM_Plex_Sans` / `IBM_Plex_Serif` / `IBM_Plex_Mono`)
 - `output: 'export'`, `trailingSlash: true`, `images: { unoptimized: true }` in `next.config.ts`
 
 ## GitHub Pages deployment
