@@ -104,7 +104,6 @@ export default function AboutPage() {
                   {[
                     ["Location", "Mumbai, India"],
                     ["Writing since", "2020"],
-                    ["Focus", "Derivatives & FX Settlement"],
                   ].map(([k, v]) => (
                     <div
                       key={k}
