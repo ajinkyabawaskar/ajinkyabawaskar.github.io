@@ -1,5 +1,3 @@
-import ReactMarkdown from "react-markdown"
-import remarkGfm from "remark-gfm"
 import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
@@ -8,6 +6,7 @@ import { Mail } from "lucide-react"
 import { GithubIcon, LinkedinIcon } from "@/components/icons"
 
 import { getPage } from "@/lib/posts"
+import Markdown from "@/components/Markdown"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
@@ -123,9 +122,7 @@ export default function AboutPage() {
 
           <div>
             <div className="prose-blog">
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                {page.content}
-              </ReactMarkdown>
+              <Markdown content={page.content} />
             </div>
 
             <Separator className="my-8" />

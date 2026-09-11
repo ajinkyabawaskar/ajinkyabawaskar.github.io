@@ -165,4 +165,7 @@
   .prose-blog hr {
     @apply my-10 border-border;
   }
+  .prose-blog .mermaid-diagram svg {
+    @apply max-w-full h-auto;
+  }
 }

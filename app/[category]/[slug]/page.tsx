@@ -1,11 +1,10 @@
 import { notFound } from "next/navigation"
 import type { Metadata } from "next"
 import Link from "next/link"
-import ReactMarkdown from "react-markdown"
-import remarkGfm from "remark-gfm"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 
 import { getPostBySlug, getAllPosts } from "@/lib/posts"
+import Markdown from "@/components/Markdown"
 import Utterances from "@/components/Utterances"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -124,9 +123,7 @@ export default async function PostPage({ params }: PageProps) {
         <Separator className="mb-8" />
 
         <div className="prose-blog">
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>
-            {processedContent}
-          </ReactMarkdown>
+          <Markdown content={processedContent} />
         </div>
 
         <Separator className="my-10" />
