@@ -1,6 +1,7 @@
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 import type { Metadata } from "next"
+import Image from "next/image"
 import Link from "next/link"
 import { Mail } from "lucide-react"
 
@@ -57,14 +58,14 @@ export default function AboutPage() {
         <div className="grid items-start gap-8 lg:grid-cols-[0.9fr_1.6fr] lg:gap-10">
           <aside className="lg:sticky lg:top-20">
             <Card className="overflow-hidden p-0">
-              <div
-                aria-hidden="true"
-                className="flex aspect-[4/3] w-full items-center justify-center bg-muted"
-              >
-                <span className="font-serif text-6xl font-medium tracking-tight text-muted-foreground">
-                  AB
-                </span>
-              </div>
+              <Image
+                src="/img/profile.png"
+                alt="Ajinkya Bawaskar"
+                width={600}
+                height={600}
+                className="aspect-square w-full object-cover"
+                priority
+              />
               <CardHeader className="border-t p-5">
                 <CardTitle className="font-serif text-lg font-medium">
                   Ajinkya Bawaskar
