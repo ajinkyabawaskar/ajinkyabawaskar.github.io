@@ -96,22 +96,34 @@ export default function HomePage() {
             </div>
           </div>
 
-          <Card className="overflow-hidden p-0">
-            <img
-              src="https://picsum.photos/seed/variable-hero-typewriter/800/640"
-              alt="Minimal desk with open notebook and soft window light"
-              width={800}
-              height={640}
-              className="block aspect-[4/3.2] w-full object-cover"
-              loading="eager"
-            />
-            <CardContent className="flex items-center justify-between gap-3 border-t bg-muted/50 p-4">
-              <span className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
-                Currently reading: Caching in Spring Boot
-              </span>
-              <span className="font-mono text-[11px] text-muted-foreground/70">
-                2023
-              </span>
+          <Card className="p-0">
+            <CardHeader className="border-b bg-muted/50 p-5">
+              <CardDescription className="font-mono text-[11px] uppercase tracking-widest">
+                The index
+              </CardDescription>
+              <CardTitle className="font-serif text-xl font-medium tracking-tight">
+                Browse by topic
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="p-5">
+              <div className="flex flex-wrap gap-2">
+                {topics.map((topic) => (
+                  <Badge key={topic} variant="secondary" asChild>
+                    <Link href="/categories/">{topic}</Link>
+                  </Badge>
+                ))}
+              </div>
+              <div className="mt-5 flex items-center justify-between gap-3 border-t pt-4">
+                <span className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
+                  {totalPosts} essays since 2020
+                </span>
+                <Button variant="link" size="sm" asChild className="h-auto p-0">
+                  <Link href="/categories/">
+                    Full archive
+                    <ArrowRight />
+                  </Link>
+                </Button>
+              </div>
             </CardContent>
           </Card>
         </div>
@@ -138,45 +150,33 @@ export default function HomePage() {
             href={`/${latestPost.category.toLowerCase()}/${latestPost.slug}/`}
             className="block"
           >
-            <Card className="overflow-hidden p-0 transition-shadow hover:shadow-lg">
-              <div className="grid md:grid-cols-[1.05fr_0.95fr]">
-                <div className="flex flex-col justify-center p-7 sm:p-8">
-                  <div className="mb-4 flex flex-wrap items-center gap-2">
-                    <Badge variant="secondary">{latestPost.category}</Badge>
-                    <span className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
-                      {new Date(latestPost.date).toLocaleDateString("en-US", {
-                        month: "long",
-                        day: "numeric",
-                        year: "numeric",
-                      })}{" "}
-                      / {estimateReadTime(latestPost.content)} read
-                    </span>
-                  </div>
-                  <h3 className="mb-3 font-serif text-2xl font-medium leading-tight tracking-tight sm:text-3xl">
-                    {latestPost.title}
-                  </h3>
-                  <p className="mb-5 line-clamp-3 max-w-[52ch] text-[15px] leading-relaxed text-muted-foreground">
-                    {latestPost.content
-                      .slice(0, 190)
-                      .replace(/[#*`[\]]/g, "")
-                      .trim()}
-                    ...
-                  </p>
-                  <Button size="sm" className="self-start">
-                    Continue reading
-                    <ArrowRight />
-                  </Button>
+            <Card className="p-0 transition-shadow hover:shadow-lg">
+              <div className="flex flex-col justify-center p-7 sm:p-8">
+                <div className="mb-4 flex flex-wrap items-center gap-2">
+                  <Badge variant="secondary">{latestPost.category}</Badge>
+                  <span className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
+                    {new Date(latestPost.date).toLocaleDateString("en-US", {
+                      month: "long",
+                      day: "numeric",
+                      year: "numeric",
+                    })}{" "}
+                    / {estimateReadTime(latestPost.content)} read
+                  </span>
                 </div>
-                <div className="min-h-64 overflow-hidden border-t bg-muted md:border-l md:border-t-0">
-                  <img
-                    src={`https://picsum.photos/seed/${latestPost.slug}/720/560`}
-                    alt=""
-                    width={720}
-                    height={560}
-                    className="block h-full w-full object-cover"
-                    loading="lazy"
-                  />
-                </div>
+                <h3 className="mb-3 font-serif text-2xl font-medium leading-tight tracking-tight sm:text-3xl">
+                  {latestPost.title}
+                </h3>
+                <p className="mb-5 line-clamp-3 max-w-[52ch] text-[15px] leading-relaxed text-muted-foreground">
+                  {latestPost.content
+                    .slice(0, 190)
+                    .replace(/[#*`[\]]/g, "")
+                    .trim()}
+                  ...
+                </p>
+                <Button size="sm" className="self-start">
+                  Continue reading
+                  <ArrowRight />
+                </Button>
               </div>
             </Card>
           </Link>

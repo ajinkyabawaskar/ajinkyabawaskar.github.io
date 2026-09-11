@@ -57,13 +57,14 @@ export default function AboutPage() {
         <div className="grid items-start gap-8 lg:grid-cols-[0.9fr_1.6fr] lg:gap-10">
           <aside className="lg:sticky lg:top-20">
             <Card className="overflow-hidden p-0">
-              <img
-                src="https://picsum.photos/seed/ajinkya-portrait/560/680"
-                alt="Portrait placeholder for Ajinkya Bawaskar"
-                width={560}
-                height={680}
-                className="block aspect-[4/4.8] w-full object-cover"
-              />
+              <div
+                aria-hidden="true"
+                className="flex aspect-[4/3] w-full items-center justify-center bg-muted"
+              >
+                <span className="font-serif text-6xl font-medium tracking-tight text-muted-foreground">
+                  AB
+                </span>
+              </div>
               <CardHeader className="border-t p-5">
                 <CardTitle className="font-serif text-lg font-medium">
                   Ajinkya Bawaskar
