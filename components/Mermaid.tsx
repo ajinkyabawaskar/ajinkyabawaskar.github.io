@@ -74,6 +74,7 @@ export default function Mermaid({ chart }: MermaidProps) {
       role="img"
       aria-label="Mermaid diagram"
       dangerouslySetInnerHTML={{ __html: svg }}
+      style={{ minWidth: 0 }}
     />
   )
 }

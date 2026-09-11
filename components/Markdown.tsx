@@ -27,12 +27,26 @@ function MermaidPre({
   return <pre {...props}>{children}</pre>
 }
 
+function TableWrapper({
+  children,
+  ...props
+}: React.TableHTMLAttributes<HTMLTableElement>) {
+  return (
+    <div className="w-full overflow-x-auto my-8 -mx-4 px-4 sm:mx-0 sm:px-0">
+      <div className="min-w-max">
+        <table {...props}>{children}</table>
+      </div>
+    </div>
+  )
+}
+
 export default function Markdown({ content }: { content: string }) {
   return (
     <ReactMarkdown
       remarkPlugins={[remarkGfm]}
       components={{
         pre: MermaidPre,
+        table: TableWrapper,
       }}
     >
       {content}
