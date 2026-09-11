@@ -23,28 +23,28 @@ OLED goes to `3V3`, `GND`, `GPIO 22` for SCL and `GPIO 21` for SDA, address `0x3
 
 The relay is active low, so `HIGH` at boot means off. On the load side, `12V+` goes to `COM`, pump `+` goes to `NO`, `NC` stays empty, and `12V-` goes straight to pump `-`.
 
-```text
-                +------------------+
-5V/2A Adapter --> |  Micro-USB       |
-(MC-104)          |  ESP32-WROOM-32  |
-                  |                  |
-                  |              3V3 o------+----> OLED VCC
-                  |              GND o--+--+----> OLED GND
-                  |                     |  +---> Relay GND
-                  |                     |
-                  |         GPIO 21 o---------> OLED SDA
-                  |         GPIO 22 o---------> OLED SCL
-                  |                  |
-                  |         GPIO 19 o---------> Relay IN
-                  |          VIN(5V)o---------> Relay VCC
-                  +------------------+
+```mermaid
+flowchart TD
+    subgraph esp32[ESP32-WROOM-32]
+        direction TB
+        USB[5V/2A Adapter] --> MCU
+        MCU[ESP32] -->|3V3| OLED_VCC[OLED VCC]
+        MCU -->|GND| OLED_GND[OLED GND]
+        MCU -->|GPIO 21| OLED_SDA[OLED SDA]
+        MCU -->|GPIO 22| OLED_SCL[OLED SCL]
+        MCU -->|GPIO 19| RELAY_IN[Relay IN]
+        MCU -->|VIN 5V| RELAY_VCC[Relay VCC]
+    end
 
-12V/2A SMPS (+) ----------------+----------- Pump (+)
-                               |   |
-                        +------+------+
-                        | COM  NO  NC |
-                        +--+---+---+--+
-12V/2A SMPS (-) ------------------------------ Pump (-)
+    subgraph power[12V/2A SMPS]
+        direction TB
+        SMPS[12V/2A SMPS] -->|COM| RELAY[Relay COM/NO]
+        RELAY -->|NO| PUMP[Pump +]
+        SMPS -.->|GND| PUMP_GND[Pump -]
+        RELAY_GND[Relay GND] -.-> PUMP_GND
+    end
+
+    OLED_VCC -.->|shared GND| RELAY_GND
 ```
 
 I powered USB first and left the 12V unplugged until the OLED came up and I could hear the relay click. That order saved me once already.
@@ -76,26 +76,35 @@ The OLED shows pump state large, plus date and time as `08SEP 20:36`, a countdow
 
 The ESP32 stays simple. My Ubuntu laptop at `192.168.1.220` on WiFi (`.221` on ethernet as fallback) holds Mosquitto, Postgres, the Spring Boot server, and the Next.js UI. MQTT carries control into the laptop. HTTP and a websocket carry state out to my browser.
 
-```text
-                Home WiFi Router (192.168.1.1)
-                 /                         \
-                / WiFi                      \ WiFi / LAN
-               /                             \
-+------------------+                    +---------------------------+
-| ESP32-WROOM-32   |                    | Ubuntu Laptop (ajinkya)   |
-| 192.168.1.x DHCP |                    |  WiFi .220 / Eth .221     |
-|                  |   MQTT :1883       |                           |
-| OLED + Relay     | ----------------->|  mosquitto broker :1883   |
-| Pump via COM/NO  |  publish status    |     |                     |
-|                  |  subscribe cmd     |     v                     |
-|                  | <------------------|  ingestor (Spring + Paho) |
-+------------------+   plant/watering/# |     | write               |
-                                       |     v                     |
-                                       |  postgres (TimescaleDB)   |
-                                       |     | read                |
-                                       |     v                     |
-                                       |  http api + ui :8000/:3000|
-                                       +---------------------------+
+```mermaid
+flowchart LR
+    subgraph LAN["Home LAN (192.168.1.x)"]
+        direction TB
+        Router[Home WiFi Router 192.168.1.1]
+        ESP32[ESP32-WROOM-32 DHCP]
+        Laptop[Ubuntu Laptop ajinkya<br/>WiFi .220 / Eth .221]
+    end
+
+    subgraph LaptopServices["Laptop Services"]
+        direction TB
+        Mosquitto[mosquitto:1883]
+        Ingestor[ingestor Spring + Paho]
+        Postgres[(postgres TimescaleDB)]
+        Server[Spring Boot :8000<br/>HTTP API + WS]
+        UI[Next.js :3000]
+    end
+
+    Router --- ESP32
+    Router --- Laptop
+
+    ESP32 -->|MQTT plant/watering/#| Mosquitto
+    Mosquitto -->|publish status| Ingestor
+    Ingestor -->|write| Postgres
+    Postgres -->|read| Server
+    Server -->|REST + WS| UI
+    Server -->|subscribe cmd| Mosquitto
+    Mosquitto -->|plant/watering/command| ESP32
+    ESP32 -->|HTTP GET /api/schedule| Server
 ```
 
 On the laptop, `infra/docker-compose.yml` runs four containers: `mosquitto` on 1883, `postgres` with TimescaleDB internally, `server` on 8000, and `ui` on 3000. The server subscribes to `plant/watering/#` with Paho, writes to `device_events` and `device_status`, and exposes `GET /api/status`, `GET /api/events?limit=50`, `POST /api/command`, and `GET /api/schedule`. The UI loads over REST once, then follows `WS /ws` for snapshots and a 10 second heartbeat. It shows a live badge when the socket is open.
@@ -108,16 +117,34 @@ I used Tailscale for a while and then moved to a Cloudflare tunnel. No inbound p
 
 Public traffic hits `https://home.abwork.shop`, passes an Access check with email OTP, and then the tunnel routes `/` to `127.0.0.1:3000` and `/api/*` plus `/ws` to `127.0.0.1:8000`. One host means one login covers UI, API, and socket. MQTT stays on the LAN at `192.168.1.220:1883`. My phone never talks MQTT directly.
 
-```text
-phone / laptop anywhere
-  -- https 443 --> Cloudflare edge (TLS + Access OTP)
-  -- allow after login --> tunnel home-to-internet
-  -- 127.0.0.1:3000 --> UI container (Next.js)
-  -- 127.0.0.1:8000 --> server (Spring Boot /api + /ws)
-server -- tcp://mosquitto:1883 --> Mosquitto
-server -- jdbc --> Postgres (internal only)
-ESP32 -- 192.168.1.220:1883 --> Mosquitto (LAN only)
-ESP32 -- 192.168.1.220:8000/api/schedule --> server (LAN only)
+```mermaid
+flowchart TB
+    subgraph Client["phone / laptop anywhere"]
+        User[User]
+    end
+
+    subgraph Edge["Cloudflare Edge"]
+        direction TB
+        Access[Access OTP]
+        Tunnel[tunnel home-to-internet]
+    end
+
+    subgraph Home["Home Network"]
+        direction TB
+        UI[(Next.js :3000)]
+        API[(Spring Boot :8000<br/>API + WS)]
+        Mosquitto[(mosquitto:1883)]
+        Postgres[(Postgres internal)]
+    end
+
+    User -- HTTPS 443 --> Edge
+    Edge -- allow after login --> Tunnel
+    Tunnel --> UI
+    Tunnel --> API
+    API -- tcp://mosquitto:1883 --> Mosquitto
+    API -- jdbc --> Postgres
+    ESP32[ESP32 LAN] -- 192.168.1.220:1883 --> Mosquitto
+    ESP32 -- 192.168.1.220:8000/api/schedule --> API
 ```
 
 Two mistakes I will not repeat: I enabled UFW with default deny before allowing port 22 and locked myself out of SSH (the tunnel kept working, which felt unfair), and I once rebuilt the UI without purging the zone cache, so the edge served old JS with an old API URL and Chrome flagged the page. Rebuild plus `purge_everything` fixed it.
