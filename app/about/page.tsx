@@ -46,8 +46,8 @@ export default function AboutPage() {
           Ajinkya Bawaskar
         </h1>
         <p className="max-w-xl text-lg leading-relaxed text-muted-foreground">
-          Software engineer and writer based in Pune. I build backend systems
-          and write to think clearly.
+          Senior Associate at JPMorganChase based in Mumbai. I build
+          Derivatives & FX Settlement systems and write to think clearly.
         </p>
       </header>
 
@@ -70,7 +70,7 @@ export default function AboutPage() {
                   Ajinkya Bawaskar
                 </CardTitle>
                 <CardDescription className="font-mono text-xs normal-case tracking-normal">
-                  Backend, distributed systems, Go, TypeScript
+                  Java, Spring Boot, Kafka, Kubernetes
                 </CardDescription>
               </CardHeader>
               <CardContent className="flex flex-col gap-2 p-5 pt-0">
@@ -102,9 +102,9 @@ export default function AboutPage() {
                 </Button>
                 <dl className="mt-3 grid gap-2 border-t pt-4">
                   {[
-                    ["Location", "Pune, India"],
+                    ["Location", "Mumbai, India"],
                     ["Writing since", "2020"],
-                    ["Focus", "Backend systems"],
+                    ["Focus", "Derivatives & FX Settlement"],
                   ].map(([k, v]) => (
                     <div
                       key={k}
@@ -179,12 +179,12 @@ export default function AboutPage() {
               </CardHeader>
               <CardContent className="flex flex-wrap gap-2 p-5 pt-1">
                 {[
-                  "Go",
+                  "Java",
+                  "Spring Boot",
+                  "Kafka",
                   "Kubernetes",
                   "Distributed systems",
-                  "TypeScript",
-                  "PostgreSQL",
-                  "Observability",
+                  "GenAI Agents",
                 ].map((t) => (
                   <Badge key={t} variant="secondary">
                     {t}

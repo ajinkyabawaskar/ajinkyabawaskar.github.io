@@ -50,7 +50,7 @@ export default function HomePage() {
         <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12">
           <div>
             <p className="mb-4 font-mono text-xs uppercase tracking-widest text-muted-foreground">
-              Est. 2020 · Pune
+              Est. 2020 · Mumbai
             </p>
             <h1
               id="hero-heading"
@@ -286,7 +286,7 @@ export default function HomePage() {
                   <Link href="/about/">About the author</Link>
                 </Button>
                 <span className="ml-2 font-mono text-[11px] text-muted-foreground">
-                  Pune, Backend, Writing
+                  Mumbai, Backend, Writing
                 </span>
               </li>
               <li>
@@ -305,7 +305,7 @@ export default function HomePage() {
           {[
             { k: "Essays", v: `${totalPosts} published` },
             { k: "Topics", v: topics.join(" · ") },
-            { k: "Since", v: "2020, Pune" },
+            { k: "Since", v: "2020, Mumbai" },
           ].map((s) => (
             <Card key={s.k}>
               <CardHeader className="p-5 pb-1">
